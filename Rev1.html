@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Pimpinan Dinas Pendidikan - 5 Bab Utama</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+
+  <!-- Top Navigation Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        
+        <!-- Brand / Title -->
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-blue-600 rounded-lg text-white">
+            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold text-slate-900 leading-tight">Dinas Pendidikan & Kebudayaan</h1>
+            <p class="text-xs text-slate-500">Executive Dashboard Pimpinan</p>
+          </div>
+        </div>
+
+        <!-- Right Header Tools -->
+        <div class="flex items-center space-x-3">
+          <button onclick="exportReport()" class="flex items-center space-x-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg transition-colors">
+            <i data-lucide="download" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Cetak Laporan Eksklusif</span>
+          </button>
+          
+          <div class="h-6 w-px bg-slate-200"></div>
+
+          <!-- User Profile -->
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center justify-center font-bold text-sm">
+              KD
+            </div>
+            <div class="hidden md:block text-left">
+              <div class="text-xs font-semibold text-slate-800">Kepala Dinas</div>
+              <div class="text-[10px] text-slate-400">NIP. 19780512...</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- Global Filter & Alert Banner -->
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+          <i data-lucide="filter" class="w-3.5 h-3.5"></i> Filter Global:
+        </span>
+        
+        <select id="yearFilter" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="2026" selected>T.A. 2026</option>
+          <option value="2025">T.A. 2025</option>
+        </select>
+
+        <select id="levelFilter" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="all" selected>Semua Jenjang (PAUD, SD, SMP)</option>
+          <option value="sd">SD Negeri & Swasta</option>
+          <option value="smp">SMP Negeri & Swasta</option>
+        </select>
+
+        <select id="districtFilter" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="all" selected>Semua Kecamatan</option>
+          <option value="utara">Kecamatan Utara</option>
+          <option value="selatan">Kecamatan Selatan</option>
+          <option value="barat">Kecamatan Barat</option>
+          <option value="timur">Kecamatan Timur</option>
+        </select>
+      </div>
+
+      <div class="flex items-center gap-2 text-blue-700 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-200 text-xs">
+        <i data-lucide="info" class="w-4 h-4 text-blue-600 shrink-0"></i>
+        <span>Pilih bab di bawah untuk melihat rincian indikator & data analitis.</span>
+      </div>
+    </div>
+
+    <!-- 5 BAB NAVIGATION TABS -->
+    <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+      <nav class="flex space-x-2 min-w-max">
+        
+        <button onclick="switchTab('bab1')" id="tab-bab1" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white shadow-sm">
+          <i data-lucide="users" class="w-4 h-4"></i>
+          <span>Bab I: Akses & Pemerataan</span>
+        </button>
+
+        <button onclick="switchTab('bab2')" id="tab-bab2" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all">
+          <i data-lucide="award" class="w-4 h-4"></i>
+          <span>Bab II: Mutu & Capaian</span>
+        </button>
+
+        <button onclick="switchTab('bab3')" id="tab-bab3" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all">
+          <i data-lucide="building-2" class="w-4 h-4"></i>
+          <span>Bab III: Sarana & Prasarana</span>
+        </button>
+
+        <button onclick="switchTab('bab4')" id="tab-bab4" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all">
+          <i data-lucide="user-check" class="w-4 h-4"></i>
+          <span>Bab IV: Ketenagaan (GTK)</span>
+        </button>
+
+        <button onclick="switchTab('bab5')" id="tab-bab5" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all">
+          <i data-lucide="landmark" class="w-4 h-4"></i>
+          <span>Bab V: Tata Kelola & Prestasi</span>
+        </button>
+
+      </nav>
+    </div>
+
+    <!-- TAB CONTENTS -->
+
+    <!-- ================= BAB 1: AKSES DAN PEMERATAAN ================= -->
+    <div id="content-bab1" class="tab-content space-y-6">
+      
+      <!-- Summary Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Angka Partisipasi Murni (APM)</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">94.8%</div>
+          <p class="text-xs text-emerald-600 font-semibold mt-1">↑ +1.2% dari tahun lalu</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Angka Putus Sekolah (APS)</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">0.32%</div>
+          <p class="text-xs text-emerald-600 font-semibold mt-1">↓ Turun 0.08% (Membaik)</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Siswa Penerima Beasiswa</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">18,450</div>
+          <p class="text-xs text-slate-400 mt-1">Program Beasiswa Daerah</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Anak Tidak Sekolah (ATS)</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">412</div>
+          <p class="text-xs text-amber-600 font-semibold mt-1">Butuh Intervensi Khusus</p>
+        </div>
+      </div>
+
+      <!-- Detail Visualizations -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <h2 class="text-sm font-bold text-slate-800 mb-1">Tren Angka Putus Sekolah & Penyaluran Beasiswa</h2>
+          <p class="text-xs text-slate-400 mb-4">Evaluasi keterjangkauan dan efektivitas beasiswa pendidikan</p>
+          <div class="h-64">
+            <canvas id="chartAkses"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-slate-800 mb-1">Distribusi Siswa Miskin / KIP</h2>
+            <p class="text-xs text-slate-400 mb-4">Sebaran wilayah siswa penerima bantuan</p>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span>Kecamatan Utara</span>
+                  <span>4,210 Siswa</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-blue-600 h-full rounded-full" style="width: 80%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span>Kecamatan Barat</span>
+                  <span>3,850 Siswa</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-blue-600 h-full rounded-full" style="width: 65%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span>Kecamatan Selatan</span>
+                  <span>2,940 Siswa</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-blue-600 h-full rounded-full" style="width: 50%"></div></div>
+              </div>
+            </div>
+          </div>
+          <button onclick="alert('Membuka Laporan Detail ATS')" class="w-full mt-4 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg text-xs font-semibold transition-colors">Lihat Peta Sebaran ATS</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= BAB 2: MUTU DAN CAPAIAN PEMBELAJARAN ================= -->
+    <div id="content-bab2" class="tab-content hidden space-y-6">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Rapor Pendidikan Daerah</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">76.4 <span class="text-xs text-slate-400 font-normal">/ 100</span></div>
+          <span class="inline-block mt-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px]">Baik</span>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Indeks Literasi</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">78.2</div>
+          <p class="text-xs text-emerald-600 font-semibold mt-1">↑ Di atas Rata-rata Nasional</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Indeks Numerasi</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">71.8</div>
+          <p class="text-xs text-amber-600 font-semibold mt-1">Perlu Peningkatan Sifat Pembelajaran</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Akreditasi Sekolah A</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">64.2%</div>
+          <p class="text-xs text-slate-400 mt-1">277 dari 432 Sekolah</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <h2 class="text-sm font-bold text-slate-800 mb-1">Capaian Asesmen Nasional (ANBK) per Jenjang</h2>
+          <p class="text-xs text-slate-400 mb-4">Perbandingan kompetensi literasi, numerasi, dan karakter</p>
+          <div class="h-64">
+            <canvas id="chartMutu"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <h2 class="text-sm font-bold text-slate-800 mb-1">Karakter & Iklim Sekolah</h2>
+          <p class="text-xs text-slate-400 mb-4">Indikator keamanan & kebhinekaan</p>
+          <div class="space-y-4 text-xs">
+            <div class="p-3 bg-slate-50 rounded-lg">
+              <div class="flex justify-between font-semibold text-slate-700">
+                <span>Iklim Keamanan Sekolah</span>
+                <span class="text-emerald-600">Aman (82.1)</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Bebas perundungan dan kekerasan fisik</p>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-lg">
+              <div class="flex justify-between font-semibold text-slate-700">
+                <span>Iklim Kebhinekaan</span>
+                <span class="text-emerald-600">Tinggi (85.4)</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Toleransi agama & budaya terjamin</p>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-lg">
+              <div class="flex justify-between font-semibold text-slate-700">
+                <span>Kualitas Pembelajaran</span>
+                <span class="text-amber-600">Sedang (68.0)</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Perlu pelatihan metode mengajar interaktif</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= BAB 3: SARANA DAN PRASARANA ================= -->
+    <div id="content-bab3" class="tab-content hidden space-y-6">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Kondisi Ruang Kelas Baik</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">62%</div>
+          <p class="text-xs text-slate-400 mt-1">2,410 Ruang Kelas</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Rusak Berat (Butuh Rehabilitasi)</span>
+          <div class="text-2xl font-extrabold text-red-600 mt-2">4%</div>
+          <p class="text-xs text-red-600 font-semibold mt-1">12 Sekolah Mengajukan Urgen</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Akses Internet Sekolah</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">88.5%</div>
+          <p class="text-xs text-emerald-600 font-semibold mt-1">Target 100% Akhir Tahun</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Kecukupan Laboratorium/TIK</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">74.1%</div>
+          <p class="text-xs text-slate-400 mt-1">Pengadaan Chromebox/PC</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <h2 class="text-sm font-bold text-slate-800 mb-1">Proporsi Kondisi Fisik Kelas</h2>
+          <p class="text-xs text-slate-400 mb-4">Klasifikasi kelayakan infrastruktur</p>
+          <div class="h-56 relative flex items-center justify-center">
+            <canvas id="chartSarpras"></canvas>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-sm font-bold text-slate-800">Daftar Usulan Rehabilitasi Gedung Sekolah Urgent</h2>
+              <p class="text-xs text-slate-400">Sekolah dengan tingkat kerusakan fisik &gt; 30%</p>
+            </div>
+            <span class="text-xs bg-red-100 text-red-700 px-2.5 py-1 rounded-full font-bold">12 Sekolah Kritis</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50">
+                  <th class="py-2.5 px-3">Nama Sekolah</th>
+                  <th class="py-2.5 px-3">Fasilitas Rusak</th>
+                  <th class="py-2.5 px-3">Tingkat Kerusakan</th>
+                  <th class="py-2.5 px-3 text-right">Aksi Pimpinan</th>
+                </tr>
+              </thead>
+              <tbody class="text-xs divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 px-3 font-semibold text-slate-800">SDN 02 Merdeka</td>
+                  <td class="py-3 px-3 text-slate-600">3 Ruang Kelas & Perpustakaan</td>
+                  <td class="py-3 px-3 text-red-600 font-bold">Rusak Berat (68%)</td>
+                  <td class="py-3 px-3 text-right"><button onclick="alert('Disposisi DAK Fisik Terkirim!')" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded text-[11px]">Disposisi DAK</button></td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 px-3 font-semibold text-slate-800">SMPN 04 Maju</td>
+                  <td class="py-3 px-3 text-slate-600">Laboratorium IPA & Toilet</td>
+                  <td class="py-3 px-3 text-amber-600 font-bold">Rusak Sedang (42%)</td>
+                  <td class="py-3 px-3 text-right"><button onclick="alert('Disposisi APBD Terkirim!')" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded text-[11px]">Disposisi APBD</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= BAB 4: KETENAGAAN PENDIDIK DAN KEPENDIDIKAN ================= -->
+    <div id="content-bab4" class="tab-content hidden space-y-6">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Total Guru & GTK</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">6,420</div>
+          <p class="text-xs text-slate-400 mt-1">PNS, PPPK & Honorer</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Sertifikasi Pendidik (Serdik)</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">78.5%</div>
+          <p class="text-xs text-emerald-600 font-semibold mt-1">5,039 Guru Tersertifikasi</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Guru Penggerak</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">342</div>
+          <p class="text-xs text-indigo-600 font-semibold mt-1">Kandidat Kepala Sekolah</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Kekurangan Guru Mapel</span>
+          <div class="text-2xl font-extrabold text-amber-600 mt-2">128 Guru</div>
+          <p class="text-xs text-amber-600 font-semibold mt-1">Dominasi Matel & IPA</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <h2 class="text-sm font-bold text-slate-800 mb-1">Komposisi Status Kepegawaian Guru</h2>
+          <p class="text-xs text-slate-400 mb-4">Rasio Aparatur Sipil Negara (ASN) vs Non-ASN</p>
+          <div class="h-64">
+            <canvas id="chartGTK"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <h2 class="text-sm font-bold text-slate-800 mb-1">Pemerataan Guru Per Kecamatan</h2>
+          <p class="text-xs text-slate-400 mb-4">Kebutuhan redistribusi tenaga pendidik</p>
+
+          <div class="space-y-3 text-xs">
+            <div class="p-3 bg-red-50 rounded-lg border border-red-100">
+              <div class="flex justify-between font-bold text-red-900 mb-1">
+                <span>Kecamatan Utara</span>
+                <span class="text-[10px] bg-red-200 text-red-800 px-1 rounded">Defisit 24 Guru</span>
+              </div>
+              <p class="text-red-700 text-[11px]">Krisis guru kelas SD dan guru IPA SMP.</p>
+            </div>
+            <div class="p-3 bg-emerald-50 rounded-lg border border-emerald-100">
+              <div class="flex justify-between font-bold text-emerald-900 mb-1">
+                <span>Kecamatan Selatan</span>
+                <span class="text-[10px] bg-emerald-200 text-emerald-800 px-1 rounded">Ideal</span>
+              </div>
+              <p class="text-emerald-700 text-[11px]">Rasio guru dan murid seimbang (1:18).</p>
+            </div>
+            <div class="p-3 bg-amber-50 rounded-lg border border-amber-100">
+              <div class="flex justify-between font-bold text-amber-900 mb-1">
+                <span>Kecamatan Barat</span>
+                <span class="text-[10px] bg-amber-200 text-amber-800 px-1 rounded">Kelebihan 6 Guru</span>
+              </div>
+              <p class="text-amber-700 text-[11px]">Potensi untuk direrouting/mutasi ke wilayah Utara.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= BAB 5: KELEMBAGAAN, TATA KELOLA, DAN PRESTASI ================= -->
+    <div id="content-bab5" class="tab-content hidden space-y-6">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Serapan Anggaran Dinas</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">68.4%</div>
+          <div class="w-full bg-slate-100 h-2 rounded-full mt-2"><div class="bg-emerald-500 h-full rounded-full" style="width: 68.4%"></div></div>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Penyaluran Dana BOS</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">98.2%</div>
+          <p class="text-xs text-emerald-600 font-semibold mt-1">Tepat Waktu TAHAP I & II</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Prestasi Siswa (Nasional/Prov)</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">142 Medali</div>
+          <p class="text-xs text-indigo-600 font-semibold mt-1">OSN, O2SN, & FLS2N</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Kepatuhan Laporan Sekolah</span>
+          <div class="text-2xl font-extrabold text-slate-900 mt-2">91.5%</div>
+          <p class="text-xs text-slate-400 mt-1">Pengisian DAPODIK Real-time</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+          <h2 class="text-sm font-bold text-slate-800 mb-1">Capaian Prestasi Siswa & Sekolah (Tahun 2026)</h2>
+          <p class="text-xs text-slate-400 mb-4">Sebaran prestasi di bidang Akademik, Olahraga, dan Seni</p>
+          <div class="h-64">
+            <canvas id="chartPrestasi"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-slate-800 mb-1">Tata Kelola & Akuntabilitas</h2>
+            <p class="text-xs text-slate-400 mb-4">Status pelaporan & transparansi keuangan</p>
+            <div class="space-y-3 text-xs">
+              <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-lg">
+                <span class="font-medium">Opini BPK Terakhir</span>
+                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded">WTP</span>
+              </div>
+              <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-lg">
+                <span class="font-medium">Tingkat Pengaduan Masyarakat</span>
+                <span class="text-slate-600 font-bold">14 Kasus (12 Selesai)</span>
+              </div>
+              <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-lg">
+                <span class="font-medium">Digitalisasi Sekolah (ARKAS)</span>
+                <span class="text-emerald-600 font-bold">96% Sekolah Active</span>
+              </div>
+            </div>
+          </div>
+          <button onclick="alert('Membuka Modul Keuangan & LHKPN')" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-xs font-semibold transition-colors">Buka Detail Realisasi Keuangan</button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- JavaScript Code for Tabs & Charts -->
+  <script>
+    // Initialize Icons
+    lucide.createIcons();
+
+    // Tab Switching Functionality
+    function switchTab(tabId) {
+      // Hide all contents
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      // Show targeted content
+      document.getElementById('content-' + tabId).classList.remove('hidden');
+
+      // Reset style all tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+      });
+
+      // Active styling for clicked tab
+      const activeTab = document.getElementById('tab-' + tabId);
+      activeTab.classList.remove('text-slate-600', 'hover:bg-slate-100');
+      activeTab.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+    }
+
+    // Initialize Charts when Page Loads
+    document.addEventListener('DOMContentLoaded', () => {
+      initChartAkses();
+      initChartMutu();
+      initChartSarpras();
+      initChartGTK();
+      initChartPrestasi();
+    });
+
+    // BAB 1 Chart
+    function initChartAkses() {
+      const ctx = document.getElementById('chartAkses').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu'],
+          datasets: [
+            {
+              label: 'Penerima Beasiswa (Siswa)',
+              data: [8000, 9500, 11000, 13500, 15000, 16800, 17500, 18450],
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              fill: true,
+              tension: 0.3
+            },
+            {
+              label: 'Angka Putus Sekolah (Kasus)',
+              data: [120, 98, 85, 60, 42, 35, 28, 18],
+              borderColor: '#ef4444',
+              backgroundColor: 'transparent',
+              borderDash: [5, 5],
+              tension: 0.3
+            }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
+
+    // BAB 2 Chart
+    function initChartMutu() {
+      const ctx = document.getElementById('chartMutu').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['PAUD', 'SD Negeri', 'SD Swasta', 'SMP Negeri', 'SMP Swasta'],
+          datasets: [
+            { label: 'Literasi', data: [65, 76, 82, 78, 84], backgroundColor: '#3b82f6' },
+            { label: 'Numerasi', data: [58, 70, 75, 72, 79], backgroundColor: '#10b981' },
+            { label: 'Karakter', data: [72, 80, 85, 81, 86], backgroundColor: '#8b5cf6' }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
+
+    // BAB 3 Chart
+    function initChartSarpras() {
+      const ctx = document.getElementById('chartSarpras').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Baik', 'Rusak Ringan', 'Rusak Sedang', 'Rusak Berat'],
+          datasets: [{
+            data: [62, 24, 10, 4],
+            backgroundColor: ['#10b981', '#fbbf24', '#f97316', '#ef4444']
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, cutout: '65%' }
+      });
+    }
+
+    // BAB 4 Chart
+    function initChartGTK() {
+      const ctx = document.getElementById('chartGTK').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Guru SD', 'Guru SMP', 'Tenaga Kependidikan (TU/Librarian)'],
+          datasets: [
+            { label: 'PNS', data: [2200, 1400, 300], backgroundColor: '#1e40af' },
+            { label: 'PPPK', data: [800, 600, 150], backgroundColor: '#3b82f6' },
+            { label: 'Honorer', data: [500, 320, 150], backgroundColor: '#cbd5e1' }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+      });
+    }
+
+    // BAB 5 Chart
+    function initChartPrestasi() {
+      const ctx = document.getElementById('chartPrestasi').getContext('2d');
+      new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+          labels: ['OSN (Sains)', 'O2SN (Olahraga)', 'FLS2N (Seni)', 'Pramuka/Karakter', 'Lainnya'],
+          datasets: [{
+            data: [42, 38, 28, 22, 12],
+            backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#64748b']
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
+
+    function exportReport() {
+      alert("Membuat Laporan Lengkap 5 Bab Eksekutif untuk Kepala Dinas...");
+    }
+  </script>
+</body>
+</html>
