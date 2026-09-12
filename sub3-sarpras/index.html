@@ -107,17 +107,17 @@
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-[#0f2b48] text-white text-xs uppercase border-b-2 border-amber-600">
-              <th class="p-3">NPSN</th>
-              <th class="p-3">NAMA SEKOLAH</th>
-              <th class="p-3">KAPANEWON</th>
-              <th class="p-3">SUMBER DATA</th>
-              <th class="p-3">KONDISI BAIK</th>
-              <th class="p-3">RUSAK RINGAN</th>
-              <th class="p-3">RUSAK BERAT</th>
-              <th class="p-3">KELAYAKAN SPM</th>
-              <th class="p-3">PERPUS</th>
-              <th class="p-3">LAB</th>
-              <th class="p-3">PRIORITAS DAK</th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('npsn')">NPSN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('nama')">NAMA SEKOLAH <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('kapanewon')">KAPANEWON <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('sumber')">SUMBER DATA <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('baik')">KONDISI BAIK <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('rusakRingan')">RUSAK RINGAN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('rusakBerat')">RUSAK BERAT <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('spm')">KELAYAKAN SPM <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('perpus')">PERPUS <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('lab')">LAB <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('dak')">PRIORITAS DAK <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
             </tr>
           </thead>
           <tbody id="table-sub3-body"></tbody>

@@ -107,15 +107,15 @@
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-[#0f2b48] text-white text-xs uppercase border-b-2 border-amber-600">
-              <th class="p-3">NPSN</th>
-              <th class="p-3">NAMA LEMBAGA</th>
-              <th class="p-3">KAPANEWON</th>
-              <th class="p-3">SUMBER DATA</th>
-              <th class="p-3">JENJANG</th>
-              <th class="p-3">PERIZINAN</th>
-              <th class="p-3">AKREDITASI</th>
-              <th class="p-3">PRESTASI</th>
-              <th class="p-3">INOVASI AI</th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('npsn')">NPSN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('nama')">NAMA LEMBAGA <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('kapanewon')">KAPANEWON <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('sumber')">SUMBER DATA <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('jenjang')">JENJANG <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('izin')">PERIZINAN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('akreditasi')">AKREDITASI <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('prestasi')">PRESTASI <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('inovasi')">INOVASI AI <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
             </tr>
           </thead>
           <tbody id="table-sub5-body"></tbody>

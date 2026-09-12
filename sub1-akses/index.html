@@ -107,15 +107,15 @@
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-[#0f2b48] text-white text-xs uppercase border-b-2 border-amber-600">
-              <th class="p-3">NO</th>
-              <th class="p-3">KAPANEWON</th>
-              <th class="p-3">SUMBER DATA</th>
-              <th class="p-3">APK SD/SMP</th>
-              <th class="p-3">APM SD/SMP</th>
-              <th class="p-3">JUMLAH ATS</th>
-              <th class="p-3">PUTUS SEKOLAH</th>
-              <th class="p-3">REKOMENDASI REGROUPING</th>
-              <th class="p-3">FUNGSI PENGGUNAAN</th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('no')">NO <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('kapanewon')">KAPANEWON <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('sumber')">SUMBER DATA <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('apk')">APK SD/SMP <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('apm')">APM SD/SMP <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('ats')">JUMLAH ATS <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('putus')">PUTUS SEKOLAH <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('regrouping')">REKOMENDASI REGROUPING <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('usage')">FUNGSI PENGGUNAAN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
               <th class="p-3">AKSI</th>
             </tr>
           </thead>

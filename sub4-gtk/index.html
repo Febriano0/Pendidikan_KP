@@ -107,15 +107,15 @@
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-[#0f2b48] text-white text-xs uppercase border-b-2 border-amber-600">
-              <th class="p-3">NIP GURU</th>
-              <th class="p-3">NAMA &amp; MAPEL</th>
-              <th class="p-3">SUMBER DATA</th>
-              <th class="p-3">SEKOLAH ASAL</th>
-              <th class="p-3">JARAK ASAL</th>
-              <th class="p-3">SEKOLAH TUJUAN</th>
-              <th class="p-3">JARAK BARU</th>
-              <th class="p-3">SKOR MCDM</th>
-              <th class="p-3">ARGUMENTASI KEPUTUSAN</th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('nip')">NIP GURU <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('nama')">NAMA &amp; MAPEL <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('sumber')">SUMBER DATA <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('asal')">SEKOLAH ASAL <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('jarakAsal')">JARAK ASAL <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('tujuan')">SEKOLAH TUJUAN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('jarakBaru')">JARAK BARU <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('mcdmScore')">SKOR MCDM <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('argumentasi')">ARGUMENTASI KEPUTUSAN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
               <th class="p-3">AKSI DISKUSI SK</th>
             </tr>
           </thead>

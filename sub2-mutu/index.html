@@ -107,15 +107,15 @@
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-[#0f2b48] text-white text-xs uppercase border-b-2 border-amber-600">
-              <th class="p-3">NPSN</th>
-              <th class="p-3">NAMA SEKOLAH</th>
-              <th class="p-3">KAPANEWON</th>
-              <th class="p-3">SUMBER DATA</th>
-              <th class="p-3">SKOR LITERASI</th>
-              <th class="p-3">SKOR NUMERASI</th>
-              <th class="p-3">KARAKTER</th>
-              <th class="p-3">AKREDITASI</th>
-              <th class="p-3">STATUS PEMBINAAN</th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('npsn')">NPSN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('nama')">NAMA SEKOLAH <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('kapanewon')">KAPANEWON <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('sumber')">SUMBER DATA <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('literasi')">SKOR LITERASI <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('numerasi')">SKOR NUMERASI <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('karakter')">KARAKTER <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('akreditasi')">AKREDITASI <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition" onclick="app.sortBy('pembinaan')">STATUS PEMBINAAN <span class="sort-icon text-[10px] text-amber-400 ml-1">↕️</span></th>
               <th class="p-3">AKSI</th>
             </tr>
           </thead>

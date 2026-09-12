@@ -67,6 +67,8 @@ class DashboardApp {
     this.user = this.loadAndValidateSession();
     this.selectedKapanewon = "all";
     this.searchQuery = "";
+    this.sortColumn = null;
+    this.sortDirection = "asc";
     this.debounceTimer = null;
     
     this.init();
@@ -227,6 +229,69 @@ class DashboardApp {
     return map[id] || "#0284c7";
   }
 
+  sortBy(key) {
+    if (this.sortColumn === key) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = key;
+      this.sortDirection = 'asc';
+    }
+    
+    this.renderCurrentSubmenuTable();
+    this.updateSortHeaderIcons(key);
+    
+    const dirText = this.sortDirection === 'asc' ? 'Ascending (A-Z / 0-9)' : 'Descending (Z-A / 9-0)';
+    this.showToast(`Urutan Kolom "${key.toUpperCase()}": ${dirText}`);
+    auditLogger.log("TABLE_SORTED", this.user ? this.user.name : "Guest", `Column: ${key}, Direction: ${this.sortDirection}`);
+  }
+
+  parseSortValue(val) {
+    if (val === null || val === undefined) return "";
+    if (typeof val === "number") return val;
+    const str = String(val).trim();
+    const numMatch = str.match(/^-?\d+(\.\d+)?/);
+    if (numMatch && !isNaN(parseFloat(numMatch[0]))) {
+      return parseFloat(numMatch[0]);
+    }
+    return str.toLowerCase();
+  }
+
+  sortData(dataList) {
+    if (!this.sortColumn) return dataList;
+    const col = this.sortColumn;
+    const dir = this.sortDirection === 'asc' ? 1 : -1;
+
+    return [...dataList].sort((a, b) => {
+      const valA = this.parseSortValue(a[col]);
+      const valB = this.parseSortValue(b[col]);
+
+      if (typeof valA === "number" && typeof valB === "number") {
+        return (valA - valB) * dir;
+      }
+      return String(valA).localeCompare(String(valB)) * dir;
+    });
+  }
+
+  updateSortHeaderIcons(activeKey) {
+    document.querySelectorAll("th[onclick*='app.sortBy']").forEach(th => {
+      const onclickAttr = th.getAttribute("onclick") || "";
+      const match = onclickAttr.match(/app\.sortBy\(['"]([^'"]+)['"]\)/);
+      if (match) {
+        const key = match[1];
+        const iconSpan = th.querySelector(".sort-icon");
+        if (iconSpan) {
+          if (key === activeKey) {
+            iconSpan.textContent = this.sortDirection === 'asc' ? '▲' : '▼';
+            iconSpan.className = "sort-icon text-xs text-amber-300 font-black ml-1";
+          } else {
+            iconSpan.textContent = '↕️';
+            iconSpan.className = "sort-icon text-[10px] text-slate-300 opacity-60 ml-1";
+          }
+        }
+      }
+    });
+  }
+
   renderKapanewonDropdowns() {
     const kapSelect = document.getElementById("kapanewonFilterSelect");
     if (!kapSelect || typeof DB === 'undefined') return;
@@ -261,6 +326,8 @@ class DashboardApp {
         d.usage.toLowerCase().includes(this.searchQuery)
       );
     }
+
+    data = this.sortData(data);
 
     if (data.length === 0) {
       tbody.innerHTML = `<tr><td colspan="10" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
@@ -305,6 +372,8 @@ class DashboardApp {
       );
     }
 
+    data = this.sortData(data);
+
     if (data.length === 0) {
       tbody.innerHTML = `<tr><td colspan="10" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
@@ -347,6 +416,8 @@ class DashboardApp {
       );
     }
 
+    data = this.sortData(data);
+
     if (data.length === 0) {
       tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
@@ -385,6 +456,8 @@ class DashboardApp {
         d.tujuan.toLowerCase().includes(this.searchQuery)
       );
     }
+
+    data = this.sortData(data);
 
     if (data.length === 0) {
       tbody.innerHTML = `<tr><td colspan="10" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
@@ -431,6 +504,8 @@ class DashboardApp {
         d.inovasi.toLowerCase().includes(this.searchQuery)
       );
     }
+
+    data = this.sortData(data);
 
     if (data.length === 0) {
       tbody.innerHTML = `<tr><td colspan="9" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
