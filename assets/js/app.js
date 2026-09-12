@@ -228,14 +228,14 @@ class DashboardApp {
         <td class="p-3 font-semibold text-slate-700">${SecurityUtils.escapeHTML(item.no)}</td>
         <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="badge badge-blue">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.apk)}</td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.apm)}</td>
         <td class="p-3 font-extrabold text-red-600">${SecurityUtils.escapeHTML(item.ats)} Anak</td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.putus)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 font-bold text-xs">${SecurityUtils.escapeHTML(item.regrouping)}</span>
+          <span class="badge badge-${SecurityUtils.escapeHTML(item.statusColor)}">${SecurityUtils.escapeHTML(item.regrouping)}</span>
         </td>
         <td class="p-3 text-slate-600 text-xs">${SecurityUtils.escapeHTML(item.usage)}</td>
         <td class="p-3">
@@ -272,14 +272,14 @@ class DashboardApp {
         <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.nama)}</td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="badge badge-amber">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
         <td class="p-3 font-bold text-slate-800">${SecurityUtils.escapeHTML(item.literasi)}</td>
         <td class="p-3 font-bold text-slate-800">${SecurityUtils.escapeHTML(item.numerasi)}</td>
         <td class="p-3 text-slate-700">${SecurityUtils.escapeHTML(item.karakter)}</td>
         <td class="p-3 font-bold text-blue-700">${SecurityUtils.escapeHTML(item.akreditasi)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 font-bold text-xs">${SecurityUtils.escapeHTML(item.pembinaan)}</span>
+          <span class="badge badge-${SecurityUtils.escapeHTML(item.statusColor)}">${SecurityUtils.escapeHTML(item.pembinaan)}</span>
         </td>
         <td class="p-3">
           <button onclick="app.showModalDetail('Mutu ANBK - ${SecurityUtils.escapeHTML(item.nama)}', 'Literasi: ${SecurityUtils.escapeHTML(item.literasi)}, Numerasi: ${SecurityUtils.escapeHTML(item.numerasi)}. Akreditasi: ${SecurityUtils.escapeHTML(item.akreditasi)}')" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-[11px] shadow-sm whitespace-nowrap inline-flex items-center justify-center">Rapor</button>
@@ -314,7 +314,7 @@ class DashboardApp {
         <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.nama)}</td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="badge badge-blue">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.baik)}</td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.rusakRingan)}</td>
@@ -323,7 +323,7 @@ class DashboardApp {
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.perpus)}</td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.lab)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 font-bold text-xs">${SecurityUtils.escapeHTML(item.dak)}</span>
+          <span class="badge badge-${SecurityUtils.escapeHTML(item.statusColor)}">${SecurityUtils.escapeHTML(item.dak)}</span>
         </td>
       </tr>
     `).join("");
@@ -352,7 +352,7 @@ class DashboardApp {
         <td class="p-3 font-mono text-slate-500 text-xs">${SecurityUtils.escapeHTML(item.nip)}</td>
         <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.nama)}<br><span class="text-amber-600 font-normal text-xs">${SecurityUtils.escapeHTML(item.mapel)}</span></td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="badge badge-purple">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.asal)}</td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.jarakAsal)}</td>
@@ -399,7 +399,7 @@ class DashboardApp {
         <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.nama)}</td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-indigo-950 text-indigo-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="badge badge-indigo">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
         <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.jenjang)}</td>
         <td class="p-3 text-emerald-600 font-bold">${SecurityUtils.escapeHTML(item.izin)}</td>

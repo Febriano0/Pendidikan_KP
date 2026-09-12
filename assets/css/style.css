@@ -370,3 +370,75 @@ td:last-child, th:last-child {
 .flex-wrap {
   flex-wrap: wrap !important;
 }
+
+/* BADGE ACCESSIBLE STYLING (ZERO OVERFLOW & ZERO WRAP GUARANTEE) */
+.badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  padding: 0.35rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  border-radius: 9999px !important;
+  box-sizing: border-box !important;
+  vertical-align: middle !important;
+  flex-shrink: 0 !important;
+  max-width: max-content !important;
+}
+
+.badge-emerald {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  border: 1px solid #a7f3d0 !important;
+}
+
+.badge-amber {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  border: 1px solid #fde68a !important;
+}
+
+.badge-red {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  border: 1px solid #fca5a5 !important;
+}
+
+.badge-blue {
+  background-color: #dbeafe !important;
+  color: #1e40af !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+.badge-purple {
+  background-color: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border: 1px solid #e9d5ff !important;
+}
+
+.badge-indigo {
+  background-color: #e0e7ff !important;
+  color: #3730a3 !important;
+  border: 1px solid #c7d2fe !important;
+}
+
+.badge-slate {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+/* Ensure table cells with badges or status never overflow or split */
+td span, th span {
+  box-sizing: border-box !important;
+}
+
+th {
+  white-space: nowrap !important;
+  background-color: #0f2b48 !important;
+  color: #ffffff !important;
+}
+
