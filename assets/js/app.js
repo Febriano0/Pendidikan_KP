@@ -70,6 +70,8 @@ class DashboardApp {
     this.sortColumn = null;
     this.sortDirection = "asc";
     this.debounceTimer = null;
+    this.domCache = new Map();
+    this.lastLoggedSearch = "";
     
     this.init();
   }
@@ -165,23 +167,46 @@ class DashboardApp {
     const searchInput = document.getElementById("globalSearchInput");
     const mobileSearchInput = document.getElementById("mobileSearchInput");
 
+    const onSearchChange = (query) => {
+      this.searchQuery = query.toLowerCase().trim();
+      if (this.currentRoute === "dashboard") {
+        this.renderDashboardPanel(this.selectedKapanewon);
+      } else {
+        this.renderCurrentSubmenuTable();
+      }
+      if (this.searchQuery && this.searchQuery !== this.lastLoggedSearch) {
+        this.lastLoggedSearch = this.searchQuery;
+        auditLogger.log("SEARCH_FILTER_EXECUTED", this.user ? this.user.name : "Guest", `Query: ${this.searchQuery}`);
+      }
+    };
+
     if (searchInput) {
       searchInput.addEventListener("input", this.debounce((e) => {
-        this.searchQuery = e.target.value.toLowerCase().trim();
         if (mobileSearchInput) mobileSearchInput.value = e.target.value;
-        this.renderCurrentSubmenuTable();
-        auditLogger.log("SEARCH_FILTER_EXECUTED", this.user ? this.user.name : "Guest", `Query: ${this.searchQuery}`);
+        onSearchChange(e.target.value);
       }, 150));
     }
 
     if (mobileSearchInput) {
       mobileSearchInput.addEventListener("input", this.debounce((e) => {
-        this.searchQuery = e.target.value.toLowerCase().trim();
         if (searchInput) searchInput.value = e.target.value;
-        this.renderCurrentSubmenuTable();
-        auditLogger.log("SEARCH_FILTER_EXECUTED", this.user ? this.user.name : "Guest", `Query: ${this.searchQuery}`);
+        onSearchChange(e.target.value);
       }, 150));
     }
+
+    // Keyboard navigation: Escape key closes active modals & mobile drawer
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        const modal = document.getElementById("customModalOverlay") || document.getElementById("auditModalOverlay");
+        if (modal) modal.remove();
+        const drawer = document.getElementById("mobileNavDrawer");
+        if (drawer && !drawer.classList.contains("hidden")) {
+          drawer.classList.add("hidden");
+          const toggleBtn = document.getElementById("mobileNavToggle");
+          if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
 
     const kapSelect = document.getElementById("kapanewonFilterSelect");
     if (kapSelect) {
@@ -205,7 +230,8 @@ class DashboardApp {
     const mobileNavDrawer = document.getElementById("mobileNavDrawer");
     if (mobileMenuBtn && mobileNavDrawer) {
       mobileMenuBtn.addEventListener("click", () => {
-        mobileNavDrawer.classList.toggle("hidden");
+        const isClosed = mobileNavDrawer.classList.toggle("hidden");
+        mobileMenuBtn.setAttribute("aria-expanded", isClosed ? "false" : "true");
       });
     }
   }
@@ -283,13 +309,22 @@ class DashboardApp {
     auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${displayName}`);
   }
 
+  getElement(id) {
+    if (!this.domCache.has(id)) {
+      const el = document.getElementById(id);
+      if (el) this.domCache.set(id, el);
+      return el;
+    }
+    return this.domCache.get(id);
+  }
+
   safeSetText(id, text) {
-    const el = document.getElementById(id);
+    const el = this.getElement(id);
     if (el) el.textContent = text;
   }
 
   safeSetBadge(id, text, color) {
-    const el = document.getElementById(id);
+    const el = this.getElement(id);
     if (el) {
       el.textContent = text;
       el.className = `badge badge-${color}`;
@@ -297,7 +332,7 @@ class DashboardApp {
   }
 
   safeSetHref(id, href) {
-    const el = document.getElementById(id);
+    const el = this.getElement(id);
     if (el) el.setAttribute("href", href);
   }
 
@@ -420,7 +455,22 @@ class DashboardApp {
         </tr>
       `;
     } else {
-      tbody.innerHTML = DB.akses.map(a => {
+      let list = DB.akses;
+      if (this.searchQuery) {
+        list = list.filter(a => 
+          a.kapanewon.toLowerCase().includes(this.searchQuery) ||
+          a.regrouping.toLowerCase().includes(this.searchQuery) ||
+          a.sumber.toLowerCase().includes(this.searchQuery) ||
+          String(a.ats).includes(this.searchQuery)
+        );
+      }
+
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 italic">Tidak ada Kapanewon yang cocok dengan kata kunci "${SecurityUtils.escapeHTML(this.searchQuery)}".</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(a => {
         const kId = a.kapanewon.toLowerCase();
         const mut = DB.mutu.find(m => m.kapanewon.toLowerCase() === kId);
         const sarp = DB.sarpras.find(s => s.kapanewon.toLowerCase() === kId);
@@ -433,7 +483,7 @@ class DashboardApp {
             <td class="p-3"><span class="badge badge-${SecurityUtils.escapeHTML(a.statusColor)}">${SecurityUtils.escapeHTML(a.regrouping)}</span></td>
             <td class="p-3 text-xs text-slate-600">${mut ? SecurityUtils.escapeHTML(mut.literasi) : 'Standar'} / ${sarp ? SecurityUtils.escapeHTML(sarp.baik) : 'Layak'}</td>
             <td class="p-3">
-              <button onclick="app.filterByKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm">
+              <button onclick="app.filterByKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm" aria-label="Pilih Wilayah ${SecurityUtils.escapeHTML(a.kapanewon)}">
                 Pilih Wilayah <svg class="w-3.5 h-3.5 text-amber-400 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               </button>
             </td>
@@ -473,7 +523,7 @@ class DashboardApp {
     this.updateSortHeaderIcons(key);
     
     const dirText = this.sortDirection === 'asc' ? 'Ascending (A-Z / 0-9)' : 'Descending (Z-A / 9-0)';
-    // suppressed bottom notif per user request}": ${dirText}`);
+    // suppressed bottom notif per user request
     auditLogger.log("TABLE_SORTED", this.user ? this.user.name : "Guest", `Column: ${key}, Direction: ${this.sortDirection}`);
   }
 
@@ -513,9 +563,11 @@ class DashboardApp {
         const iconSpan = th.querySelector(".sort-icon");
         if (iconSpan) {
           if (key === activeKey) {
+            th.setAttribute("aria-sort", this.sortDirection === 'asc' ? "ascending" : "descending");
             iconSpan.innerHTML = this.sortDirection === 'asc' ? '<svg class="w-3 h-3 inline-block ml-1 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-6 8h12l-6-8z"/></svg>' : '<svg class="w-3 h-3 inline-block ml-1 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 20l6-8H6l6 8z"/></svg>';
             iconSpan.className = "sort-icon text-xs text-amber-300 font-black ml-1";
           } else {
+            th.setAttribute("aria-sort", "none");
             iconSpan.innerHTML = '<svg class="w-3 h-3 sort-icon inline-block ml-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>';
             iconSpan.className = "sort-icon text-xs text-slate-300 font-bold ml-1";
           }

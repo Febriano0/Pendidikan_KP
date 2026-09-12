@@ -1,6 +1,4 @@
 /* DISDIKPORA KULON PROGO - HIGH CONTRAST ACCESSIBLE GOVERNMENT CSS */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
 *, ::before, ::after {
   box-sizing: border-box;
   margin: 0;
@@ -96,7 +94,30 @@ button, input, select, textarea {
 
 /* Sizing & Spacing */
 .w-full { width: 100%; }
-.max-w-7xl { max-width: 80rem; }
+/* DYNAMIC RESPONSIVE CONTAINER & MAX WIDTH */
+.max-w-7xl {
+  max-width: 80rem;
+  width: 100%;
+}
+
+/* Ketika layar user muat / lebar, perlebar secara dinamis agar tabel tidak terpotong atau butuh scroll kesamping */
+@media (min-width: 1280px) {
+  .max-w-7xl {
+    max-width: 95% !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .max-w-7xl {
+    max-width: 94% !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .max-w-7xl {
+    max-width: 1820px !important;
+  }
+}
 .max-w-3xl { max-width: 48rem; }
 .max-w-md { max-width: 28rem; }
 .max-w-xs { max-width: 20rem; }
@@ -1051,4 +1072,103 @@ footer p {
 
 .footer-copyright p.text-slate-400 {
   color: #cbd5e1 !important; /* Upgraded to high-contrast crisp text */
+}
+
+
+/* DYNAMIC WIDE TABLE OPTIMIZATION */
+.overflow-x-auto {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  background-color: #0f2b48 !important;
+  color: #ffffff !important;
+  padding: 0.75rem 0.85rem;
+  font-weight: 800;
+  font-size: 0.75rem;
+  border-bottom: 3px solid #d97706 !important;
+  vertical-align: middle;
+}
+
+td {
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #0f172a !important;
+  font-size: 0.75rem;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+/* Fluid responsive table cells when screen fits (>= 1280px) */
+@media (min-width: 1280px) {
+  table {
+    table-layout: auto;
+    width: 100%;
+  }
+  th {
+    padding: 0.75rem 0.75rem !important;
+    white-space: normal !important;
+  }
+  td {
+    padding: 0.7rem 0.75rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  th {
+    padding: 0.8rem 1rem !important;
+    font-size: 0.8rem !important;
+  }
+  td {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Keyboard Accessible Focus */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #d97706 !important;
+  outline-offset: 2px !important;
+}
+
+/* Executive Print Stylesheet */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, .official-topbar, #mobileNavToggle, #btnResetMapFilter, button {
+    display: none !important;
+  }
+  main, .max-w-7xl, .overflow-x-auto {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  table {
+    width: 100% !important;
+    page-break-inside: auto;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  thead {
+    display: table-header-group;
+  }
 }
