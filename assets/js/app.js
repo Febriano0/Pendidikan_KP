@@ -204,16 +204,27 @@ class DashboardApp {
     }
 
     document.querySelectorAll("[data-kapanewon-id]").forEach(p => {
+      const parentGroup = p.closest(".map-region-group") || p.parentElement;
+      const textLabel = parentGroup ? parentGroup.querySelector("text") : null;
+
       if (p.getAttribute("data-kapanewon-id") === kapId) {
         p.setAttribute("fill", "#fde047");
         p.setAttribute("stroke", "#d97706");
         p.setAttribute("stroke-width", "6");
+        if (textLabel) {
+          textLabel.setAttribute("fill", "#0f2b48"); // Crisp dark navy text on bright yellow
+          textLabel.setAttribute("font-weight", "900");
+        }
       } else {
         const id = p.getAttribute("data-kapanewon-id");
         const origColor = this.getOriginalKapanewonColor(id);
         p.setAttribute("fill", origColor);
         p.setAttribute("stroke", "#0f2b48");
         p.setAttribute("stroke-width", "3.5");
+        if (textLabel) {
+          textLabel.setAttribute("fill", "#ffffff"); // Crisp white text on dark/colored polygon
+          textLabel.setAttribute("font-weight", "800");
+        }
       }
     });
 
@@ -297,7 +308,7 @@ class DashboardApp {
             iconSpan.className = "sort-icon text-xs text-amber-300 font-black ml-1";
           } else {
             iconSpan.textContent = '↕️';
-            iconSpan.className = "sort-icon text-[10px] text-slate-300 opacity-60 ml-1";
+            iconSpan.className = "sort-icon text-xs text-slate-300 font-bold ml-1";
           }
         }
       }

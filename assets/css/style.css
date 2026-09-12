@@ -948,3 +948,107 @@ footer {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+
+/* ==========================================================================
+   HIGH CONTRAST & ZERO "WARNA MATI" ACCESSIBILITY ENGINE (WCAG AAA)
+   ========================================================================== */
+
+/* Upgraded Text Contrast */
+.text-cyan-700 { color: #0e7490 !important; font-weight: 800 !important; }
+.text-slate-500 { color: #475569 !important; } /* Upgraded to 7.1:1 AAA contrast on white */
+.text-slate-600 { color: #334155 !important; }
+.text-slate-700 { color: #1e293b !important; }
+
+/* HEADER INPUT & DROPDOWN HIGH CONTRAST RULES */
+header input[type="text"],
+#globalSearchInput,
+#mobileSearchInput {
+  background-color: #0a1f38 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #475569 !important;
+  font-weight: 600 !important;
+  outline: none !important;
+}
+
+header input[type="text"]::placeholder,
+#globalSearchInput::placeholder,
+#mobileSearchInput::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+header input[type="text"]:focus,
+#globalSearchInput:focus,
+#mobileSearchInput:focus {
+  border-color: #f59e0b !important;
+  background-color: #0e294b !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3) !important;
+}
+
+/* HEADER KAPANEWON SELECT HIGH CONTRAST */
+header select,
+#kapanewonFilterSelect,
+#mobileKapanewonFilterSelect {
+  background-color: #0a1f38 !important;
+  color: #fde047 !important; /* Bright Gold text on Navy = 13.8:1 AAA */
+  font-weight: 800 !important;
+  border: 1.5px solid #d97706 !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+header select option,
+#kapanewonFilterSelect option,
+#mobileKapanewonFilterSelect option {
+  background-color: #0f2b48 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* PAGE FORM INPUTS (LIGHT THEME) */
+main input[type="text"],
+main input[type="password"] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #94a3b8 !important;
+  font-weight: 600 !important;
+}
+
+main input[type="text"]:focus,
+main input[type="password"]:focus {
+  border-color: #d97706 !important;
+  box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.25) !important;
+}
+
+/* FOOTER HIGH CONTRAST TEXT */
+footer {
+  background-color: #0f2b48 !important;
+  color: #e2e8f0 !important;
+}
+
+footer p {
+  color: #e2e8f0 !important;
+}
+
+.footer-nav a {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.footer-nav a:hover {
+  color: #fde047 !important;
+}
+
+.footer-copyright p.font-black {
+  color: #ffffff !important;
+}
+
+.footer-copyright p.text-amber-400 {
+  color: #fbbf24 !important;
+}
+
+.footer-copyright p.text-slate-400 {
+  color: #cbd5e1 !important; /* Upgraded to high-contrast crisp text */
+}
