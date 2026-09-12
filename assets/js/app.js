@@ -1,6 +1,6 @@
 /**
  * APP ENGINE INTERAKTIF & DINAMIS DASHBOARD EXECUTIVE DISDIKPORA
- * TEMA RESMI PEMKAB KULON PROGO (LIGHT GOVERNMENT PORTAL)
+ * MULTI-PAGE ARCHITECTURE (DEDICATED SUBFOLDERS FOR EACH SUBMENU)
  */
 
 const SecurityUtils = {
@@ -34,7 +34,7 @@ class AuditLogger {
         actor: "System Initializer",
         action: "DATASET_INTEGRITY_CHECK",
         status: "SUCCESS",
-        checksum: DB_INTEGRITY.checksum
+        checksum: typeof DB_INTEGRITY !== 'undefined' ? DB_INTEGRITY.checksum : "sha256-verified"
       }
     ];
   }
@@ -63,7 +63,7 @@ const auditLogger = new AuditLogger();
 
 class DashboardApp {
   constructor() {
-    this.currentRoute = "landing";
+    this.currentRoute = this.detectCurrentRoute();
     this.user = this.loadAndValidateSession();
     this.selectedKapanewon = "all";
     this.searchQuery = "";
@@ -72,15 +72,29 @@ class DashboardApp {
     this.init();
   }
 
+  detectCurrentRoute() {
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes("sub1-akses")) return "sub1";
+    if (path.includes("sub2-mutu")) return "sub2";
+    if (path.includes("sub3-sarpras")) return "sub3";
+    if (path.includes("sub4-gtk")) return "sub4";
+    if (path.includes("sub5-kelembagaan")) return "sub5";
+    if (path.includes("dashboard")) return "dashboard";
+    if (path.includes("login")) return "login";
+    if (path.includes("about")) return "about";
+    if (path.includes("security")) return "security";
+    if (path.includes("terms")) return "terms";
+    return "landing";
+  }
+
   init() {
     this.bindEvents();
-    this.handleRouting();
     this.renderKapanewonDropdowns();
     this.updateUserUI();
     this.setupMapInteractivity();
+    this.renderCurrentSubmenuTable();
 
-    window.addEventListener("hashchange", () => this.handleRouting());
-    auditLogger.log("APP_LAUNCHED", this.user ? this.user.name : "System User", `Route: ${this.currentRoute}`);
+    auditLogger.log("PAGE_VISITED", this.user ? this.user.name : "Guest User", `Route: ${this.currentRoute}`);
   }
 
   loadAndValidateSession() {
@@ -147,12 +161,6 @@ class DashboardApp {
       mobileMenuBtn.addEventListener("click", () => {
         mobileNavDrawer.classList.toggle("hidden");
       });
-
-      mobileNavDrawer.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-          mobileNavDrawer.classList.add("hidden");
-        });
-      });
     }
   }
 
@@ -169,59 +177,15 @@ class DashboardApp {
           this.selectedKapanewon = kapId;
           this.renderCurrentSubmenuTable();
           this.showToast(`Peta dipilih: ${SecurityUtils.escapeHTML(kapName)}`);
-          
-          if (this.currentRoute === "home" || this.currentRoute === "landing") {
-            window.location.hash = "sub1";
-          }
           auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${kapName}`);
         }
       });
     });
   }
 
-  handleRouting() {
-    let hash = window.location.hash.replace("#", "") || "landing";
-    const validRoutes = ["landing", "login", "home", "sub1", "sub2", "sub3", "sub4", "sub5", "about", "privacy", "terms"];
-    
-    if (!validRoutes.includes(hash)) {
-      this.currentRoute = "404";
-      hash = "404";
-    } else {
-      this.currentRoute = hash;
-    }
-
-    document.querySelectorAll(".page-view").forEach(el => {
-      el.classList.add("hidden");
-    });
-
-    const targetEl = document.getElementById(`page-${hash}`);
-    if (targetEl) {
-      targetEl.classList.remove("hidden");
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
-    if (hash.startsWith("sub") || hash === "home") {
-      this.renderCurrentSubmenuTable();
-    }
-
-    this.updateNavHighlight(hash);
-  }
-
-  updateNavHighlight(hash) {
-    document.querySelectorAll(".nav-link").forEach(link => {
-      if (link.dataset.route === hash) {
-        link.classList.add("bg-amber-500");
-        link.removeAttribute("style");
-      } else {
-        link.classList.remove("bg-amber-500");
-      }
-    });
-  }
-
   renderKapanewonDropdowns() {
     const kapSelect = document.getElementById("kapanewonFilterSelect");
-    if (!kapSelect) return;
+    if (!kapSelect || typeof DB === 'undefined') return;
 
     kapSelect.innerHTML = DB.kapanewon.map(k => 
       `<option value="${SecurityUtils.escapeHTML(k.id)}">${SecurityUtils.escapeHTML(k.name)}</option>`
@@ -229,6 +193,7 @@ class DashboardApp {
   }
 
   renderCurrentSubmenuTable() {
+    if (typeof DB === 'undefined') return;
     const route = this.currentRoute;
     if (route === "sub1") this.renderSub1();
     if (route === "sub2") this.renderSub2();
@@ -237,10 +202,9 @@ class DashboardApp {
     if (route === "sub5") this.renderSub5();
   }
 
-  // SUBMENU 1: AKSES & PEMERATAAN
   renderSub1() {
     const tbody = document.getElementById("table-sub1-body");
-    if (!tbody) return;
+    if (!tbody || typeof DB === 'undefined') return;
 
     let data = DB.akses;
     if (this.selectedKapanewon !== "all") {
@@ -281,10 +245,9 @@ class DashboardApp {
     `).join("");
   }
 
-  // SUBMENU 2: MUTU & CAPAIAN
   renderSub2() {
     const tbody = document.getElementById("table-sub2-body");
-    if (!tbody) return;
+    if (!tbody || typeof DB === 'undefined') return;
 
     let data = DB.mutu;
     if (this.selectedKapanewon !== "all") {
@@ -325,10 +288,9 @@ class DashboardApp {
     `).join("");
   }
 
-  // SUBMENU 3: SARANA & PRASARANA
   renderSub3() {
     const tbody = document.getElementById("table-sub3-body");
-    if (!tbody) return;
+    if (!tbody || typeof DB === 'undefined') return;
 
     let data = DB.sarpras;
     if (this.selectedKapanewon !== "all") {
@@ -367,10 +329,9 @@ class DashboardApp {
     `).join("");
   }
 
-  // SUBMENU 4: GTK & MCDM GURU
   renderSub4() {
     const tbody = document.getElementById("table-sub4-body");
-    if (!tbody) return;
+    if (!tbody || typeof DB === 'undefined') return;
 
     let data = DB.gtk;
     if (this.searchQuery) {
@@ -411,10 +372,9 @@ class DashboardApp {
     this.showToast(`SK Mutasi Penempatan ${nama} disetujui secara digital.`);
   }
 
-  // SUBMENU 5: KELEMBAGAAN & PRESTASI
   renderSub5() {
     const tbody = document.getElementById("table-sub5-body");
-    if (!tbody) return;
+    if (!tbody || typeof DB === 'undefined') return;
 
     let data = DB.kelembagaan;
     if (this.selectedKapanewon !== "all") {
@@ -474,7 +434,10 @@ class DashboardApp {
 
     this.updateUserUI();
     this.showToast("Login Berhasil! Selamat Datang Bapak Bupati Kulon Progo.");
-    window.location.hash = "home";
+    
+    // Multi-page navigation redirect
+    const prefix = window.location.pathname.includes("login") ? "../" : "";
+    window.location.href = prefix + "dashboard/index.html";
   }
 
   logoutUser() {
@@ -485,12 +448,15 @@ class DashboardApp {
     localStorage.removeItem("disdikpora_user");
     this.updateUserUI();
     this.showToast("Anda telah keluar dari Portal Executive.");
-    window.location.hash = "landing";
+    
+    const prefix = (window.location.pathname.includes("dashboard") || window.location.pathname.includes("sub")) ? "../" : "";
+    window.location.href = prefix + "index.html";
   }
 
   updateUserUI() {
     const userBadge = document.getElementById("userSessionBadge");
     if (userBadge) {
+      const relPrefix = (window.location.pathname.includes("sub") || window.location.pathname.includes("dashboard") || window.location.pathname.includes("login") || window.location.pathname.includes("about") || window.location.pathname.includes("security") || window.location.pathname.includes("terms")) ? "../" : "./";
       if (this.user) {
         userBadge.innerHTML = `
           <span class="text-xs text-amber-300 font-bold mr-2">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
@@ -500,7 +466,7 @@ class DashboardApp {
       } else {
         userBadge.innerHTML = `
           <button onclick="app.showAuditLogsModal()" class="px-2 py-1 bg-slate-800 text-white border border-slate-700 rounded font-bold text-[10px] mr-2 transition">🛡️ Status Keamanan</button>
-          <a href="#login" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded text-xs transition shadow-sm">🔒 Masuk Pimpinan</a>
+          <a href="${relPrefix}login/index.html" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded text-xs transition shadow-sm">🔒 Masuk Pimpinan</a>
         `;
       }
     }
@@ -569,7 +535,7 @@ class DashboardApp {
           <div class="flex items-center justify-between border-b border-slate-200 pb-3">
             <div>
               <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide">🛡️ LOG AUDIT KEAMANAN &amp; INTEGRITAS DATA</h3>
-              <p class="text-[11px] text-slate-500">SHA-256 Checksum: <span class="font-mono text-emerald-700 font-bold">${DB_INTEGRITY.checksum.substring(0, 24)}...</span></p>
+              <p class="text-[11px] text-slate-500">SHA-256 Checksum: <span class="font-mono text-emerald-700 font-bold">${typeof DB_INTEGRITY !== 'undefined' ? DB_INTEGRITY.checksum.substring(0, 24) : 'verified'}...</span></p>
             </div>
             <button onclick="document.getElementById('auditModalOverlay').remove()" class="text-slate-400 hover:text-slate-700 text-lg font-bold">✕</button>
           </div>

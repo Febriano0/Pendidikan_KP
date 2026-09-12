@@ -7,27 +7,63 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://disdikpora.kulonprogokab.go.id/executive/about.html</loc>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/dashboard/</loc>
     <lastmod>2026-09-13</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/sub1-akses/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://disdikpora.kulonprogokab.go.id/executive/privacy_security.html</loc>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/sub2-mutu/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/sub3-sarpras/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/sub4-gtk/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/sub5-kelembagaan/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/login/</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/about/</loc>
     <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://disdikpora.kulonprogokab.go.id/executive/terms_copyright.html</loc>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/security/</loc>
     <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://disdikpora.kulonprogokab.go.id/executive/404.html</loc>
+    <loc>https://disdikpora.kulonprogokab.go.id/executive/terms/</loc>
     <lastmod>2026-09-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

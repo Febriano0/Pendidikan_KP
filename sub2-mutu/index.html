@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sub-Menu 2: Mutu ANBK & Rapor - Executive Portal</title>
+  <meta name="description" content="Sub-Menu 2 Mutu ANBK & Rapor Pendidikan Kulon Progo">
+  <meta name="keywords" content="Disdikpora Kulon Progo, Executive Dashboard, Web Pendidikan, Pemkab Kulon Progo">
+  <meta name="author" content="Dinas Pendidikan Pemuda dan Olahraga Kabupaten Kulon Progo">
+  <meta name="robots" content="index, follow">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: http: data: blob:; img-src 'self' data: https: http:; frame-ancestors 'none'; object-src 'none';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen flex flex-col justify-between antialiased">
+  <!-- OFFICIAL INDONESIAN GOVT TOPBAR -->
+  <div class="bg-slate-950 text-slate-300 text-[11px] py-1.5 px-4 sm:px-6 lg:px-8 flex justify-between items-center border-b border-slate-800 font-medium">
+    <div class="flex items-center space-x-4">
+      <span>📍 Kantor Disdikpora: Jl. Landasan Udara Adisutjipto, Kompleks Pemkab Kulon Progo</span>
+      <span class="hidden sm:inline">📞 Telp: (0274) 773032</span>
+      <span class="hidden md:inline">✉️ disdikpora@kulonprogokab.go.id</span>
+    </div>
+    <div class="flex items-center space-x-3">
+      <span class="px-2 py-0.5 bg-amber-500 text-slate-900 rounded font-bold text-[10px]">PORTAL SPBE RESMI</span>
+      <span>13 September 2026</span>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-50 bg-slate-900 border-b border-amber-600/40 shadow-2xl backdrop-blur">
+    <div class="h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-blue-700"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center font-black text-slate-900 shadow-md group-hover:scale-105 transition">
+          KP
+        </div>
+        <div>
+          <h1 class="text-sm font-black text-white tracking-wide">PEMERINTAH KABUPATEN KULON PROGO</h1>
+          <p class="text-xs text-amber-400 font-semibold">Dinas Pendidikan Pemuda dan Olahraga • Executive Portal</p>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-1 text-xs font-semibold">
+        <a href="../index.html" class="nav-link px-3 py-2 rounded-lg transition">Beranda</a>
+<a href="../dashboard/index.html" class="nav-link px-3 py-2 rounded-lg transition">Home Dashboard</a>
+<a href="../sub1-akses/index.html" class="nav-link px-3 py-2 rounded-lg transition">Sub 1: Akses</a>
+<a href="../sub2-mutu/index.html" class="nav-link px-3 py-2 rounded-lg transition bg-amber-500 font-extrabold text-white">Sub 2: Mutu</a>
+<a href="../sub3-sarpras/index.html" class="nav-link px-3 py-2 rounded-lg transition">Sub 3: Sarpras</a>
+<a href="../sub4-gtk/index.html" class="nav-link px-3 py-2 rounded-lg transition">Sub 4: GTK</a>
+<a href="../sub5-kelembagaan/index.html" class="nav-link px-3 py-2 rounded-lg transition">Sub 5: Kelembagaan</a>
+
+      </nav>
+
+      <button id="mobileNavToggle" aria-label="Buka Menu Navigasi" class="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+      <div class="flex items-center space-x-3">
+        <div id="userSessionBadge"></div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="bg-slate-900/90 border-t border-slate-800 px-4 sm:px-6 lg:px-8 py-2">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center space-x-3">
+          <span class="text-slate-400 font-medium">Filter Kapanewon:</span>
+          <select id="kapanewonFilterSelect" class="bg-slate-950 border border-slate-700 text-white rounded-lg px-3 py-1.5 font-semibold focus:outline-none focus:border-amber-500">
+          </select>
+        </div>
+
+        <div class="flex items-center space-x-3 flex-1 max-w-xs">
+          <input type="text" id="globalSearchInput" placeholder="Cari sekolah, indikator, atau data..." class="w-full bg-slate-950 border border-slate-700 text-white placeholder-slate-500 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-amber-500">
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE DRAWER -->
+    <div id="mobileNavDrawer" class="hidden md:hidden bg-slate-900 border-b border-amber-600/30 px-4 py-3 space-y-2 text-xs font-semibold">
+      <a href="../index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Beranda Utama</a>
+      <a href="../dashboard/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Home Executive Dashboard</a>
+      <a href="../sub1-akses/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 1: Akses Pendidikan</a>
+      <a href="../sub2-mutu/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 2: Mutu ANBK</a>
+      <a href="../sub3-sarpras/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 3: Sarana Prasarana</a>
+      <a href="../sub4-gtk/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 4: Kepegawaian GTK (MCDM)</a>
+      <a href="../sub5-kelembagaan/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 5: Kelembagaan &amp; GIS</a>
+      <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+        <a href="../about/index.html" class="text-amber-400 font-bold">Tentang Aplikasi</a>
+        <a href="../security/index.html" class="text-slate-400">Keamanan Data</a>
+      </div>
+    </div>
+  </header>
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+    <section class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-300 pb-4">
+        <div>
+          <span class="text-xs font-bold text-amber-600 uppercase">SUB-MENU 2</span>
+          <h2 class="text-2xl font-black text-slate-900">Mutu ANBK, Literasi-Numerasi &amp; Rapor Pendidikan</h2>
+          <p class="text-xs text-slate-600 font-medium">Sumber Data Resmi: Platform Rapor Pendidikan Kemendikdasmen &amp; BAN-S/M</p>
+        </div>
+      </div>
+      <div class="overflow-x-auto bg-white rounded-xl border border-slate-300 shadow-sm">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-[#0f2b48] text-white text-xs uppercase border-b-2 border-amber-600">
+              <th class="p-3">NPSN</th>
+              <th class="p-3">NAMA SEKOLAH</th>
+              <th class="p-3">KAPANEWON</th>
+              <th class="p-3">SUMBER DATA</th>
+              <th class="p-3">SKOR LITERASI</th>
+              <th class="p-3">SKOR NUMERASI</th>
+              <th class="p-3">KARAKTER</th>
+              <th class="p-3">AKREDITASI</th>
+              <th class="p-3">STATUS PEMBINAAN</th>
+              <th class="p-3">AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="table-sub2-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+  <footer class="bg-slate-900 border-t border-slate-800 py-6 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <span class="font-bold text-white block">© 2026 Pemerintah Kabupaten Kulon Progo</span>
+        <span>Dinas Pendidikan Pemuda dan Olahraga • Hak Cipta Dilindungi Undang-Undang</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="../about/index.html" class="hover:text-amber-400">Tentang Aplikasi</a>
+        <a href="../security/index.html" class="hover:text-amber-400">Keamanan &amp; Integritas Data</a>
+        <a href="../terms/index.html" class="hover:text-amber-400">Hak Cipta &amp; Ketentuan</a>
+        <a href="../404.html" class="hover:text-amber-400">Halaman Error 404</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.app) {
+        window.app.currentRoute = "sub2";
+        window.app.renderSub2();
+      }
+    });
+  </script>
+</body>
+</html>
