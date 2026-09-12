@@ -159,90 +159,80 @@
 
         <div class="bg-slate-100 p-4 rounded-xl border border-slate-300 relative overflow-hidden flex justify-center items-center shadow-inner">
           <!-- SVG REALISTIC GEOGRAPHIC MAP -->
-          <svg viewBox="0 0 900 720" class="w-full max-w-3xl h-auto drop-shadow-md select-none">
-            <defs>
-              <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#bae6fd" />
-                <stop offset="100%" stop-color="#7dd3fc" />
-              </linearGradient>
-            </defs>
-
-            <!-- Samudra Hindia (Ocean Area) -->
-            <path d="M 0 540 Q 450 580 900 540 L 900 720 L 0 720 Z" fill="url(#oceanGrad)" stroke="#38bdf8" stroke-width="2" />
-            <text x="450" y="660" text-anchor="middle" fill="#0369a1" stroke="#ffffff" stroke-width="2.5" paint-order="stroke fill" font-size="14" font-weight="800" letter-spacing="3" class="ocean-label pointer-events-none">SAMUDRA HINDIA</text>
+          <svg viewBox="0 0 900 690" class="w-full max-w-[400px] h-auto drop-shadow-md select-none map-svg-compact">
 
             <!-- Map Polygons Group -->
             <g id="map-polygons">
               <!-- Samigaluh -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="samigaluh" data-kapanewon-name="Samigaluh">
                 <path data-kapanewon-id="samigaluh" data-kapanewon-name="Samigaluh" d="M 360 50 L 520 40 L 580 130 L 460 170 L 350 140 Z" fill="#1e3a8a" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="450" y="105" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Samigaluh</text>
+                <text x="450" y="105" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Samigaluh</text>
               </g>
 
               <!-- Kalibawang -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="kalibawang" data-kapanewon-name="Kalibawang">
                 <path data-kapanewon-id="kalibawang" data-kapanewon-name="Kalibawang" d="M 520 40 L 700 50 L 670 170 L 580 130 Z" fill="#0284c7" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="610" y="105" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Kalibawang</text>
+                <text x="610" y="105" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Kalibawang</text>
               </g>
 
               <!-- Girimulyo -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="girimulyo" data-kapanewon-name="Girimulyo">
                 <path data-kapanewon-id="girimulyo" data-kapanewon-name="Girimulyo" d="M 230 150 L 350 140 L 460 170 L 420 270 L 250 250 Z" fill="#0369a1" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="340" y="205" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Girimulyo</text>
+                <text x="340" y="205" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Girimulyo</text>
               </g>
 
               <!-- Nanggulan -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="nanggulan" data-kapanewon-name="Nanggulan">
                 <path data-kapanewon-id="nanggulan" data-kapanewon-name="Nanggulan" d="M 460 170 L 670 170 L 620 290 L 420 270 Z" fill="#0284c7" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="540" y="225" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Nanggulan</text>
+                <text x="540" y="225" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Nanggulan</text>
               </g>
 
               <!-- Kokap -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="kokap" data-kapanewon-name="Kokap">
                 <path data-kapanewon-id="kokap" data-kapanewon-name="Kokap" d="M 130 250 L 250 250 L 270 380 L 120 360 Z" fill="#0f766e" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="190" y="315" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Kokap</text>
+                <text x="190" y="315" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Kokap</text>
               </g>
 
               <!-- Pengasih -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="pengasih" data-kapanewon-name="Pengasih">
                 <path data-kapanewon-id="pengasih" data-kapanewon-name="Pengasih" d="M 250 250 L 420 270 L 460 390 L 270 380 Z" fill="#d97706" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="350" y="325" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Pengasih</text>
+                <text x="350" y="325" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Pengasih</text>
               </g>
 
               <!-- Sentolo -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="sentolo" data-kapanewon-name="Sentolo">
                 <path data-kapanewon-id="sentolo" data-kapanewon-name="Sentolo" d="M 420 270 L 620 290 L 650 420 L 460 390 Z" fill="#2563eb" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="530" y="345" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Sentolo</text>
+                <text x="530" y="345" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Sentolo</text>
               </g>
 
               <!-- Temon -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="temon" data-kapanewon-name="Temon">
                 <path data-kapanewon-id="temon" data-kapanewon-name="Temon" d="M 90 360 L 230 370 L 210 540 L 60 510 Z" fill="#4d7c0f" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="150" y="445" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Temon (YIA)</text>
+                <text x="150" y="445" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Temon (YIA)</text>
               </g>
 
               <!-- Wates -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="wates" data-kapanewon-name="Wates">
                 <path data-kapanewon-id="wates" data-kapanewon-name="Wates" d="M 230 370 L 370 380 L 350 550 L 210 540 Z" fill="#b45309" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="290" y="455" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="900" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">WATES</text>
+                <text x="290" y="455" text-anchor="middle" fill="#ffffff" font-size="23" font-weight="900" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">WATES</text>
               </g>
 
               <!-- Panjatan -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="panjatan" data-kapanewon-name="Panjatan">
                 <path data-kapanewon-id="panjatan" data-kapanewon-name="Panjatan" d="M 370 380 L 510 390 L 480 560 L 350 550 Z" fill="#15803d" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="430" y="465" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Panjatan</text>
+                <text x="430" y="465" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Panjatan</text>
               </g>
 
               <!-- Lendah -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="lendah" data-kapanewon-name="Lendah">
                 <path data-kapanewon-id="lendah" data-kapanewon-name="Lendah" d="M 510 390 L 650 420 L 620 580 L 480 560 Z" fill="#6d28d9" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="560" y="485" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Lendah</text>
+                <text x="560" y="485" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Lendah</text>
               </g>
 
               <!-- Galur -->
               <g class="map-region-group cursor-pointer" data-kapanewon-id="galur" data-kapanewon-name="Galur">
                 <path data-kapanewon-id="galur" data-kapanewon-name="Galur" d="M 480 560 L 620 580 L 590 670 L 450 650 Z" fill="#0369a1" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                <text x="530" y="615" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Galur</text>
+                <text x="530" y="615" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Galur</text>
               </g>
             </g>
 

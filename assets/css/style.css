@@ -337,8 +337,14 @@ tr:hover {
 
 /* ==========================================================================
    SVG GEOSPATIAL MAP & HIGH-CONTRAST CARTOGRAPHIC LABELS
-   Eliminates identical text/shadow blur; enforces sharp cartographic halos.
+   Compact 50% scale, zero-ocean layout with razor-sharp cartographic halos.
    ========================================================================== */
+.map-svg-compact {
+  width: 100% !important;
+  max-width: 400px !important;
+  height: auto !important;
+}
+
 .map-polygon-path {
   transition: fill 0.2s ease-in-out, stroke 0.2s ease-in-out, stroke-width 0.2s ease-in-out !important;
   cursor: pointer;
@@ -348,10 +354,11 @@ tr:hover {
 .map-region-label,
 .map-region-group text {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 21px !important;
   font-weight: 800 !important;
   paint-order: stroke fill !important;
   stroke: #091e3a !important;
-  stroke-width: 3.5px !important;
+  stroke-width: 4px !important;
   stroke-linecap: round !important;
   stroke-linejoin: round !important;
   fill: #ffffff !important;
@@ -359,6 +366,11 @@ tr:hover {
   pointer-events: none !important;
   user-select: none !important;
   transition: fill 0.2s ease, stroke 0.2s ease, font-weight 0.2s ease !important;
+}
+
+.map-region-group[data-kapanewon-id="wates"] text {
+  font-size: 23px !important;
+  font-weight: 900 !important;
 }
 
 /* Hover state on region group: Gold polygon, Navy text with White Halo */
@@ -372,7 +384,7 @@ tr:hover {
 .map-region-group:hover .map-region-label {
   fill: #0f2b48 !important;
   stroke: #ffffff !important;
-  stroke-width: 3.5px !important;
+  stroke-width: 4px !important;
   font-weight: 900 !important;
   filter: none !important;
 }
@@ -388,19 +400,8 @@ tr:hover {
 .map-region-group.is-active .map-region-label {
   fill: #0f2b48 !important;
   stroke: #ffffff !important;
-  stroke-width: 4px !important;
+  stroke-width: 4.5px !important;
   font-weight: 900 !important;
-  filter: none !important;
-}
-
-/* Ocean text label */
-.ocean-label {
-  paint-order: stroke fill !important;
-  stroke: #ffffff !important;
-  stroke-width: 2.5px !important;
-  stroke-linecap: round !important;
-  stroke-linejoin: round !important;
-  fill: #0369a1 !important;
   filter: none !important;
 }
 
