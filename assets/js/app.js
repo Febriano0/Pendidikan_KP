@@ -237,8 +237,9 @@ class DashboardApp {
   }
 
   setupMapInteractivity() {
-    const mapItems = document.querySelectorAll(".map-region-group, [data-kapanewon-id]");
-    mapItems.forEach(el => {
+    const regionGroups = document.querySelectorAll(".map-region-group");
+    const targets = regionGroups.length > 0 ? regionGroups : document.querySelectorAll("[data-kapanewon-id]");
+    targets.forEach(el => {
       el.style.cursor = "pointer";
       el.addEventListener("click", (e) => {
         e.preventDefault();
@@ -246,10 +247,19 @@ class DashboardApp {
         const kapId = el.getAttribute("data-kapanewon-id") || el.querySelector("[data-kapanewon-id]")?.getAttribute("data-kapanewon-id");
         const kapName = el.getAttribute("data-kapanewon-name") || el.querySelector("[data-kapanewon-id]")?.getAttribute("data-kapanewon-name") || kapId;
         if (kapId) {
-          this.filterByKapanewon(kapId, kapName);
+          this.toggleKapanewon(kapId, kapName);
         }
       });
     });
+  }
+
+  toggleKapanewon(kapId, kapName) {
+    if (this.selectedKapanewon === kapId) {
+      // Un-click / toggle off: Revert back to all regions
+      this.filterByKapanewon("all", "Semua Kapanewon (12)");
+    } else {
+      this.filterByKapanewon(kapId, kapName);
+    }
   }
 
   filterByKapanewon(kapId, kapName) {
@@ -488,16 +498,17 @@ class DashboardApp {
         const mut = DB.mutu.find(m => m.kapanewon.toLowerCase() === kId);
         const sarp = DB.sarpras.find(s => s.kapanewon.toLowerCase() === kId);
         const q = `?kap=${kId}`;
+        const isSelected = (this.selectedKapanewon === kId);
         return `
-          <tr class="hover:bg-slate-50 transition border-b border-slate-200">
-            <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(a.kapanewon)}</td>
+          <tr class="${isSelected ? 'bg-amber-50/80 border-l-4 border-l-amber-600' : 'hover:bg-slate-50'} transition border-b border-slate-200">
+            <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(a.kapanewon)} ${isSelected ? '<span class="text-[10px] px-1.5 py-0.5 bg-amber-200 text-amber-900 font-extrabold rounded ml-1">Terpilih</span>' : ''}</td>
             <td class="p-3 text-slate-800">APK: ${SecurityUtils.escapeHTML(a.apk)} • APM: ${SecurityUtils.escapeHTML(a.apm)}</td>
             <td class="p-3 font-black text-red-600">${SecurityUtils.escapeHTML(String(a.ats))} Anak</td>
             <td class="p-3"><span class="badge badge-${SecurityUtils.escapeHTML(a.statusColor)}">${SecurityUtils.escapeHTML(a.regrouping)}</span></td>
             <td class="p-3 text-xs text-slate-600">${mut ? SecurityUtils.escapeHTML(mut.literasi) : 'Standar'} / ${sarp ? SecurityUtils.escapeHTML(sarp.baik) : 'Layak'}</td>
             <td class="p-3">
-              <button onclick="app.filterByKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm transition inline-flex items-center gap-1" aria-label="Pilih Wilayah ${SecurityUtils.escapeHTML(a.kapanewon)}">
-                Pilih Wilayah &rarr;
+              <button onclick="app.toggleKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3.5 py-1.5 ${isSelected ? 'bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-700' : 'bg-amber-600 hover:bg-amber-700 text-white'} rounded-lg text-xs font-bold whitespace-nowrap shadow-sm transition inline-flex items-center gap-1" aria-label="${isSelected ? 'Batalkan pilihan wilayah ' + SecurityUtils.escapeHTML(a.kapanewon) : 'Pilih wilayah ' + SecurityUtils.escapeHTML(a.kapanewon)}" title="${isSelected ? 'Klik untuk membatalkan filter' : 'Klik untuk memfilter data wilayah ini'}">
+                ${isSelected ? 'Batal Pilih ✕' : 'Pilih Wilayah &rarr;'}
               </button>
             </td>
           </tr>
