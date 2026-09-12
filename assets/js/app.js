@@ -508,7 +508,7 @@ class DashboardApp {
             <td class="p-3 text-xs text-slate-600">${mut ? SecurityUtils.escapeHTML(mut.literasi) : 'Standar'} / ${sarp ? SecurityUtils.escapeHTML(sarp.baik) : 'Layak'}</td>
             <td class="p-3">
               <button onclick="app.toggleKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3.5 py-1.5 ${isSelected ? 'bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-700' : 'bg-amber-600 hover:bg-amber-700 text-white'} rounded-lg text-xs font-bold whitespace-nowrap shadow-sm transition inline-flex items-center gap-1" aria-label="${isSelected ? 'Batalkan pilihan wilayah ' + SecurityUtils.escapeHTML(a.kapanewon) : 'Pilih wilayah ' + SecurityUtils.escapeHTML(a.kapanewon)}" title="${isSelected ? 'Klik untuk membatalkan filter' : 'Klik untuk memfilter data wilayah ini'}">
-                ${isSelected ? 'Batal Pilih ✕' : 'Pilih Wilayah &rarr;'}
+                ${isSelected ? 'Batal Pilih <svg class="w-3.5 h-3.5 inline-block ml-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>' : 'Pilih Wilayah <svg class="w-3.5 h-3.5 inline-block ml-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>'}
               </button>
             </td>
           </tr>
@@ -584,17 +584,27 @@ class DashboardApp {
       const match = onclickAttr.match(/app\.sortBy\(['"]([^'"]+)['"]\)/);
       if (match) {
         const key = match[1];
-        const iconSpan = th.querySelector(".sort-icon");
-        if (iconSpan) {
-          if (key === activeKey) {
-            th.setAttribute("aria-sort", this.sortDirection === 'asc' ? "ascending" : "descending");
-            iconSpan.innerHTML = this.sortDirection === 'asc' ? '<svg class="w-3 h-3 inline-block ml-1 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-6 8h12l-6-8z"/></svg>' : '<svg class="w-3 h-3 inline-block ml-1 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 20l6-8H6l6 8z"/></svg>';
-            iconSpan.className = "sort-icon text-xs text-amber-300 font-black ml-1";
-          } else {
-            th.setAttribute("aria-sort", "none");
-            iconSpan.innerHTML = '<svg class="w-3 h-3 sort-icon inline-block ml-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>';
-            iconSpan.className = "sort-icon text-xs text-slate-300 font-bold ml-1";
-          }
+        let iconSpan = th.querySelector(".sort-icon");
+        if (!iconSpan) return;
+
+        // Auto-wrap if sort-icon is on an SVG element to avoid nested SVG bugs
+        if (iconSpan.tagName.toLowerCase() === 'svg') {
+          const wrapper = document.createElement('span');
+          wrapper.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle";
+          iconSpan.parentNode.replaceChild(wrapper, iconSpan);
+          iconSpan = wrapper;
+        }
+
+        if (key === activeKey) {
+          th.setAttribute("aria-sort", this.sortDirection === 'asc' ? "ascending" : "descending");
+          iconSpan.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-amber-400 ml-1.5 align-middle font-bold";
+          iconSpan.innerHTML = this.sortDirection === 'asc'
+            ? '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>'
+            : '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M19 12l-7 7-7-7"/></svg>';
+        } else {
+          th.setAttribute("aria-sort", "none");
+          iconSpan.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle";
+          iconSpan.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg>';
         }
       }
     });
