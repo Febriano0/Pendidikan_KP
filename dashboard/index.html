@@ -162,9 +162,14 @@
             <h3 class="text-xl font-black text-slate-900">Peta Geospasial 12 Kapanewon Kabupaten Kulon Progo</h3>
             <p class="text-xs text-slate-600 font-medium">Klik wilayah Kapanewon pada peta di bawah untuk menyaring data indikator secara otomatis:</p>
           </div>
-          <div id="activeMapBadge" class="px-3 py-1.5 bg-slate-900 text-amber-400 border border-slate-800 text-xs font-bold rounded-lg flex items-center gap-2 shadow-sm">
-            <span>📍 Wilayah Aktif:</span>
-            <span id="activeMapName" class="text-white font-extrabold">Semua Kapanewon (12)</span>
+          <div class="flex items-center gap-2">
+            <div id="activeMapBadge" class="px-3 py-1.5 bg-slate-900 text-amber-400 border border-slate-800 text-xs font-bold rounded-lg flex items-center gap-2 shadow-sm">
+              <span>📍 Wilayah Aktif:</span>
+              <span id="activeMapName" class="text-white font-extrabold">Semua Kapanewon (12)</span>
+            </div>
+            <button onclick="app.filterByKapanewon('all', 'Semua Kapanewon (12)')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 text-xs font-bold rounded-lg transition shadow-sm" title="Tampilkan semua data">
+              🔄 Tampilkan Semua
+            </button>
           </div>
         </div>
 
@@ -278,6 +283,142 @@
           </div>
         </div>
       </div>
+    
+      <!-- KAPANEWON EXECUTIVE DETAIL PANEL -->
+      <div id="kapanewonDetailPanel" class="space-y-6 pt-2">
+        <!-- Panel Title Banner -->
+        <div class="bg-[#0f2b48] text-white p-5 rounded-2xl border-l-4 border-amber-500 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">HASIL SARINGAN PETA GEOSPASIAL</span>
+              <span id="panelZoneBadge" class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-blue-900 text-blue-200 border border-blue-700">12 Kapanewon Terintegrasi</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-white mt-1">
+              Data Terpadu: <span id="panelKapanewonName" class="text-amber-400">Semua Kapanewon (Kabupaten Kulon Progo)</span>
+            </h3>
+            <p class="text-xs text-slate-300 mt-0.5">Indikator agregat pendidikan terintegrasi dari Dapodik, Dukcapil, Rapor Pendidikan, dan BKPSDM</p>
+          </div>
+          <button id="btnResetMapFilter" onclick="app.filterByKapanewon('all', 'Semua Kapanewon (12)')" class="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-slate-900 text-xs font-black rounded-xl shadow-md transition whitespace-nowrap self-start sm:self-center">
+            🔄 Tampilkan Semua Wilayah
+          </button>
+        </div>
+
+        <!-- 4 Real-time Executive KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Card 1: Akses & ATS -->
+          <div class="bg-white p-5 rounded-xl border border-slate-300 shadow-sm border-t-4 border-t-blue-700 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-slate-700 font-bold">SUB 1: AKSES &amp; ATS</span>
+                <span id="kpiRegrouping" class="badge badge-emerald">Optimal</span>
+              </div>
+              <div class="mt-2">
+                <span class="text-[11px] text-slate-500 font-semibold block">Total Anak Tidak Sekolah (ATS):</span>
+                <span id="kpiAts" class="text-2xl font-black text-red-600 block">2.080 Anak</span>
+              </div>
+              <div class="mt-2 text-xs text-slate-700 space-y-0.5">
+                <div>APK: <span id="kpiApk" class="font-bold text-slate-900">79.2%</span></div>
+                <div>APM: <span id="kpiApm" class="font-bold text-slate-900">98.7% / 94.5%</span></div>
+              </div>
+            </div>
+            <a id="linkSub1" href="../sub1-akses/index.html" class="pt-2 border-t border-slate-200 text-xs font-bold text-blue-700 hover:text-blue-900 inline-flex items-center gap-1">
+              Buka Detail Sub 1 (Akses) →
+            </a>
+          </div>
+
+          <!-- Card 2: Mutu ANBK -->
+          <div class="bg-white p-5 rounded-xl border border-slate-300 shadow-sm border-t-4 border-t-amber-600 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-slate-700 font-bold">SUB 2: MUTU ANBK</span>
+                <span id="kpiAkreditasi" class="badge badge-emerald">A / B</span>
+              </div>
+              <div class="mt-2">
+                <span class="text-[11px] text-slate-500 font-semibold block">Sekolah Rujukan / Sampel:</span>
+                <span id="kpiMutuSekolah" class="text-sm font-black text-slate-900 block truncate">485 Satuan Pendidikan</span>
+              </div>
+              <div class="mt-2 text-xs text-slate-700 space-y-0.5">
+                <div>Literasi: <span id="kpiLiterasi" class="font-bold text-emerald-700">80.8 (Tinggi)</span></div>
+                <div>Numerasi: <span id="kpiNumerasi" class="font-bold text-amber-600">75.2 (Sedang)</span></div>
+              </div>
+            </div>
+            <a id="linkSub2" href="../sub2-mutu/index.html" class="pt-2 border-t border-slate-200 text-xs font-bold text-amber-600 hover:text-amber-800 inline-flex items-center gap-1">
+              Buka Detail Sub 2 (Mutu) →
+            </a>
+          </div>
+
+          <!-- Card 3: Sarpras & DAK -->
+          <div class="bg-white p-5 rounded-xl border border-slate-300 shadow-sm border-t-4 border-t-blue-800 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-slate-700 font-bold">SUB 3: SARPRAS SEKOLAH</span>
+                <span id="kpiDakStatus" class="badge badge-blue">Alokasi DAK</span>
+              </div>
+              <div class="mt-2">
+                <span class="text-[11px] text-slate-500 font-semibold block">Kondisi Ruang Kelas:</span>
+                <span id="kpiRuangBaik" class="text-lg font-black text-slate-900 block">88.2% Layak</span>
+              </div>
+              <div class="mt-2 text-xs text-slate-700 space-y-0.5">
+                <div>Rusak Berat: <span id="kpiRuangRusak" class="font-bold text-red-600">9 Ruang</span></div>
+                <div>Status SPM: <span id="kpiSpmStatus" class="font-bold text-slate-900">SPM Terpenuhi</span></div>
+              </div>
+            </div>
+            <a id="linkSub3" href="../sub3-sarpras/index.html" class="pt-2 border-t border-slate-200 text-xs font-bold text-blue-800 hover:text-blue-950 inline-flex items-center gap-1">
+              Buka Detail Sub 3 (Sarpras) →
+            </a>
+          </div>
+
+          <!-- Card 4: GTK & Kelembagaan -->
+          <div class="bg-white p-5 rounded-xl border border-slate-300 shadow-sm border-t-4 border-t-purple-600 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-slate-700 font-bold">SUB 4 &amp; 5: GTK &amp; INOVASI</span>
+                <span class="badge badge-purple">MCDM &amp; AI</span>
+              </div>
+              <div class="mt-2">
+                <span class="text-[11px] text-slate-500 font-semibold block">Rekomendasi Penataan Guru:</span>
+                <span id="kpiGtkMcdm" class="text-xs font-black text-slate-900 block truncate">Optimasi Domisili Aktif</span>
+              </div>
+              <div class="mt-2 text-xs text-slate-700 space-y-0.5">
+                <div>Inovasi: <span id="kpiInovasiAi" class="font-bold text-purple-700">Pilot AI &amp; Coding</span></div>
+                <div>Perizinan: <span class="font-bold text-emerald-700">100% Terverifikasi</span></div>
+              </div>
+            </div>
+            <a id="linkSub4" href="../sub4-gtk/index.html" class="pt-2 border-t border-slate-200 text-xs font-bold text-purple-700 hover:text-purple-900 inline-flex items-center gap-1">
+              Buka Detail Sub 4 &amp; 5 →
+            </a>
+          </div>
+        </div>
+
+        <!-- Integrated 5-Submenu Summary Table -->
+        <div class="bg-white rounded-xl border border-slate-300 shadow-sm overflow-hidden">
+          <div class="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h4 class="text-sm font-black text-slate-900">📋 Rincian Indikator Terpadu Sesuai Wilayah Terpilih</h4>
+              <p class="text-[11px] text-slate-600">Pilih baris atau klik tombol pintas untuk langsung meninjau data di masing-masing Sub-Menu.</p>
+            </div>
+            <span class="text-[11px] text-slate-500 font-semibold">Tersinkronisasi Otomatis dengan Peta Geospasial</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse" id="dashboardSummaryTable">
+              <thead>
+                <tr class="bg-[#0f2b48] text-white text-xs uppercase border-b-2 border-amber-600">
+                  <th class="p-3">KRITERIA SUB-MENU</th>
+                  <th class="p-3">INDIKATOR UTAMA</th>
+                  <th class="p-3">NILAI / CAPAIAN</th>
+                  <th class="p-3">STATUS &amp; KEPUTUSAN</th>
+                  <th class="p-3">SUMBER DATA</th>
+                  <th class="p-3">AKSI PINTAS</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardSummaryTableBody" class="text-xs">
+                <!-- Injected dynamically by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </section>
   </main>
     <footer class="bg-slate-900 border-t border-amber-600/50 py-8 text-xs text-slate-400">

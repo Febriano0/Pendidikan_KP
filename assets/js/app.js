@@ -93,8 +93,33 @@ class DashboardApp {
     this.bindEvents();
     this.renderKapanewonDropdowns();
     this.updateUserUI();
+
+    // Check URL query parameters or session storage for pre-selected Kapanewon
+    const urlParams = new URLSearchParams(window.location.search);
+    const kapParam = urlParams.get('kap');
+    if (kapParam) {
+      this.selectedKapanewon = kapParam.toLowerCase();
+      try { sessionStorage.setItem("disdikpora_selected_kapanewon", this.selectedKapanewon); } catch(e) {}
+    } else {
+      try {
+        const savedKap = sessionStorage.getItem("disdikpora_selected_kapanewon");
+        if (savedKap && savedKap !== "all") {
+          this.selectedKapanewon = savedKap;
+        }
+      } catch(e) {}
+    }
+
     this.setupMapInteractivity();
-    this.renderCurrentSubmenuTable();
+
+    if (this.currentRoute === "dashboard") {
+      this.renderDashboardPanel(this.selectedKapanewon);
+    } else {
+      this.renderCurrentSubmenuTable();
+    }
+
+    if (this.selectedKapanewon && this.selectedKapanewon !== "all") {
+      this.filterByKapanewon(this.selectedKapanewon);
+    }
 
     auditLogger.log("PAGE_VISITED", this.user ? this.user.name : "Guest User", `Route: ${this.currentRoute}`);
   }
@@ -161,11 +186,18 @@ class DashboardApp {
     const kapSelect = document.getElementById("kapanewonFilterSelect");
     if (kapSelect) {
       kapSelect.addEventListener("change", (e) => {
-        this.selectedKapanewon = e.target.value;
-        this.renderCurrentSubmenuTable();
-        const selectedText = e.target.selectedOptions[0]?.text || e.target.value;
-        // suppressed bottom notif per user request}`);
-        auditLogger.log("KAPANEWON_FILTER_CHANGED", this.user ? this.user.name : "Guest", `Filter: ${selectedText}`);
+        const val = e.target.value;
+        const txt = e.target.selectedOptions[0]?.text || val;
+        this.filterByKapanewon(val, txt);
+      });
+    }
+
+    const mobileKapSelect = document.getElementById("mobileKapanewonFilterSelect");
+    if (mobileKapSelect) {
+      mobileKapSelect.addEventListener("change", (e) => {
+        const val = e.target.value;
+        const txt = e.target.selectedOptions[0]?.text || val;
+        this.filterByKapanewon(val, txt);
       });
     }
 
@@ -179,35 +211,50 @@ class DashboardApp {
   }
 
   setupMapInteractivity() {
-    document.querySelectorAll("[data-kapanewon-id]").forEach(el => {
-      el.classList.add("cursor-pointer", "transition");
+    const mapItems = document.querySelectorAll(".map-region-group, [data-kapanewon-id]");
+    mapItems.forEach(el => {
+      el.style.cursor = "pointer";
       el.addEventListener("click", (e) => {
         e.preventDefault();
-        const kapId = el.getAttribute("data-kapanewon-id");
-        const kapName = el.getAttribute("data-kapanewon-name") || kapId;
-        this.filterByKapanewon(kapId, kapName);
+        e.stopPropagation();
+        const kapId = el.getAttribute("data-kapanewon-id") || el.querySelector("[data-kapanewon-id]")?.getAttribute("data-kapanewon-id");
+        const kapName = el.getAttribute("data-kapanewon-name") || el.querySelector("[data-kapanewon-id]")?.getAttribute("data-kapanewon-name") || kapId;
+        if (kapId) {
+          this.filterByKapanewon(kapId, kapName);
+        }
       });
     });
   }
 
   filterByKapanewon(kapId, kapName) {
     this.selectedKapanewon = kapId;
+    try { sessionStorage.setItem("disdikpora_selected_kapanewon", kapId); } catch(e) {}
+
+    // Sync header dropdown selects
     const select = document.getElementById("kapanewonFilterSelect");
-    if (select) {
+    if (select && select.value !== kapId) {
       select.value = kapId;
     }
-
-    const activeMapName = document.getElementById("activeMapName");
-    if (activeMapName) {
-      const found = (typeof DB !== 'undefined' && DB.kapanewon) ? DB.kapanewon.find(k => k.id === kapId) : null;
-      activeMapName.textContent = found ? found.name : (kapName || kapId);
+    const mobileSelect = document.getElementById("mobileKapanewonFilterSelect");
+    if (mobileSelect && mobileSelect.value !== kapId) {
+      mobileSelect.value = kapId;
     }
 
+    const found = (typeof DB !== 'undefined' && DB.kapanewon) ? DB.kapanewon.find(k => k.id === kapId) : null;
+    const displayName = found ? found.name : (kapName || (kapId === "all" ? "Semua Kapanewon (12)" : kapId));
+
+    // Update active badges
+    document.querySelectorAll("#activeMapName").forEach(badge => {
+      badge.textContent = displayName;
+    });
+
+    // Update SVG map polygons & text contrast
     document.querySelectorAll("[data-kapanewon-id]").forEach(p => {
+      const pId = p.getAttribute("data-kapanewon-id");
       const parentGroup = p.closest(".map-region-group") || p.parentElement;
       const textLabel = parentGroup ? parentGroup.querySelector("text") : null;
 
-      if (p.getAttribute("data-kapanewon-id") === kapId) {
+      if (kapId !== "all" && pId === kapId) {
         p.setAttribute("fill", "#fde047");
         p.setAttribute("stroke", "#d97706");
         p.setAttribute("stroke-width", "6");
@@ -216,8 +263,7 @@ class DashboardApp {
           textLabel.setAttribute("font-weight", "900");
         }
       } else {
-        const id = p.getAttribute("data-kapanewon-id");
-        const origColor = this.getOriginalKapanewonColor(id);
+        const origColor = this.getOriginalKapanewonColor(pId);
         p.setAttribute("fill", origColor);
         p.setAttribute("stroke", "#0f2b48");
         p.setAttribute("stroke-width", "3.5");
@@ -228,10 +274,173 @@ class DashboardApp {
       }
     });
 
-    this.renderCurrentSubmenuTable();
-    const displayName = kapName || ((typeof DB !== 'undefined' && DB.kapanewon) ? (DB.kapanewon.find(k => k.id === kapId)?.name || kapId) : kapId);
-    // suppressed bottom notif per user request}`);
+    if (this.currentRoute === "dashboard") {
+      this.renderDashboardPanel(kapId, displayName);
+    } else {
+      this.renderCurrentSubmenuTable();
+    }
+
     auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${displayName}`);
+  }
+
+  safeSetText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  safeSetBadge(id, text, color) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = text;
+      el.className = `badge badge-${color}`;
+    }
+  }
+
+  safeSetHref(id, href) {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute("href", href);
+  }
+
+  renderDashboardPanel(kapId, displayName) {
+    const panel = document.getElementById("kapanewonDetailPanel");
+    if (!panel || typeof DB === 'undefined') return;
+
+    const isAll = (!kapId || kapId === "all");
+    const kapData = isAll ? null : DB.kapanewon.find(k => k.id === kapId);
+    const titleText = isAll ? "Semua Kapanewon (Kabupaten Kulon Progo)" : (kapData ? kapData.name : (displayName || kapId));
+    const zoneText = isAll ? "12 Kapanewon Terintegrasi" : (kapData ? `Zona ${kapData.zone}` : "Wilayah Terpilih");
+
+    this.safeSetText("panelKapanewonName", titleText);
+    this.safeSetText("panelZoneBadge", zoneText);
+
+    // Filtered data across 5 submenus
+    let aksesItem = isAll ? null : DB.akses.find(a => a.kapanewon.toLowerCase().includes(kapId.toLowerCase()));
+    let mutuList = isAll ? DB.mutu : DB.mutu.filter(m => m.kapanewon.toLowerCase().includes(kapId.toLowerCase()));
+    let sarprasList = isAll ? DB.sarpras : DB.sarpras.filter(s => s.kapanewon.toLowerCase().includes(kapId.toLowerCase()));
+    let gtkList = isAll ? DB.gtk : DB.gtk.filter(g => g.asal.toLowerCase().includes(kapId.toLowerCase()) || g.tujuan.toLowerCase().includes(kapId.toLowerCase()));
+    let kelembagaanList = isAll ? DB.kelembagaan : DB.kelembagaan.filter(k => k.kapanewon.toLowerCase().includes(kapId.toLowerCase()));
+
+    // 1. Akses KPIs
+    const totalAts = DB.akses.reduce((sum, a) => sum + (a.ats || 0), 0);
+    this.safeSetText("kpiApk", aksesItem ? aksesItem.apk : "79.2%");
+    this.safeSetText("kpiApm", aksesItem ? aksesItem.apm : "98.7% / 94.5%");
+    this.safeSetText("kpiAts", aksesItem ? `${aksesItem.ats} Anak` : `${totalAts} Anak`);
+    this.safeSetBadge("kpiRegrouping", aksesItem ? aksesItem.regrouping : "12 Kapanewon Terpantau", aksesItem ? aksesItem.statusColor : "emerald");
+
+    // 2. Mutu KPIs
+    const topMutu = mutuList.length > 0 ? mutuList[0] : null;
+    this.safeSetText("kpiMutuSekolah", topMutu ? topMutu.nama : "485 Satuan Pendidikan");
+    this.safeSetText("kpiLiterasi", topMutu ? topMutu.literasi : "80.8 (Tinggi)");
+    this.safeSetText("kpiNumerasi", topMutu ? topMutu.numerasi : "75.2 (Sedang)");
+    this.safeSetBadge("kpiAkreditasi", topMutu ? topMutu.akreditasi : "91.3% A / B", "emerald");
+
+    // 3. Sarpras KPIs
+    const topSarpras = sarprasList.length > 0 ? sarprasList[0] : null;
+    this.safeSetText("kpiRuangBaik", topSarpras ? topSarpras.baik : "88.2% Layak");
+    this.safeSetText("kpiRuangRusak", topSarpras ? topSarpras.rusakBerat : "9 Ruang Teridentifikasi");
+    this.safeSetText("kpiSpmStatus", topSarpras ? topSarpras.spm : "SPM Terpenuhi");
+    this.safeSetBadge("kpiDakStatus", topSarpras ? topSarpras.dak : "Alokasi DAK Berjalan", topSarpras ? topSarpras.statusColor : "blue");
+
+    // 4. GTK & Kelembagaan KPIs
+    const topGtk = gtkList.length > 0 ? gtkList[0] : (DB.gtk.length > 0 ? DB.gtk[0] : null);
+    const topKelembagaan = kelembagaanList.length > 0 ? kelembagaanList[0] : (DB.kelembagaan.length > 0 ? DB.kelembagaan[0] : null);
+    this.safeSetText("kpiGtkMcdm", topGtk ? `${topGtk.nama} (${topGtk.mcdmScore})` : "Optimasi Domisili Aktif");
+    this.safeSetText("kpiInovasiAi", topKelembagaan ? topKelembagaan.inovasi : "Pilot AI & Coding Tersebar");
+
+    // Deep-linking links
+    const queryParam = isAll ? "" : `?kap=${kapId}`;
+    this.safeSetHref("linkSub1", `../sub1-akses/index.html${queryParam}`);
+    this.safeSetHref("linkSub2", `../sub2-mutu/index.html${queryParam}`);
+    this.safeSetHref("linkSub3", `../sub3-sarpras/index.html${queryParam}`);
+    this.safeSetHref("linkSub4", `../sub4-gtk/index.html${queryParam}`);
+    this.safeSetHref("linkSub5", `../sub5-kelembagaan/index.html${queryParam}`);
+
+    // Render Table
+    this.renderDashboardSummaryTable(kapId, isAll, aksesItem, mutuList, sarprasList, gtkList, kelembagaanList);
+
+    // Visual Pulse Effect
+    panel.classList.add("ring-2", "ring-amber-500", "transition-all", "duration-500");
+    setTimeout(() => {
+      panel.classList.remove("ring-2", "ring-amber-500");
+    }, 800);
+  }
+
+  renderDashboardSummaryTable(kapId, isAll, aksesItem, mutuList, sarprasList, gtkList, kelembagaanList) {
+    const tbody = document.getElementById("dashboardSummaryTableBody");
+    if (!tbody) return;
+
+    const queryParam = isAll ? "" : `?kap=${kapId}`;
+
+    if (!isAll) {
+      const topMutu = mutuList.length > 0 ? mutuList[0] : null;
+      const topSarpras = sarprasList.length > 0 ? sarprasList[0] : null;
+      const topGtk = gtkList.length > 0 ? gtkList[0] : null;
+      const topKelembagaan = kelembagaanList.length > 0 ? kelembagaanList[0] : null;
+
+      tbody.innerHTML = `
+        <tr class="hover:bg-slate-50 transition border-b border-slate-200">
+          <td class="p-3 font-extrabold text-blue-700">Sub 1: Akses &amp; ATS</td>
+          <td class="p-3 font-bold text-slate-900">APK: ${aksesItem ? SecurityUtils.escapeHTML(aksesItem.apk) : '-'} • APM: ${aksesItem ? SecurityUtils.escapeHTML(aksesItem.apm) : '-'}</td>
+          <td class="p-3 font-black text-red-600">${aksesItem ? SecurityUtils.escapeHTML(String(aksesItem.ats)) : '-'} Anak ATS</td>
+          <td class="p-3"><span class="badge badge-${aksesItem ? SecurityUtils.escapeHTML(aksesItem.statusColor) : 'blue'}">${aksesItem ? SecurityUtils.escapeHTML(aksesItem.regrouping) : '-'}</span></td>
+          <td class="p-3 text-xs text-slate-600">${aksesItem ? SecurityUtils.escapeHTML(aksesItem.sumber) : 'Dapodik & BPS'}</td>
+          <td class="p-3"><a href="../sub1-akses/index.html${queryParam}" class="px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 1 →</a></td>
+        </tr>
+        <tr class="hover:bg-slate-50 transition border-b border-slate-200">
+          <td class="p-3 font-extrabold text-amber-600">Sub 2: Mutu ANBK</td>
+          <td class="p-3 font-bold text-slate-900">${topMutu ? SecurityUtils.escapeHTML(topMutu.nama) : 'Satuan Pendidikan'}</td>
+          <td class="p-3 font-extrabold text-slate-800">Lit: ${topMutu ? SecurityUtils.escapeHTML(topMutu.literasi) : '-'} • Num: ${topMutu ? SecurityUtils.escapeHTML(topMutu.numerasi) : '-'}</td>
+          <td class="p-3"><span class="badge badge-${topMutu ? SecurityUtils.escapeHTML(topMutu.statusColor) : 'emerald'}">${topMutu ? SecurityUtils.escapeHTML(topMutu.pembinaan) : '-'}</span></td>
+          <td class="p-3 text-xs text-slate-600">${topMutu ? SecurityUtils.escapeHTML(topMutu.sumber) : 'Rapor Pendidikan'}</td>
+          <td class="p-3"><a href="../sub2-mutu/index.html${queryParam}" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 2 →</a></td>
+        </tr>
+        <tr class="hover:bg-slate-50 transition border-b border-slate-200">
+          <td class="p-3 font-extrabold text-blue-800">Sub 3: Sarpras Sekolah</td>
+          <td class="p-3 font-bold text-slate-900">${topSarpras ? SecurityUtils.escapeHTML(topSarpras.nama) : 'Kondisi Ruang'}</td>
+          <td class="p-3 font-extrabold text-slate-800">${topSarpras ? SecurityUtils.escapeHTML(topSarpras.baik) : '-'} Baik • ${topSarpras ? SecurityUtils.escapeHTML(topSarpras.rusakBerat) : '-'} Rusak Berat</td>
+          <td class="p-3"><span class="badge badge-${topSarpras ? SecurityUtils.escapeHTML(topSarpras.statusColor) : 'emerald'}">${topSarpras ? SecurityUtils.escapeHTML(topSarpras.dak) : '-'}</span></td>
+          <td class="p-3 text-xs text-slate-600">${topSarpras ? SecurityUtils.escapeHTML(topSarpras.sumber) : 'Dapodik Sarpras'}</td>
+          <td class="p-3"><a href="../sub3-sarpras/index.html${queryParam}" class="px-3 py-1.5 bg-blue-800 hover:bg-blue-900 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 3 →</a></td>
+        </tr>
+        <tr class="hover:bg-slate-50 transition border-b border-slate-200">
+          <td class="p-3 font-extrabold text-purple-700">Sub 4: GTK (MCDM)</td>
+          <td class="p-3 font-bold text-slate-900">${topGtk ? SecurityUtils.escapeHTML(topGtk.nama) : 'Penataan Guru'} (${topGtk ? SecurityUtils.escapeHTML(topGtk.mapel) : '-'})</td>
+          <td class="p-3 font-extrabold text-emerald-700">Skor MCDM: ${topGtk ? SecurityUtils.escapeHTML(topGtk.mcdmScore) : 'Optimal'}</td>
+          <td class="p-3"><span class="badge badge-emerald">${topGtk ? SecurityUtils.escapeHTML(topGtk.argumentasi) : 'Penataan Domisili'}</span></td>
+          <td class="p-3 text-xs text-slate-600">${topGtk ? SecurityUtils.escapeHTML(topGtk.sumber) : 'BKPSDM'}</td>
+          <td class="p-3"><a href="../sub4-gtk/index.html${queryParam}" class="px-3 py-1.5 bg-purple-700 hover:bg-purple-800 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 4 →</a></td>
+        </tr>
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-3 font-extrabold text-cyan-700">Sub 5: Kelembagaan &amp; GIS</td>
+          <td class="p-3 font-bold text-slate-900">${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.nama) : 'Lembaga Pendidikan'}</td>
+          <td class="p-3 font-extrabold text-slate-800">${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.prestasi) : 'Terakreditasi'}</td>
+          <td class="p-3"><span class="badge badge-${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.statusColor) : 'purple'}">${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.inovasi) : 'Aktif'}</span></td>
+          <td class="p-3 text-xs text-slate-600">${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.sumber) : 'Dapodik & Dikpora'}</td>
+          <td class="p-3"><a href="../sub5-kelembagaan/index.html${queryParam}" class="px-3 py-1.5 bg-cyan-700 hover:bg-cyan-800 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 5 →</a></td>
+        </tr>
+      `;
+    } else {
+      tbody.innerHTML = DB.akses.map(a => {
+        const kId = a.kapanewon.toLowerCase();
+        const mut = DB.mutu.find(m => m.kapanewon.toLowerCase() === kId);
+        const sarp = DB.sarpras.find(s => s.kapanewon.toLowerCase() === kId);
+        const q = `?kap=${kId}`;
+        return `
+          <tr class="hover:bg-slate-50 transition border-b border-slate-200">
+            <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(a.kapanewon)}</td>
+            <td class="p-3 text-slate-800">APK: ${SecurityUtils.escapeHTML(a.apk)} • APM: ${SecurityUtils.escapeHTML(a.apm)}</td>
+            <td class="p-3 font-black text-red-600">${SecurityUtils.escapeHTML(String(a.ats))} Anak</td>
+            <td class="p-3"><span class="badge badge-${SecurityUtils.escapeHTML(a.statusColor)}">${SecurityUtils.escapeHTML(a.regrouping)}</span></td>
+            <td class="p-3 text-xs text-slate-600">${mut ? SecurityUtils.escapeHTML(mut.literasi) : 'Standar'} / ${sarp ? SecurityUtils.escapeHTML(sarp.baik) : 'Layak'}</td>
+            <td class="p-3">
+              <button onclick="app.filterByKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm">
+                Pilih Wilayah 📍
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
   }
 
   getOriginalKapanewonColor(id) {
@@ -476,6 +685,12 @@ class DashboardApp {
     if (!tbody || typeof DB === 'undefined') return;
 
     let data = DB.gtk;
+    if (this.selectedKapanewon !== "all") {
+      data = data.filter(d => 
+        d.asal.toLowerCase().includes(this.selectedKapanewon.toLowerCase()) ||
+        d.tujuan.toLowerCase().includes(this.selectedKapanewon.toLowerCase())
+      );
+    }
     if (this.searchQuery) {
       data = data.filter(d => 
         d.nama.toLowerCase().includes(this.searchQuery) ||
@@ -723,4 +938,5 @@ class DashboardApp {
 let app;
 document.addEventListener("DOMContentLoaded", () => {
   app = new DashboardApp();
+  window.app = app;
 });
