@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: http: data: blob:; img-src 'self' data: https: http:; frame-ancestors 'none'; object-src 'none';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -133,26 +134,17 @@
       </div>
 
       <div class="bg-white p-6 rounded-2xl border border-slate-300 shadow-sm">
-        <h3 class="text-sm font-black text-slate-900 uppercase mb-3">Peta Geospasial 12 Kapanewon Kabupaten Kulon Progo</h3>
-        <p class="text-xs text-slate-600 mb-4">Klik polygon Kapanewon pada peta di bawah untuk memfilter data indikator secara langsung:</p>
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex justify-center">
-          <svg viewBox="0 0 800 650" class="w-full max-w-2xl h-auto drop-shadow-md">
-            <g id="map-polygons">
-              <path data-kapanewon-id="samigaluh" data-kapanewon-name="Samigaluh" d="M 320 40 L 480 30 L 530 110 L 410 150 L 310 120 Z" fill="#1e3a8a" />
-              <path data-kapanewon-id="kalibawang" data-kapanewon-name="Kalibawang" d="M 480 30 L 640 40 L 610 150 L 530 110 Z" fill="#0284c7" />
-              <path data-kapanewon-id="girimulyo" data-kapanewon-name="Girimulyo" d="M 210 130 L 310 120 L 410 150 L 380 240 L 230 220 Z" fill="#0369a1" />
-              <path data-kapanewon-id="kokap" data-kapanewon-name="Kokap" d="M 120 220 L 230 220 L 250 340 L 110 320 Z" fill="#0f766e" />
-              <path data-kapanewon-id="pengasih" data-kapanewon-name="Pengasih" d="M 230 220 L 380 240 L 420 350 L 250 340 Z" fill="#d97706" />
-              <path data-kapanewon-id="nanggulan" data-kapanewon-name="Nanggulan" d="M 410 150 L 610 150 L 560 260 L 380 240 Z" fill="#0284c7" />
-              <path data-kapanewon-id="sentolo" data-kapanewon-name="Sentolo" d="M 380 240 L 560 260 L 580 380 L 420 350 Z" fill="#2563eb" />
-              <path data-kapanewon-id="temon" data-kapanewon-name="Temon" d="M 80 320 L 210 330 L 190 480 L 60 450 Z" fill="#4d7c0f" />
-              <path data-kapanewon-id="wates" data-kapanewon-name="Wates" d="M 210 330 L 340 340 L 320 490 L 190 480 Z" fill="#b45309" />
-              <path data-kapanewon-id="panjatan" data-kapanewon-name="Panjatan" d="M 340 340 L 460 350 L 440 500 L 320 490 Z" fill="#15803d" />
-              <path data-kapanewon-id="lendah" data-kapanewon-name="Lendah" d="M 460 350 L 580 380 L 560 520 L 440 500 Z" fill="#6d28d9" />
-              <path data-kapanewon-id="galur" data-kapanewon-name="Galur" d="M 440 500 L 560 520 L 530 610 L 410 590 Z" fill="#0369a1" />
-            </g>
-          </svg>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-200">
+          <div>
+            <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider block">PETA INTERAKTIF GEOSPASIAL</span>
+            <h3 class="text-lg font-black text-slate-900">Peta Google Maps 12 Kapanewon Kabupaten Kulon Progo</h3>
+            <p class="text-xs text-slate-600">Arahkan kursor atau klik wilayah Kapanewon (dengan garis pembatas kuning/navy) untuk memfilter data indikator secara langsung:</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 bg-blue-900 text-white border border-blue-800 text-[11px] font-bold rounded-md inline-flex items-center gap-1">🗺️ Google Maps Mode</span>
+          </div>
         </div>
+        <div id="googleMap" class="w-full h-[480px] rounded-xl border border-slate-300 shadow-inner overflow-hidden relative z-0"></div>
       </div>
     </section>
   </main>
@@ -171,7 +163,9 @@
       </div>
     </div>
   </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="../assets/js/data.js"></script>
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/google_maps.js"></script>
 </body>
 </html>
