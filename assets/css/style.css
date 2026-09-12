@@ -1183,3 +1183,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     display: table-header-group;
   }
 }
+
+
+/* UNIVERSAL SVG ICON PROTECTION (NO SKEW, NO WARPING, NO COLLISION, NO CLIPPING) */
+svg {
+  overflow: visible;
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+}
+
+svg:not([viewBox*="900"]) {
+  flex-shrink: 0 !important;
+  aspect-ratio: 1 / 1 !important;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+button svg, .btn svg, a svg, span svg {
+  vertical-align: middle;
+  flex-shrink: 0 !important;
+}
+
+.sort-icon {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  flex-shrink: 0 !important;
+  width: 0.75rem !important;
+  height: 0.75rem !important;
+  margin-left: 0.35rem !important;
+}
