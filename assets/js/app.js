@@ -96,19 +96,43 @@ class DashboardApp {
     this.renderKapanewonDropdowns();
     this.updateUserUI();
 
-    // Check URL query parameters or session storage for pre-selected Kapanewon
-    const urlParams = new URLSearchParams(window.location.search);
-    const kapParam = urlParams.get('kap');
-    if (kapParam) {
-      this.selectedKapanewon = kapParam.toLowerCase();
-      try { sessionStorage.setItem("disdikpora_selected_kapanewon", this.selectedKapanewon); } catch(e) {}
+    // Remove any legacy sessionStorage selection so reload always starts fresh
+    try {
+      sessionStorage.removeItem("disdikpora_selected_kapanewon");
+    } catch(e) {}
+
+    // Check if the current page load is a browser reload / refresh
+    let isReload = false;
+    try {
+      const navEntries = performance.getEntriesByType("navigation");
+      if (navEntries && navEntries.length > 0) {
+        isReload = navEntries[0].type === "reload";
+      } else if (window.performance && window.performance.navigation) {
+        isReload = window.performance.navigation.type === 1;
+      }
+    } catch (e) {}
+
+    if (isReload) {
+      // When refreshed, clean URL and force unclick / return to all kapanewon
+      if (window.location.search) {
+        try {
+          window.history.replaceState(null, "", window.location.pathname);
+        } catch(e) {}
+      }
+      this.selectedKapanewon = "all";
     } else {
-      try {
-        const savedKap = sessionStorage.getItem("disdikpora_selected_kapanewon");
-        if (savedKap && savedKap !== "all") {
-          this.selectedKapanewon = savedKap;
-        }
-      } catch(e) {}
+      // Check URL query parameters for pre-selected Kapanewon (from explicit deep links)
+      const urlParams = new URLSearchParams(window.location.search);
+      const kapParam = urlParams.get('kap');
+      if (kapParam) {
+        this.selectedKapanewon = kapParam.toLowerCase();
+        // Clean URL query immediately so a subsequent user refresh defaults back to all
+        try {
+          window.history.replaceState(null, "", window.location.pathname);
+        } catch(e) {}
+      } else {
+        this.selectedKapanewon = "all";
+      }
     }
 
     this.setupMapInteractivity();
@@ -121,7 +145,16 @@ class DashboardApp {
 
     if (this.selectedKapanewon && this.selectedKapanewon !== "all") {
       this.filterByKapanewon(this.selectedKapanewon);
+    } else {
+      this.filterByKapanewon("all", "Semua Kapanewon (12)");
     }
+
+    // Safety: ensure sessionStorage is purged before unloading/refreshing
+    window.addEventListener("beforeunload", () => {
+      try {
+        sessionStorage.removeItem("disdikpora_selected_kapanewon");
+      } catch(e) {}
+    });
 
     auditLogger.log("PAGE_VISITED", this.user ? this.user.name : "Guest User", `Route: ${this.currentRoute}`);
   }
@@ -264,7 +297,6 @@ class DashboardApp {
 
   filterByKapanewon(kapId, kapName) {
     this.selectedKapanewon = kapId;
-    try { sessionStorage.setItem("disdikpora_selected_kapanewon", kapId); } catch(e) {}
 
     // Sync header dropdown selects
     const select = document.getElementById("kapanewonFilterSelect");
