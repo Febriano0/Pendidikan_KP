@@ -460,13 +460,13 @@ class DashboardApp {
       if (this.user) {
         userBadge.innerHTML = `
           <span class="text-xs text-amber-300 font-bold mr-2">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
-          <button onclick="app.showAuditLogsModal()" class="px-2 py-1 bg-blue-900 text-white rounded font-bold text-[10px] mr-1.5 transition">🛡️ Audit Log</button>
+          <a href="${relPrefix}security/index.html" class="px-2.5 py-1 bg-blue-900 hover:bg-blue-800 text-white rounded font-bold text-[10px] mr-1.5 transition inline-flex items-center">🛡️ Audit Log</a>
           <button onclick="app.logoutUser()" class="px-2.5 py-1 bg-red-700 hover:bg-red-800 text-white rounded font-bold text-[10px] transition">Keluar</button>
         `;
       } else {
         userBadge.innerHTML = `
-          <button onclick="app.showAuditLogsModal()" class="px-2 py-1 bg-slate-800 text-white border border-slate-700 rounded font-bold text-[10px] mr-2 transition">🛡️ Status Keamanan</button>
-          <a href="${relPrefix}login/index.html" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded text-xs transition shadow-sm">🔒 Masuk Pimpinan</a>
+          <a href="${relPrefix}security/index.html" class="px-2.5 py-1 bg-blue-900 hover:bg-blue-800 text-white border border-blue-700 rounded font-bold text-[10px] mr-2 transition inline-flex items-center">🛡️ Status Keamanan</a>
+          <a href="${relPrefix}login/index.html" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded text-xs transition shadow-sm inline-flex items-center">🔒 Masuk Pimpinan</a>
         `;
       }
     }
