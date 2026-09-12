@@ -274,28 +274,41 @@ class DashboardApp {
       badge.textContent = displayName;
     });
 
-    // Update SVG map polygons & text contrast
-    document.querySelectorAll("[data-kapanewon-id]").forEach(p => {
+    // Update SVG map polygons & text contrast with cartographic halo
+    document.querySelectorAll(".map-polygon-path, path[data-kapanewon-id]").forEach(p => {
       const pId = p.getAttribute("data-kapanewon-id");
+      if (!pId) return;
       const parentGroup = p.closest(".map-region-group") || p.parentElement;
       const textLabel = parentGroup ? parentGroup.querySelector("text") : null;
 
       if (kapId !== "all" && pId === kapId) {
+        if (parentGroup) parentGroup.classList.add("is-active");
         p.setAttribute("fill", "#fde047");
         p.setAttribute("stroke", "#d97706");
         p.setAttribute("stroke-width", "6");
         if (textLabel) {
-          textLabel.setAttribute("fill", "#0f2b48"); // Crisp dark navy text on bright yellow
+          textLabel.setAttribute("fill", "#0f2b48"); // Deep navy
+          textLabel.setAttribute("stroke", "#ffffff"); // High-contrast crisp white halo
+          textLabel.setAttribute("stroke-width", "3.5");
+          textLabel.setAttribute("paint-order", "stroke fill");
           textLabel.setAttribute("font-weight", "900");
+          textLabel.classList.remove("drop-shadow");
+          textLabel.classList.add("map-region-label");
         }
       } else {
+        if (parentGroup) parentGroup.classList.remove("is-active");
         const origColor = this.getOriginalKapanewonColor(pId);
         p.setAttribute("fill", origColor);
         p.setAttribute("stroke", "#0f2b48");
         p.setAttribute("stroke-width", "3.5");
         if (textLabel) {
-          textLabel.setAttribute("fill", "#ffffff"); // Crisp white text on dark/colored polygon
+          textLabel.setAttribute("fill", "#ffffff"); // Crisp white
+          textLabel.setAttribute("stroke", "#091e3a"); // High-contrast deep navy halo
+          textLabel.setAttribute("stroke-width", "3.5");
+          textLabel.setAttribute("paint-order", "stroke fill");
           textLabel.setAttribute("font-weight", "800");
+          textLabel.classList.remove("drop-shadow");
+          textLabel.classList.add("map-region-label");
         }
       }
     });
