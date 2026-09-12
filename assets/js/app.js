@@ -1,11 +1,9 @@
 /**
  * APP ENGINE INTERAKTIF & DINAMIS DASHBOARD EXECUTIVE DISDIKPORA
- * FITUR KEAMANAN: State Integrity, Session Signature Verification, XSS Escaping, CSP Audit Logger.
+ * TEMA RESMI PEMKAB KULON PROGO (LIGHT GOVERNMENT PORTAL)
  */
 
-// SECURITY & SANITIZATION UTILITIES
 const SecurityUtils = {
-  // Sanitize text against DOM XSS attacks
   escapeHTML(str) {
     if (str === null || str === undefined) return '';
     return String(str)
@@ -16,7 +14,6 @@ const SecurityUtils = {
       .replace(/'/g, '&#039;');
   },
 
-  // Simple string hash for session state signature verification
   generateSignature(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -28,7 +25,6 @@ const SecurityUtils = {
   }
 };
 
-// IMMUTABLE SESSION AUDIT LOGGER
 class AuditLogger {
   constructor() {
     this.logs = JSON.parse(sessionStorage.getItem("disdikpora_audit_log")) || [
@@ -54,7 +50,7 @@ class AuditLogger {
       signature: SecurityUtils.generateSignature(action + Date.now())
     };
     this.logs.unshift(entry);
-    if (this.logs.length > 50) this.logs.pop(); // Keep last 50 audit entries
+    if (this.logs.length > 50) this.logs.pop();
     sessionStorage.setItem("disdikpora_audit_log", JSON.stringify(this.logs));
   }
 
@@ -83,22 +79,16 @@ class DashboardApp {
     this.updateUserUI();
     this.setupMapInteractivity();
 
-    // Listen for hash changes
     window.addEventListener("hashchange", () => this.handleRouting());
-    
-    // Log initial app launch
     auditLogger.log("APP_LAUNCHED", this.user ? this.user.name : "System User", `Route: ${this.currentRoute}`);
   }
 
-  // SESSION STATE INTEGRITY VERIFICATION
   loadAndValidateSession() {
     try {
       const raw = localStorage.getItem("disdikpora_user");
       if (!raw) return null;
       
       const user = JSON.parse(raw);
-      
-      # Check max 8-hour session lifetime
       const loginTime = new Date(user.loginTimestamp || 0).getTime();
       const now = new Date().getTime();
       const MAX_SESSION_MS = 8 * 60 * 60 * 1000;
@@ -109,12 +99,10 @@ class DashboardApp {
         return null;
       }
 
-      # Verify cryptographic session signature
       const expectedSig = SecurityUtils.generateSignature(user.nip + user.role + user.loginTimestamp);
       if (user.signature !== expectedSig) {
-        console.warn("[SECURITY ALERT] Session state tampering detected! Purging session.");
         localStorage.removeItem("disdikpora_user");
-        auditLogger.log("SESSION_TAMPERING_DETECTED", user.nip, "Signature Mismatch - Purged");
+        auditLogger.log("SESSION_TAMPERING_DETECTED", user.nip, "Signature Mismatch");
         return null;
       }
 
@@ -148,7 +136,7 @@ class DashboardApp {
         this.selectedKapanewon = e.target.value;
         this.renderCurrentSubmenuTable();
         const selectedText = e.target.selectedOptions[0]?.text || e.target.value;
-        this.showToast(`Filter Kapanewon diperbarui: ${SecurityUtils.escapeHTML(selectedText)}`);
+        this.showToast(`Filter Kapanewon: ${SecurityUtils.escapeHTML(selectedText)}`);
         auditLogger.log("KAPANEWON_FILTER_CHANGED", this.user ? this.user.name : "Guest", `Filter: ${selectedText}`);
       });
     }
@@ -170,7 +158,7 @@ class DashboardApp {
 
   setupMapInteractivity() {
     document.querySelectorAll("[data-kapanewon-id]").forEach(el => {
-      el.classList.add("cursor-pointer", "transition", "duration-200", "hover:opacity-80");
+      el.classList.add("cursor-pointer", "transition", "hover:opacity-85");
       el.addEventListener("click", () => {
         const kapId = el.getAttribute("data-kapanewon-id");
         const kapName = el.getAttribute("data-kapanewon-name") || kapId;
@@ -193,7 +181,6 @@ class DashboardApp {
 
   handleRouting() {
     let hash = window.location.hash.replace("#", "") || "landing";
-    
     const validRoutes = ["landing", "login", "home", "sub1", "sub2", "sub3", "sub4", "sub5", "about", "privacy", "terms"];
     
     if (!validRoutes.includes(hash)) {
@@ -205,17 +192,11 @@ class DashboardApp {
 
     document.querySelectorAll(".page-view").forEach(el => {
       el.classList.add("hidden");
-      el.classList.remove("opacity-100");
-      el.classList.add("opacity-0");
     });
 
     const targetEl = document.getElementById(`page-${hash}`);
     if (targetEl) {
       targetEl.classList.remove("hidden");
-      requestAnimationFrame(() => {
-        targetEl.classList.remove("opacity-0");
-        targetEl.classList.add("opacity-100", "transition-opacity", "duration-300");
-      });
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -230,13 +211,10 @@ class DashboardApp {
   updateNavHighlight(hash) {
     document.querySelectorAll(".nav-link").forEach(link => {
       if (link.dataset.route === hash) {
-        link.classList.add("bg-amber-500", "text-slate-900", "font-bold");
-        link.classList.remove("text-slate-200", "hover:bg-slate-800");
-        link.setAttribute("aria-current", "page");
+        link.classList.add("bg-amber-500");
+        link.removeAttribute("style");
       } else {
-        link.classList.remove("bg-amber-500", "text-slate-900", "font-bold");
-        link.classList.add("text-slate-200");
-        link.removeAttribute("aria-current");
+        link.classList.remove("bg-amber-500");
       }
     });
   }
@@ -277,27 +255,27 @@ class DashboardApp {
     }
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="10" class="p-8 text-center text-slate-400 text-xs italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="10" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = data.map(item => `
-      <tr class="hover:bg-slate-800/40 transition text-xs text-slate-200 border-b border-slate-800/60">
-        <td class="p-3 font-semibold">${SecurityUtils.escapeHTML(item.no)}</td>
-        <td class="p-3 font-bold text-amber-400">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
+      <tr>
+        <td class="p-3 font-semibold text-slate-700">${SecurityUtils.escapeHTML(item.no)}</td>
+        <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 font-bold border border-blue-800">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.apk)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.apm)}</td>
-        <td class="p-3 font-extrabold text-red-400">${SecurityUtils.escapeHTML(item.ats)} Anak</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.putus)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.apk)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.apm)}</td>
+        <td class="p-3 font-extrabold text-red-600">${SecurityUtils.escapeHTML(item.ats)} Anak</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.putus)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 text-${SecurityUtils.escapeHTML(item.statusColor)}-400 font-bold border border-${SecurityUtils.escapeHTML(item.statusColor)}-800">${SecurityUtils.escapeHTML(item.regrouping)}</span>
+          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 font-bold text-xs">${SecurityUtils.escapeHTML(item.regrouping)}</span>
         </td>
-        <td class="p-3 text-slate-400">${SecurityUtils.escapeHTML(item.usage)}</td>
+        <td class="p-3 text-slate-600 text-xs">${SecurityUtils.escapeHTML(item.usage)}</td>
         <td class="p-3">
-          <button onclick="app.showModalDetail('Akses & Pemerataan - ${SecurityUtils.escapeHTML(item.kapanewon)}', 'Detail ATS: ${SecurityUtils.escapeHTML(item.ats)} anak. Sumber: ${SecurityUtils.escapeHTML(item.sumber)}. ${SecurityUtils.escapeHTML(item.usage)}')" class="px-3 py-1 bg-blue-700 hover:bg-blue-600 text-white rounded font-bold text-[11px] transition shadow">Detail</button>
+          <button onclick="app.showModalDetail('Akses & Pemerataan - ${SecurityUtils.escapeHTML(item.kapanewon)}', 'Detail ATS: ${SecurityUtils.escapeHTML(item.ats)} anak. Sumber: ${SecurityUtils.escapeHTML(item.sumber)}. ${SecurityUtils.escapeHTML(item.usage)}')" class="px-3 py-1 bg-blue-700 hover:bg-blue-800 text-white rounded font-bold text-[11px] shadow-sm">Detail</button>
         </td>
       </tr>
     `).join("");
@@ -321,27 +299,27 @@ class DashboardApp {
     }
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="10" class="p-8 text-center text-slate-400 text-xs italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="10" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = data.map(item => `
-      <tr class="hover:bg-slate-800/40 transition text-xs text-slate-200 border-b border-slate-800/60">
-        <td class="p-3 font-mono text-slate-400">${SecurityUtils.escapeHTML(item.npsn)}</td>
-        <td class="p-3 font-bold text-white">${SecurityUtils.escapeHTML(item.nama)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
+      <tr>
+        <td class="p-3 font-mono text-slate-500 text-xs">${SecurityUtils.escapeHTML(item.npsn)}</td>
+        <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.nama)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 font-bold border border-amber-800">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
-        <td class="p-3 font-bold">${SecurityUtils.escapeHTML(item.literasi)}</td>
-        <td class="p-3 font-bold">${SecurityUtils.escapeHTML(item.numerasi)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.karakter)}</td>
-        <td class="p-3 font-bold text-blue-400">${SecurityUtils.escapeHTML(item.akreditasi)}</td>
+        <td class="p-3 font-bold text-slate-800">${SecurityUtils.escapeHTML(item.literasi)}</td>
+        <td class="p-3 font-bold text-slate-800">${SecurityUtils.escapeHTML(item.numerasi)}</td>
+        <td class="p-3 text-slate-700">${SecurityUtils.escapeHTML(item.karakter)}</td>
+        <td class="p-3 font-bold text-blue-700">${SecurityUtils.escapeHTML(item.akreditasi)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 text-${SecurityUtils.escapeHTML(item.statusColor)}-400 font-bold border border-${SecurityUtils.escapeHTML(item.statusColor)}-800">${SecurityUtils.escapeHTML(item.pembinaan)}</span>
+          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 font-bold text-xs">${SecurityUtils.escapeHTML(item.pembinaan)}</span>
         </td>
         <td class="p-3">
-          <button onclick="app.showModalDetail('Mutu ANBK - ${SecurityUtils.escapeHTML(item.nama)}', 'Literasi: ${SecurityUtils.escapeHTML(item.literasi)}, Numerasi: ${SecurityUtils.escapeHTML(item.numerasi)}. Akreditasi: ${SecurityUtils.escapeHTML(item.akreditasi)}')" class="px-3 py-1 bg-amber-600 hover:bg-amber-500 text-slate-900 rounded font-bold text-[11px] transition shadow">Rapor</button>
+          <button onclick="app.showModalDetail('Mutu ANBK - ${SecurityUtils.escapeHTML(item.nama)}', 'Literasi: ${SecurityUtils.escapeHTML(item.literasi)}, Numerasi: ${SecurityUtils.escapeHTML(item.numerasi)}. Akreditasi: ${SecurityUtils.escapeHTML(item.akreditasi)}')" class="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded font-bold text-[11px] shadow-sm">Rapor</button>
         </td>
       </tr>
     `).join("");
@@ -364,26 +342,26 @@ class DashboardApp {
     }
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="11" class="p-8 text-center text-slate-400 text-xs italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = data.map(item => `
-      <tr class="hover:bg-slate-800/40 transition text-xs text-slate-200 border-b border-slate-800/60">
-        <td class="p-3 font-mono text-slate-400">${SecurityUtils.escapeHTML(item.npsn)}</td>
-        <td class="p-3 font-bold text-white">${SecurityUtils.escapeHTML(item.nama)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
+      <tr>
+        <td class="p-3 font-mono text-slate-500 text-xs">${SecurityUtils.escapeHTML(item.npsn)}</td>
+        <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.nama)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 font-bold border border-blue-800">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.baik)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.rusakRingan)}</td>
-        <td class="p-3 font-bold text-red-400">${SecurityUtils.escapeHTML(item.rusakBerat)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.spm)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.perpus)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.lab)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.baik)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.rusakRingan)}</td>
+        <td class="p-3 font-bold text-red-600">${SecurityUtils.escapeHTML(item.rusakBerat)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.spm)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.perpus)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.lab)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 text-${SecurityUtils.escapeHTML(item.statusColor)}-400 font-bold border border-${SecurityUtils.escapeHTML(item.statusColor)}-800">${SecurityUtils.escapeHTML(item.dak)}</span>
+          <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 font-bold text-xs">${SecurityUtils.escapeHTML(item.dak)}</span>
         </td>
       </tr>
     `).join("");
@@ -404,25 +382,25 @@ class DashboardApp {
     }
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="10" class="p-8 text-center text-slate-400 text-xs italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="10" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = data.map(item => `
-      <tr class="hover:bg-slate-800/40 transition text-xs text-slate-200 border-b border-slate-800/60">
-        <td class="p-3 font-mono text-slate-400">${SecurityUtils.escapeHTML(item.nip)}</td>
-        <td class="p-3 font-bold text-white">${SecurityUtils.escapeHTML(item.nama)}<br><span class="text-amber-400 font-normal">${SecurityUtils.escapeHTML(item.mapel)}</span></td>
+      <tr>
+        <td class="p-3 font-mono text-slate-500 text-xs">${SecurityUtils.escapeHTML(item.nip)}</td>
+        <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.nama)}<br><span class="text-amber-600 font-normal text-xs">${SecurityUtils.escapeHTML(item.mapel)}</span></td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 font-bold border border-purple-800">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.asal)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.jarakAsal)}</td>
-        <td class="p-3 font-bold text-blue-400">${SecurityUtils.escapeHTML(item.tujuan)}</td>
-        <td class="p-3 text-emerald-400 font-bold">${SecurityUtils.escapeHTML(item.jarakBaru)}</td>
-        <td class="p-3 font-extrabold text-amber-400">${SecurityUtils.escapeHTML(item.mcdmScore)}</td>
-        <td class="p-3 text-slate-300">${SecurityUtils.escapeHTML(item.argumentasi)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.asal)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.jarakAsal)}</td>
+        <td class="p-3 font-bold text-blue-700">${SecurityUtils.escapeHTML(item.tujuan)}</td>
+        <td class="p-3 text-emerald-600 font-bold">${SecurityUtils.escapeHTML(item.jarakBaru)}</td>
+        <td class="p-3 font-black text-amber-600 text-sm">${SecurityUtils.escapeHTML(item.mcdmScore)}</td>
+        <td class="p-3 text-slate-700 text-xs">${SecurityUtils.escapeHTML(item.argumentasi)}</td>
         <td class="p-3">
-          <button onclick="app.approveSK('${SecurityUtils.escapeHTML(item.nip)}', '${SecurityUtils.escapeHTML(item.nama)}')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold text-[11px] transition shadow">Setujui SK</button>
+          <button onclick="app.approveSK('${SecurityUtils.escapeHTML(item.nip)}', '${SecurityUtils.escapeHTML(item.nama)}')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded font-bold text-[11px] shadow-sm">Setujui SK</button>
         </td>
       </tr>
     `).join("");
@@ -430,7 +408,7 @@ class DashboardApp {
 
   approveSK(nip, nama) {
     auditLogger.log("SK_MUTASI_APPROVED", this.user ? this.user.name : "Bupati Kulon Progo", `NIP: ${nip}, Nama: ${nama}`);
-    this.showToast(`SK Mutasi Penempatan ${nama} disetujui secara digital & dicatat di Audit Trail.`);
+    this.showToast(`SK Mutasi Penempatan ${nama} disetujui secara digital.`);
   }
 
   // SUBMENU 5: KELEMBAGAAN & PRESTASI
@@ -451,28 +429,27 @@ class DashboardApp {
     }
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="9" class="p-8 text-center text-slate-400 text-xs italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="9" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
     }
 
     tbody.innerHTML = data.map(item => `
-      <tr class="hover:bg-slate-800/40 transition text-xs text-slate-200 border-b border-slate-800/60">
-        <td class="p-3 font-mono text-slate-400">${SecurityUtils.escapeHTML(item.npsn)}</td>
-        <td class="p-3 font-bold text-white">${SecurityUtils.escapeHTML(item.nama)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
+      <tr>
+        <td class="p-3 font-mono text-slate-500 text-xs">${SecurityUtils.escapeHTML(item.npsn)}</td>
+        <td class="p-3 font-bold text-slate-900">${SecurityUtils.escapeHTML(item.nama)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.kapanewon)}</td>
         <td class="p-3">
-          <span class="px-2.5 py-1 rounded-full bg-indigo-950 text-indigo-300 font-bold border border-indigo-800">${SecurityUtils.escapeHTML(item.sumber)}</span>
+          <span class="px-2.5 py-1 rounded-full bg-indigo-950 text-indigo-300 font-bold text-xs">${SecurityUtils.escapeHTML(item.sumber)}</span>
         </td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.jenjang)}</td>
-        <td class="p-3 text-emerald-400 font-bold">${SecurityUtils.escapeHTML(item.izin)}</td>
-        <td class="p-3 font-bold text-blue-400">${SecurityUtils.escapeHTML(item.akreditasi)}</td>
-        <td class="p-3">${SecurityUtils.escapeHTML(item.prestasi)}</td>
-        <td class="p-3 font-bold text-purple-400">${SecurityUtils.escapeHTML(item.inovasi)}</td>
+        <td class="p-3 text-slate-800">${SecurityUtils.escapeHTML(item.jenjang)}</td>
+        <td class="p-3 text-emerald-600 font-bold">${SecurityUtils.escapeHTML(item.izin)}</td>
+        <td class="p-3 font-bold text-blue-700">${SecurityUtils.escapeHTML(item.akreditasi)}</td>
+        <td class="p-3 text-slate-700 text-xs">${SecurityUtils.escapeHTML(item.prestasi)}</td>
+        <td class="p-3 font-bold text-purple-700">${SecurityUtils.escapeHTML(item.inovasi)}</td>
       </tr>
     `).join("");
   }
 
-  // SECURE AUTHENTICATION LOGIN WITH SESSION SIGNATURE
   loginUser(nip, password) {
     const cleanNip = SecurityUtils.escapeHTML(nip);
     if (!cleanNip || !password) {
@@ -482,8 +459,6 @@ class DashboardApp {
     
     const loginTimestamp = new Date().toISOString();
     const role = "Pimpinan Executive Daerah";
-    
-    // Generate HMAC signature for state tamper-proofing
     const signature = SecurityUtils.generateSignature(cleanNip + role + loginTimestamp);
 
     this.user = {
@@ -498,7 +473,7 @@ class DashboardApp {
     auditLogger.log("EXECUTIVE_LOGIN_SUCCESS", this.user.name, `NIP: ${cleanNip}, Role: ${role}`);
 
     this.updateUserUI();
-    this.showToast("Login Berhasil! Selamat Datang Bapak Bupati Kulon Progo (Sesi Terenkripsi).");
+    this.showToast("Login Berhasil! Selamat Datang Bapak Bupati Kulon Progo.");
     window.location.hash = "home";
   }
 
@@ -518,14 +493,14 @@ class DashboardApp {
     if (userBadge) {
       if (this.user) {
         userBadge.innerHTML = `
-          <span class="text-xs text-amber-400 font-bold mr-2">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
-          <button onclick="app.showAuditLogsModal()" class="px-2 py-1 bg-amber-600/30 hover:bg-amber-600/50 text-amber-300 border border-amber-500/50 rounded font-bold text-[10px] mr-1.5 transition">🛡️ Audit Log</button>
-          <button onclick="app.logoutUser()" class="px-2.5 py-1 bg-red-900 hover:bg-red-800 text-white rounded font-bold text-[10px] transition">Keluar</button>
+          <span class="text-xs text-amber-300 font-bold mr-2">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
+          <button onclick="app.showAuditLogsModal()" class="px-2 py-1 bg-blue-900 text-white rounded font-bold text-[10px] mr-1.5 transition">🛡️ Audit Log</button>
+          <button onclick="app.logoutUser()" class="px-2.5 py-1 bg-red-700 hover:bg-red-800 text-white rounded font-bold text-[10px] transition">Keluar</button>
         `;
       } else {
         userBadge.innerHTML = `
-          <button onclick="app.showAuditLogsModal()" class="px-2 py-1 bg-amber-600/20 hover:bg-amber-600/40 text-amber-400 border border-amber-500/30 rounded font-bold text-[10px] mr-2 transition">🛡️ Status Keamanan</button>
-          <a href="#login" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-slate-900 font-extrabold rounded text-xs transition shadow">🔒 Masuk Pimpinan</a>
+          <button onclick="app.showAuditLogsModal()" class="px-2 py-1 bg-slate-800 text-white border border-slate-700 rounded font-bold text-[10px] mr-2 transition">🛡️ Status Keamanan</button>
+          <a href="#login" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded text-xs transition shadow-sm">🔒 Masuk Pimpinan</a>
         `;
       }
     }
@@ -536,10 +511,10 @@ class DashboardApp {
     if (!container) return;
 
     const toast = document.createElement("div");
-    toast.className = `px-4 py-3 rounded-xl text-xs font-bold shadow-2xl border flex items-center justify-between transition-all duration-300 ${
-      type === "error" ? "bg-red-950 border-red-800 text-red-200" : "bg-emerald-950 border-emerald-800 text-emerald-200"
+    toast.className = `px-4 py-3 rounded-lg text-xs font-bold shadow-lg border flex items-center justify-between transition-all duration-300 ${
+      type === "error" ? "bg-red-100 border-red-300 text-red-800" : "bg-emerald-100 border-emerald-300 text-emerald-900"
     }`;
-    toast.innerHTML = `<span>${SecurityUtils.escapeHTML(message)}</span><button onclick="this.parentElement.remove()" class="ml-4 text-slate-400 hover:text-white">✕</button>`;
+    toast.innerHTML = `<span>${SecurityUtils.escapeHTML(message)}</span><button onclick="this.parentElement.remove()" class="ml-4 text-slate-500 hover:text-slate-900">✕</button>`;
 
     container.appendChild(toast);
     setTimeout(() => {
@@ -556,15 +531,15 @@ class DashboardApp {
     const cleanBody = SecurityUtils.escapeHTML(bodyText);
 
     const modalHtml = `
-      <div id="customModalOverlay" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h3 class="text-sm font-black text-amber-400 uppercase tracking-wide">${cleanTitle}</h3>
-            <button onclick="document.getElementById('customModalOverlay').remove()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+      <div id="customModalOverlay" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-300 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+            <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wide">${cleanTitle}</h3>
+            <button onclick="document.getElementById('customModalOverlay').remove()" class="text-slate-400 hover:text-slate-700 text-lg font-bold">✕</button>
           </div>
-          <p class="text-xs text-slate-200 leading-relaxed">${cleanBody}</p>
+          <p class="text-xs text-slate-700 leading-relaxed">${cleanBody}</p>
           <div class="pt-2 flex justify-end">
-            <button onclick="document.getElementById('customModalOverlay').remove()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-slate-900 font-extrabold text-xs rounded-xl shadow transition">Tutup Informasi</button>
+            <button onclick="document.getElementById('customModalOverlay').remove()" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs rounded-xl shadow-sm transition">Tutup Informasi</button>
           </div>
         </div>
       </div>
@@ -579,33 +554,33 @@ class DashboardApp {
 
     const logs = auditLogger.getLogs();
     const rowsHtml = logs.map(l => `
-      <tr class="border-b border-slate-800/80 text-[11px]">
-        <td class="p-2 font-mono text-slate-400">${SecurityUtils.escapeHTML(l.timestamp.substring(11, 19))}</td>
-        <td class="p-2 font-bold text-amber-400">${SecurityUtils.escapeHTML(l.actor)}</td>
-        <td class="p-2 text-white font-semibold">${SecurityUtils.escapeHTML(l.action)}</td>
-        <td class="p-2 text-slate-300">${SecurityUtils.escapeHTML(l.details)}</td>
-        <td class="p-2 text-emerald-400 font-mono">${SecurityUtils.escapeHTML(l.status)}</td>
+      <tr class="border-b border-slate-200 text-[11px]">
+        <td class="p-2 font-mono text-slate-500">${SecurityUtils.escapeHTML(l.timestamp.substring(11, 19))}</td>
+        <td class="p-2 font-bold text-slate-900">${SecurityUtils.escapeHTML(l.actor)}</td>
+        <td class="p-2 text-blue-700 font-semibold">${SecurityUtils.escapeHTML(l.action)}</td>
+        <td class="p-2 text-slate-700">${SecurityUtils.escapeHTML(l.details)}</td>
+        <td class="p-2 text-emerald-600 font-mono font-bold">${SecurityUtils.escapeHTML(l.status)}</td>
       </tr>
     `).join("");
 
     const modalHtml = `
-      <div id="auditModalOverlay" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 max-h-[85vh] flex flex-col">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div id="auditModalOverlay" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white border border-slate-300 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 max-h-[85vh] flex flex-col">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-3">
             <div>
-              <h3 class="text-sm font-black text-amber-400 uppercase tracking-wide">🛡️ LOG AUDIT KEAMANAN &amp; INTEGRITAS STATE DATA</h3>
-              <p class="text-[11px] text-slate-400">SHA-256 Data Checksum: <span class="font-mono text-emerald-400">${DB_INTEGRITY.checksum.substring(0, 24)}...</span></p>
+              <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide">🛡️ LOG AUDIT KEAMANAN &amp; INTEGRITAS DATA</h3>
+              <p class="text-[11px] text-slate-500">SHA-256 Checksum: <span class="font-mono text-emerald-700 font-bold">${DB_INTEGRITY.checksum.substring(0, 24)}...</span></p>
             </div>
-            <button onclick="document.getElementById('auditModalOverlay').remove()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+            <button onclick="document.getElementById('auditModalOverlay').remove()" class="text-slate-400 hover:text-slate-700 text-lg font-bold">✕</button>
           </div>
-          <div class="overflow-y-auto flex-1 bg-slate-950 rounded-2xl p-2 border border-slate-800">
+          <div class="overflow-y-auto flex-1 bg-slate-50 rounded-xl p-2 border border-slate-200">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="bg-slate-900 text-slate-400 text-[10px] uppercase border-b border-slate-800">
+                <tr class="bg-slate-200 text-slate-700 text-[10px] uppercase border-b border-slate-300">
                   <th class="p-2">WAKTU</th>
                   <th class="p-2">AKTOR</th>
                   <th class="p-2">AKSI STATE</th>
-                  <th class="p-2">Rincian</th>
+                  <th class="p-2">RINCIAN</th>
                   <th class="p-2">STATUS</th>
                 </tr>
               </thead>
@@ -614,9 +589,9 @@ class DashboardApp {
               </tbody>
             </table>
           </div>
-          <div class="pt-2 flex justify-between items-center text-[11px] text-slate-400">
-            <span>Standar Kepatuhan: ISO/IEC 27001 &amp; UU PDP No. 27/2022</span>
-            <button onclick="document.getElementById('auditModalOverlay').remove()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-slate-900 font-extrabold rounded-xl shadow transition">Tutup Log</button>
+          <div class="pt-2 flex justify-between items-center text-[11px] text-slate-500">
+            <span>ISO/IEC 27001 &amp; UU PDP No. 27/2022 Verified</span>
+            <button onclick="document.getElementById('auditModalOverlay').remove()" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white font-extrabold rounded-xl shadow-sm transition">Tutup Log</button>
           </div>
         </div>
       </div>
@@ -626,7 +601,6 @@ class DashboardApp {
   }
 }
 
-// Global App Instance
 let app;
 document.addEventListener("DOMContentLoaded", () => {
   app = new DashboardApp();
