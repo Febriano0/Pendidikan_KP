@@ -183,6 +183,15 @@ class DashboardApp {
     });
   }
 
+  filterByKapanewon(kapId) {
+    const select = document.getElementById("kapanewonFilterSelect");
+    if (select) select.value = kapId;
+    this.selectedKapanewon = kapId;
+    this.renderCurrentSubmenuTable();
+    this.showToast(`Peta Wilayah Dipilih: ${SecurityUtils.escapeHTML(kapId.toUpperCase())}`);
+    auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${kapId}`);
+  }
+
   renderKapanewonDropdowns() {
     const kapSelect = document.getElementById("kapanewonFilterSelect");
     if (!kapSelect || typeof DB === 'undefined') return;
