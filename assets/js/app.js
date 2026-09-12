@@ -164,7 +164,7 @@ class DashboardApp {
         this.selectedKapanewon = e.target.value;
         this.renderCurrentSubmenuTable();
         const selectedText = e.target.selectedOptions[0]?.text || e.target.value;
-        this.showToast(`Filter Kapanewon: ${SecurityUtils.escapeHTML(selectedText)}`);
+        // suppressed bottom notif per user request}`);
         auditLogger.log("KAPANEWON_FILTER_CHANGED", this.user ? this.user.name : "Guest", `Filter: ${selectedText}`);
       });
     }
@@ -219,7 +219,7 @@ class DashboardApp {
 
     this.renderCurrentSubmenuTable();
     const displayName = kapName || ((typeof DB !== 'undefined' && DB.kapanewon) ? (DB.kapanewon.find(k => k.id === kapId)?.name || kapId) : kapId);
-    this.showToast(`Wilayah Dipilih: ${SecurityUtils.escapeHTML(displayName)}`);
+    // suppressed bottom notif per user request}`);
     auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${displayName}`);
   }
 
@@ -253,7 +253,7 @@ class DashboardApp {
     this.updateSortHeaderIcons(key);
     
     const dirText = this.sortDirection === 'asc' ? 'Ascending (A-Z / 0-9)' : 'Descending (Z-A / 9-0)';
-    this.showToast(`Urutan Kolom "${key.toUpperCase()}": ${dirText}`);
+    // suppressed bottom notif per user request}": ${dirText}`);
     auditLogger.log("TABLE_SORTED", this.user ? this.user.name : "Guest", `Column: ${key}, Direction: ${this.sortDirection}`);
   }
 
@@ -502,7 +502,7 @@ class DashboardApp {
 
   approveSK(nip, nama) {
     auditLogger.log("SK_MUTASI_APPROVED", this.user ? this.user.name : "Bupati Kulon Progo", `NIP: ${nip}, Nama: ${nama}`);
-    this.showToast(`SK Mutasi Penempatan ${nama} disetujui secara digital.`);
+    // suppressed bottom notif per user request
   }
 
   renderSub5() {
@@ -548,7 +548,7 @@ class DashboardApp {
   loginUser(nip, password) {
     const cleanNip = SecurityUtils.escapeHTML(nip);
     if (!cleanNip || !password) {
-      this.showToast("NIP dan Kata Sandi harus diisi!", "error");
+      // suppressed bottom notif per user request
       return;
     }
     
@@ -568,7 +568,7 @@ class DashboardApp {
     auditLogger.log("EXECUTIVE_LOGIN_SUCCESS", this.user.name, `NIP: ${cleanNip}, Role: ${role}`);
 
     this.updateUserUI();
-    this.showToast("Login Berhasil! Selamat Datang Bapak Bupati Kulon Progo.");
+    // suppressed bottom notif per user request
     
     // Multi-page navigation redirect
     const prefix = window.location.pathname.includes("login") ? "../" : "";
@@ -582,7 +582,7 @@ class DashboardApp {
     this.user = null;
     localStorage.removeItem("disdikpora_user");
     this.updateUserUI();
-    this.showToast("Anda telah keluar dari Portal Executive.");
+    // suppressed bottom notif per user request
     
     const prefix = (window.location.pathname.includes("dashboard") || window.location.pathname.includes("sub")) ? "../" : "";
     window.location.href = prefix + "index.html";
@@ -627,20 +627,8 @@ class DashboardApp {
   }
 
   showToast(message, type = "success") {
-    const container = document.getElementById("toastContainer");
-    if (!container) return;
-
-    const toast = document.createElement("div");
-    toast.className = `px-4 py-3 rounded-lg text-xs font-bold shadow-lg border flex items-center justify-between transition-all duration-300 ${
-      type === "error" ? "bg-red-100 border-red-300 text-red-800" : "bg-emerald-100 border-emerald-300 text-emerald-900"
-    }`;
-    toast.innerHTML = `<span>${SecurityUtils.escapeHTML(message)}</span><button onclick="this.parentElement.remove()" class="ml-4 text-slate-500 hover:text-slate-900">✕</button>`;
-
-    container.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = "0";
-      setTimeout(() => toast.remove(), 300);
-    }, 3500);
+    // Disabled per user instruction: tidak perlu memunculkan notif/log di bawah saat sesuatu diklik
+    return;
   }
 
   showModalDetail(title, bodyText) {

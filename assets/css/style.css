@@ -939,3 +939,12 @@ footer {
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, #dc2626, #f59e0b, #1d4ed8) !important;
 }
+
+
+/* DISABLE ALL BOTTOM TOAST / NOTIFICATION POPUPS */
+#toastContainer, .toast-container, .toast {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
