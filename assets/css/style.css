@@ -1272,10 +1272,12 @@ svg:not([viewBox*="900"]) {
   aspect-ratio: 1 / 1 !important;
   display: inline-block;
   vertical-align: middle;
+  width: 1rem;
+  height: 1rem;
   max-width: 100%;
 }
 
-button svg, .btn svg, a svg, span svg, label svg {
+h1 svg, h2 svg, h3 svg, h4 svg, h5 svg, h6 svg, p svg, span svg, a svg, button svg, .btn svg, label svg {
   vertical-align: middle;
   flex-shrink: 0 !important;
 }
