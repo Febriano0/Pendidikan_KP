@@ -166,30 +166,65 @@ class DashboardApp {
 
   setupMapInteractivity() {
     document.querySelectorAll("[data-kapanewon-id]").forEach(el => {
-      el.classList.add("cursor-pointer", "transition", "hover:opacity-85");
-      el.addEventListener("click", () => {
+      el.classList.add("cursor-pointer", "transition");
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
         const kapId = el.getAttribute("data-kapanewon-id");
         const kapName = el.getAttribute("data-kapanewon-name") || kapId;
-        
-        const select = document.getElementById("kapanewonFilterSelect");
-        if (select) {
-          select.value = kapId;
-          this.selectedKapanewon = kapId;
-          this.renderCurrentSubmenuTable();
-          this.showToast(`Peta dipilih: ${SecurityUtils.escapeHTML(kapName)}`);
-          auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${kapName}`);
-        }
+        this.filterByKapanewon(kapId, kapName);
       });
     });
   }
 
-  filterByKapanewon(kapId) {
-    const select = document.getElementById("kapanewonFilterSelect");
-    if (select) select.value = kapId;
+  filterByKapanewon(kapId, kapName) {
     this.selectedKapanewon = kapId;
+    const select = document.getElementById("kapanewonFilterSelect");
+    if (select) {
+      select.value = kapId;
+    }
+
+    const activeMapName = document.getElementById("activeMapName");
+    if (activeMapName) {
+      const found = (typeof DB !== 'undefined' && DB.kapanewon) ? DB.kapanewon.find(k => k.id === kapId) : null;
+      activeMapName.textContent = found ? found.name : (kapName || kapId);
+    }
+
+    document.querySelectorAll("[data-kapanewon-id]").forEach(p => {
+      if (p.getAttribute("data-kapanewon-id") === kapId) {
+        p.setAttribute("fill", "#fde047");
+        p.setAttribute("stroke", "#d97706");
+        p.setAttribute("stroke-width", "6");
+      } else {
+        const id = p.getAttribute("data-kapanewon-id");
+        const origColor = this.getOriginalKapanewonColor(id);
+        p.setAttribute("fill", origColor);
+        p.setAttribute("stroke", "#0f2b48");
+        p.setAttribute("stroke-width", "3.5");
+      }
+    });
+
     this.renderCurrentSubmenuTable();
-    this.showToast(`Peta Wilayah Dipilih: ${SecurityUtils.escapeHTML(kapId.toUpperCase())}`);
-    auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${kapId}`);
+    const displayName = kapName || ((typeof DB !== 'undefined' && DB.kapanewon) ? (DB.kapanewon.find(k => k.id === kapId)?.name || kapId) : kapId);
+    this.showToast(`Wilayah Dipilih: ${SecurityUtils.escapeHTML(displayName)}`);
+    auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${displayName}`);
+  }
+
+  getOriginalKapanewonColor(id) {
+    const map = {
+      samigaluh: "#1e3a8a",
+      kalibawang: "#0284c7",
+      girimulyo: "#0369a1",
+      nanggulan: "#0284c7",
+      kokap: "#0f766e",
+      pengasih: "#d97706",
+      sentolo: "#2563eb",
+      temon: "#4d7c0f",
+      wates: "#b45309",
+      panjatan: "#15803d",
+      lendah: "#6d28d9",
+      galur: "#0369a1"
+    };
+    return map[id] || "#0284c7";
   }
 
   renderKapanewonDropdowns() {
