@@ -442,3 +442,197 @@ th {
   color: #ffffff !important;
 }
 
+
+
+/* EXECUTIVE HEADER & RESPONSIVE UTILITIES */
+.truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.flex-shrink-0, .shrink-0 {
+  flex-shrink: 0 !important;
+}
+
+.min-w-0 {
+  min-width: 0 !important;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap !important;
+}
+
+.relative {
+  position: relative !important;
+}
+
+.absolute {
+  position: absolute !important;
+}
+
+.inset-y-0 {
+  top: 0 !important;
+  bottom: 0 !important;
+}
+
+.left-0 {
+  left: 0 !important;
+}
+
+.right-0 {
+  right: 0 !important;
+}
+
+.pointer-events-none {
+  pointer-events: none !important;
+}
+
+.pl-8 {
+  padding-left: 2rem !important;
+}
+
+.pr-3 {
+  padding-right: 0.75rem !important;
+}
+
+.py-2\.5 {
+  padding-top: 0.625rem !important;
+  padding-bottom: 0.625rem !important;
+}
+
+.w-64 {
+  width: 16rem !important;
+}
+
+.w-72 {
+  width: 18rem !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+@media (min-width: 768px) {
+  .md\:block { display: block !important; }
+}
+
+.w-44 { width: 11rem !important; }
+.w-56 { width: 14rem !important; }
+@media (min-width: 1280px) { .xl\:inline { display: inline !important; } }
+/* EXECUTIVE HEADER STYLING ARCHITECTURE */
+header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
+  background-color: #0f2b48 !important;
+  border-bottom: 2px solid rgba(217, 119, 6, 0.5) !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.35) !important;
+  width: 100% !important;
+}
+
+.header-tier1 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  gap: 1rem !important;
+}
+
+.header-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  min-width: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.header-brand h1 {
+  font-size: 0.875rem !important;
+  font-weight: 900 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.025em !important;
+  line-height: 1.25 !important;
+}
+
+.header-brand p {
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  color: #fde047 !important;
+  line-height: 1.25 !important;
+}
+
+@media (max-width: 640px) {
+  .header-brand h1 {
+    font-size: 0.7rem !important;
+  }
+  .header-brand p {
+    font-size: 0.625rem !important;
+  }
+}
+
+.header-tier2 {
+  background-color: #09192b !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  width: 100% !important;
+}
+
+.header-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.nav-link {
+  padding: 0.45rem 0.8rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  color: #f1f5f9 !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease-in-out !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.nav-link:hover {
+  background-color: #1e3a8a !important;
+  color: #ffffff !important;
+}
+
+.nav-link.bg-amber-500,
+.nav-link.active {
+  background-color: #d97706 !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.4) !important;
+}
+
+#userSessionBadge, #mobileUserSessionBadge {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+#userSessionBadge a, #userSessionBadge button,
+#mobileUserSessionBadge a, #mobileUserSessionBadge button,
+a.px-2\.5, a.px-3, a.px-3\.5, a.px-4, a.px-6 {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}

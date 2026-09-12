@@ -32,65 +32,97 @@
     </div>
   </div>
 
-  <header class="sticky top-0 z-50 bg-slate-900 border-b border-amber-600/40 shadow-2xl backdrop-blur">
+      <header class="sticky top-0 z-50 bg-slate-900 border-b border-amber-600/40 shadow-2xl backdrop-blur">
+    <!-- TOP ACCENT COLOR STRIPE -->
     <div class="h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-blue-700"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-      <a href="../index.html" class="flex items-center space-x-3 group">
-        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center font-black text-slate-900 shadow-md group-hover:scale-105 transition">
+
+    <!-- TIER 1: BRAND IDENTITY & EXECUTIVE ACTIONS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
+      <!-- BRAND LOGO & TITLE -->
+      <a href="../index.html" class="header-brand flex items-center space-x-3 group min-w-0 flex-shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center font-black text-slate-900 shadow-md group-hover:scale-105 transition flex-shrink-0">
           KP
         </div>
-        <div>
-          <h1 class="text-sm font-black text-white tracking-wide">PEMERINTAH KABUPATEN KULON PROGO</h1>
-          <p class="text-xs text-amber-400 font-semibold">Dinas Pendidikan Pemuda dan Olahraga • Executive Portal</p>
+        <div class="min-w-0">
+          <h1 class="text-xs sm:text-sm font-black text-white tracking-wide truncate">PEMERINTAH KABUPATEN KULON PROGO</h1>
+          <p class="text-[10px] sm:text-xs text-amber-400 font-bold truncate">Dinas Pendidikan Pemuda dan Olahraga • Executive Portal</p>
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center space-x-1 text-xs font-semibold">
-        <a href="../index.html" class="nav-link px-3 py-2 rounded-lg transition">Beranda</a>
-<a href="../dashboard/index.html" class="nav-link px-3 py-2 rounded-lg transition">Home Dashboard</a>
-<a href="../sub1-akses/index.html" class="nav-link px-3 py-2 rounded-lg transition bg-amber-500 font-extrabold text-white">Sub 1: Akses</a>
-<a href="../sub2-mutu/index.html" class="nav-link px-3 py-2 rounded-lg transition">Sub 2: Mutu</a>
-<a href="../sub3-sarpras/index.html" class="nav-link px-3 py-2 rounded-lg transition">Sub 3: Sarpras</a>
-<a href="../sub4-gtk/index.html" class="nav-link px-3 py-2 rounded-lg transition">Sub 4: GTK</a>
-<a href="../sub5-kelembagaan/index.html" class="nav-link px-3 py-2 rounded-lg transition">Sub 5: Kelembagaan</a>
+      <!-- DESKTOP ACTIONS (USER SESSION BADGE) -->
+      <div class="hidden md:flex items-center space-x-2 flex-shrink-0">
+        <div id="userSessionBadge" class="flex items-center space-x-2"></div>
+      </div>
 
-      </nav>
-
-      <button id="mobileNavToggle" aria-label="Buka Menu Navigasi" class="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+      <!-- MOBILE NAV TOGGLE -->
+      <button id="mobileNavToggle" aria-label="Buka Menu Navigasi" class="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 flex-shrink-0">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
-      <div class="flex items-center space-x-3">
-        <div id="userSessionBadge"></div>
-      </div>
     </div>
 
-    <!-- FILTER BAR -->
-    <div class="bg-slate-900/90 border-t border-slate-800 px-4 sm:px-6 lg:px-8 py-2">
-      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div class="flex items-center space-x-3">
-          <span class="text-white font-bold">Filter Kapanewon:</span>
-          <select id="kapanewonFilterSelect" class="bg-slate-950 border border-slate-700 text-white rounded-lg px-3 py-1.5 font-semibold focus:outline-none focus:border-amber-500">
-          </select>
-        </div>
+    <!-- TIER 2: SUB-MENU NAVIGATION STRIP & SEARCH / FILTER (DESKTOP) -->
+    <div class="header-tier2 bg-slate-950/90 border-t border-slate-800/80 px-4 sm:px-6 lg:px-8 py-1.5 hidden md:block">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <!-- 7 SUB-MENU NAVIGATION TABS -->
+        <nav class="header-nav flex items-center space-x-1 text-xs font-semibold overflow-x-auto no-scrollbar flex-shrink-0 py-0.5">
+          <a href="../index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Beranda</a>
+          <a href="../dashboard/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Home Dashboard</a>
+          <a href="../sub1-akses/index.html" class="nav-link px-3 py-1.5 rounded-lg transition bg-amber-500 font-extrabold text-white whitespace-nowrap shadow-sm">Sub 1: Akses</a>
+          <a href="../sub2-mutu/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Sub 2: Mutu</a>
+          <a href="../sub3-sarpras/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Sub 3: Sarpras</a>
+          <a href="../sub4-gtk/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Sub 4: GTK</a>
+          <a href="../sub5-kelembagaan/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Sub 5: Kelembagaan</a>
+        </nav>
 
-        <div class="flex items-center space-x-3 flex-1 max-w-xs">
-          <input type="text" id="globalSearchInput" placeholder="Cari sekolah, indikator, atau data..." class="w-full bg-slate-950 border border-slate-700 text-white placeholder-slate-500 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-amber-500">
+        <!-- FILTER KAPANEWON & SEARCH (EXCLUSIVE TO SUB 1-5) -->
+        <div class="flex items-center space-x-3 flex-shrink-0">
+          <div class="flex items-center space-x-1.5">
+            <span class="text-xs text-amber-400 font-bold whitespace-nowrap hidden xl:inline">Filter Kapanewon:</span>
+            <select id="kapanewonFilterSelect" class="bg-slate-900 border border-slate-700 text-white rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:border-amber-500 transition cursor-pointer">
+            </select>
+          </div>
+          <div class="search-container relative w-44 lg:w-56">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none text-slate-400 text-xs">🔍</span>
+            <input type="text" id="globalSearchInput" placeholder="Cari data..." class="w-full bg-slate-900 border border-slate-700 text-white placeholder-slate-400 rounded-lg pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:border-amber-500 transition">
+          </div>
         </div>
       </div>
     </div>
 
     <!-- MOBILE DRAWER -->
-    <div id="mobileNavDrawer" class="hidden md:hidden bg-slate-900 border-b border-amber-600/30 px-4 py-3 space-y-2 text-xs font-semibold">
-      <a href="../index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Beranda Utama</a>
-      <a href="../dashboard/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Home Executive Dashboard</a>
-      <a href="../sub1-akses/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 1: Akses Pendidikan</a>
-      <a href="../sub2-mutu/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 2: Mutu ANBK</a>
-      <a href="../sub3-sarpras/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 3: Sarana Prasarana</a>
-      <a href="../sub4-gtk/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 4: Kepegawaian GTK (MCDM)</a>
-      <a href="../sub5-kelembagaan/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 5: Kelembagaan &amp; GIS</a>
-      <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+    <div id="mobileNavDrawer" class="hidden md:hidden bg-slate-900 border-b border-amber-600/30 px-4 py-4 space-y-3 text-xs font-semibold shadow-2xl">
+      <!-- Mobile Search Input -->
+      <div class="relative w-full">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none text-slate-400 text-xs">🔍</span>
+        <input type="text" id="mobileSearchInput" placeholder="Cari data, sekolah, indikator..." class="w-full bg-slate-950 border border-slate-700 text-white placeholder-slate-400 rounded-lg pl-8 pr-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+      </div>
+
+      <!-- Mobile Kapanewon Filter -->
+      <div class="space-y-1">
+        <label class="text-xs text-amber-400 font-bold block">Filter Kapanewon:</label>
+        <select id="mobileKapanewonFilterSelect" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-amber-500">
+        </select>
+      </div>
+
+      <!-- Mobile Session Badge -->
+      <div id="mobileUserSessionBadge" class="pt-1 pb-2 border-b border-slate-800"></div>
+
+      <!-- Navigation Links -->
+      <div class="space-y-1">
+        <a href="../index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Beranda Utama</a>
+        <a href="../dashboard/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Home Executive Dashboard</a>
+        <a href="../sub1-akses/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 1: Akses Pendidikan</a>
+        <a href="../sub2-mutu/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 2: Mutu ANBK</a>
+        <a href="../sub3-sarpras/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 3: Sarana Prasarana</a>
+        <a href="../sub4-gtk/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 4: Kepegawaian GTK (MCDM)</a>
+        <a href="../sub5-kelembagaan/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 5: Kelembagaan &amp; GIS</a>
+      </div>
+
+      <!-- Quick Footer Links in Drawer -->
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-[11px]">
         <a href="../about/index.html" class="text-amber-400 font-bold">Tentang Aplikasi</a>
-        <a href="../security/index.html" class="text-slate-400">Keamanan Data</a>
+        <a href="../security/index.html" class="text-slate-400 hover:text-white">Keamanan Data</a>
+        <a href="../terms/index.html" class="text-slate-400 hover:text-white">Ketentuan Layanan</a>
       </div>
     </div>
   </header>

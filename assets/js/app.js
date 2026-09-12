@@ -138,9 +138,21 @@ class DashboardApp {
 
   bindEvents() {
     const searchInput = document.getElementById("globalSearchInput");
+    const mobileSearchInput = document.getElementById("mobileSearchInput");
+
     if (searchInput) {
       searchInput.addEventListener("input", this.debounce((e) => {
         this.searchQuery = e.target.value.toLowerCase().trim();
+        if (mobileSearchInput) mobileSearchInput.value = e.target.value;
+        this.renderCurrentSubmenuTable();
+        auditLogger.log("SEARCH_FILTER_EXECUTED", this.user ? this.user.name : "Guest", `Query: ${this.searchQuery}`);
+      }, 150));
+    }
+
+    if (mobileSearchInput) {
+      mobileSearchInput.addEventListener("input", this.debounce((e) => {
+        this.searchQuery = e.target.value.toLowerCase().trim();
+        if (searchInput) searchInput.value = e.target.value;
         this.renderCurrentSubmenuTable();
         auditLogger.log("SEARCH_FILTER_EXECUTED", this.user ? this.user.name : "Guest", `Query: ${this.searchQuery}`);
       }, 150));
@@ -294,11 +306,15 @@ class DashboardApp {
 
   renderKapanewonDropdowns() {
     const kapSelect = document.getElementById("kapanewonFilterSelect");
-    if (!kapSelect || typeof DB === 'undefined') return;
+    const mobileKapSelect = document.getElementById("mobileKapanewonFilterSelect");
+    if (typeof DB === 'undefined') return;
 
-    kapSelect.innerHTML = DB.kapanewon.map(k => 
+    const optionsHtml = DB.kapanewon.map(k => 
       `<option value="${SecurityUtils.escapeHTML(k.id)}">${SecurityUtils.escapeHTML(k.name)}</option>`
     ).join("");
+
+    if (kapSelect) kapSelect.innerHTML = optionsHtml;
+    if (mobileKapSelect) mobileKapSelect.innerHTML = optionsHtml;
   }
 
   renderCurrentSubmenuTable() {
@@ -574,21 +590,40 @@ class DashboardApp {
 
   updateUserUI() {
     const userBadge = document.getElementById("userSessionBadge");
-    if (userBadge) {
-      const relPrefix = (window.location.pathname.includes("sub") || window.location.pathname.includes("dashboard") || window.location.pathname.includes("login") || window.location.pathname.includes("about") || window.location.pathname.includes("security") || window.location.pathname.includes("terms")) ? "../" : "./";
-      if (this.user) {
-        userBadge.innerHTML = `
-          <span class="text-xs text-amber-300 font-bold mr-2">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
-          <a href="${relPrefix}security/index.html" class="px-2.5 py-1 bg-blue-900 hover:bg-blue-800 text-white rounded font-bold text-[10px] mr-1.5 transition inline-flex items-center">🛡️ Audit Log</a>
-          <button onclick="app.logoutUser()" class="px-2.5 py-1 bg-red-700 hover:bg-red-800 text-white rounded font-bold text-[10px] transition">Keluar</button>
-        `;
-      } else {
-        userBadge.innerHTML = `
-          <a href="${relPrefix}security/index.html" class="px-2.5 py-1 bg-blue-900 hover:bg-blue-800 text-white border border-blue-700 rounded font-bold text-[10px] mr-2 transition inline-flex items-center">🛡️ Status Keamanan</a>
-          <a href="${relPrefix}login/index.html" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded text-xs transition shadow-sm inline-flex items-center">🔒 Masuk Pimpinan</a>
-        `;
-      }
+    const mobileUserBadge = document.getElementById("mobileUserSessionBadge");
+    const relPrefix = (window.location.pathname.includes("sub") || window.location.pathname.includes("dashboard") || window.location.pathname.includes("login") || window.location.pathname.includes("about") || window.location.pathname.includes("security") || window.location.pathname.includes("terms")) ? "../" : "./";
+
+    let desktopContent = '';
+    let mobileContent = '';
+
+    if (this.user) {
+      desktopContent = `
+        <span class="text-xs text-amber-300 font-bold whitespace-nowrap mr-1">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
+        <a href="${relPrefix}security/index.html" class="px-2.5 py-1.5 bg-blue-900 hover:bg-blue-800 text-white border border-blue-700 rounded-lg font-bold text-xs transition inline-flex items-center gap-1 shadow-sm">🛡️ Audit Log</a>
+        <button onclick="app.logoutUser()" class="px-2.5 py-1.5 bg-red-700 hover:bg-red-800 text-white rounded-lg font-bold text-xs transition shadow-sm">Keluar</button>
+      `;
+      mobileContent = `
+        <div class="w-full flex items-center justify-between bg-slate-800 p-2.5 rounded-lg border border-slate-700 mb-2">
+          <span class="text-xs text-amber-300 font-bold">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
+          <button onclick="app.logoutUser()" class="px-2.5 py-1 bg-red-700 hover:bg-red-800 text-white rounded font-bold text-xs">Keluar</button>
+        </div>
+        <a href="${relPrefix}security/index.html" class="w-full text-center px-3 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-bold text-xs transition block border border-blue-700">🛡️ Audit Log Keamanan</a>
+      `;
+    } else {
+      desktopContent = `
+        <a href="${relPrefix}security/index.html" class="px-3 py-1.5 bg-blue-900/90 hover:bg-blue-800 text-white border border-blue-600/80 rounded-lg font-bold text-xs transition inline-flex items-center gap-1 shadow-sm">🛡️ Status Keamanan</a>
+        <a href="${relPrefix}login/index.html" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-lg text-xs transition shadow-sm inline-flex items-center gap-1">🔒 Masuk Pimpinan</a>
+      `;
+      mobileContent = `
+        <div class="grid grid-cols-2 gap-2 w-full">
+          <a href="${relPrefix}security/index.html" class="text-center px-2 py-2 bg-blue-900 hover:bg-blue-800 text-white border border-blue-700 rounded-lg font-bold text-xs transition block">🛡️ Status Keamanan</a>
+          <a href="${relPrefix}login/index.html" class="text-center px-2 py-2 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-lg text-xs transition block shadow-sm">🔒 Masuk Pimpinan</a>
+        </div>
+      `;
     }
+
+    if (userBadge) userBadge.innerHTML = desktopContent;
+    if (mobileUserBadge) mobileUserBadge.innerHTML = mobileContent;
   }
 
   showToast(message, type = "success") {
