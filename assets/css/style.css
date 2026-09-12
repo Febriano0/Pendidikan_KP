@@ -338,3 +338,35 @@ footer span.font-bold, footer a {
 footer a:hover {
   color: #fde047 !important;
 }
+
+
+/* UNCLIP & UNSTOPPABLE BUTTON STYLING (ZERO CLIPPING GUARANTEE) */
+button, .btn, .nav-link, a.px-6, a.px-3 {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Ensure table action cells don't wrap or cut off buttons */
+td:last-child, th:last-child {
+  white-space: nowrap !important;
+  min-width: 110px;
+}
+
+/* Header User Badge Spacing */
+#userSessionBadge {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Hero Action Buttons Wrapper */
+.flex-wrap {
+  flex-wrap: wrap !important;
+}

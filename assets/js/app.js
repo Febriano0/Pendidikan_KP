@@ -239,7 +239,7 @@ class DashboardApp {
         </td>
         <td class="p-3 text-slate-600 text-xs">${SecurityUtils.escapeHTML(item.usage)}</td>
         <td class="p-3">
-          <button onclick="app.showModalDetail('Akses & Pemerataan - ${SecurityUtils.escapeHTML(item.kapanewon)}', 'Detail ATS: ${SecurityUtils.escapeHTML(item.ats)} anak. Sumber: ${SecurityUtils.escapeHTML(item.sumber)}. ${SecurityUtils.escapeHTML(item.usage)}')" class="px-3 py-1 bg-blue-700 hover:bg-blue-800 text-white rounded font-bold text-[11px] shadow-sm">Detail</button>
+          <button onclick="app.showModalDetail('Akses & Pemerataan - ${SecurityUtils.escapeHTML(item.kapanewon)}', 'Detail ATS: ${SecurityUtils.escapeHTML(item.ats)} anak. Sumber: ${SecurityUtils.escapeHTML(item.sumber)}. ${SecurityUtils.escapeHTML(item.usage)}')" class="px-3.5 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-bold text-[11px] shadow-sm whitespace-nowrap inline-flex items-center justify-center">Detail</button>
         </td>
       </tr>
     `).join("");
@@ -282,7 +282,7 @@ class DashboardApp {
           <span class="px-2.5 py-1 rounded-full bg-${SecurityUtils.escapeHTML(item.statusColor)}-950 font-bold text-xs">${SecurityUtils.escapeHTML(item.pembinaan)}</span>
         </td>
         <td class="p-3">
-          <button onclick="app.showModalDetail('Mutu ANBK - ${SecurityUtils.escapeHTML(item.nama)}', 'Literasi: ${SecurityUtils.escapeHTML(item.literasi)}, Numerasi: ${SecurityUtils.escapeHTML(item.numerasi)}. Akreditasi: ${SecurityUtils.escapeHTML(item.akreditasi)}')" class="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded font-bold text-[11px] shadow-sm">Rapor</button>
+          <button onclick="app.showModalDetail('Mutu ANBK - ${SecurityUtils.escapeHTML(item.nama)}', 'Literasi: ${SecurityUtils.escapeHTML(item.literasi)}, Numerasi: ${SecurityUtils.escapeHTML(item.numerasi)}. Akreditasi: ${SecurityUtils.escapeHTML(item.akreditasi)}')" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-[11px] shadow-sm whitespace-nowrap inline-flex items-center justify-center">Rapor</button>
         </td>
       </tr>
     `).join("");
@@ -361,7 +361,7 @@ class DashboardApp {
         <td class="p-3 font-black text-amber-600 text-sm">${SecurityUtils.escapeHTML(item.mcdmScore)}</td>
         <td class="p-3 text-slate-700 text-xs">${SecurityUtils.escapeHTML(item.argumentasi)}</td>
         <td class="p-3">
-          <button onclick="app.approveSK('${SecurityUtils.escapeHTML(item.nip)}', '${SecurityUtils.escapeHTML(item.nama)}')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded font-bold text-[11px] shadow-sm">Setujui SK</button>
+          <button onclick="app.approveSK('${SecurityUtils.escapeHTML(item.nip)}', '${SecurityUtils.escapeHTML(item.nama)}')" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[11px] shadow-sm whitespace-nowrap inline-flex items-center justify-center">Setujui SK</button>
         </td>
       </tr>
     `).join("");
