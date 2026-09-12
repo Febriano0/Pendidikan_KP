@@ -483,8 +483,8 @@ class DashboardApp {
             <td class="p-3"><span class="badge badge-${SecurityUtils.escapeHTML(a.statusColor)}">${SecurityUtils.escapeHTML(a.regrouping)}</span></td>
             <td class="p-3 text-xs text-slate-600">${mut ? SecurityUtils.escapeHTML(mut.literasi) : 'Standar'} / ${sarp ? SecurityUtils.escapeHTML(sarp.baik) : 'Layak'}</td>
             <td class="p-3">
-              <button onclick="app.filterByKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm" aria-label="Pilih Wilayah ${SecurityUtils.escapeHTML(a.kapanewon)}">
-                Pilih Wilayah <svg class="w-3.5 h-3.5 text-amber-400 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <button onclick="app.filterByKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm transition inline-flex items-center gap-1" aria-label="Pilih Wilayah ${SecurityUtils.escapeHTML(a.kapanewon)}">
+                Pilih Wilayah &rarr;
               </button>
             </td>
           </tr>
@@ -921,7 +921,7 @@ class DashboardApp {
         <div class="bg-white border border-slate-300 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
           <div class="flex items-center justify-between border-b border-slate-200 pb-3">
             <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wide">${cleanTitle}</h3>
-            <button onclick="document.getElementById('customModalOverlay').remove()" class="text-slate-400 hover:text-slate-700"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            <button onclick="document.getElementById('customModalOverlay').remove()" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition" aria-label="Tutup">&times;</button>
           </div>
           <p class="text-xs text-slate-700 leading-relaxed">${cleanBody}</p>
           <div class="pt-2 flex justify-end">
@@ -957,7 +957,7 @@ class DashboardApp {
               <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide"><svg class="w-3.5 h-3.5 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> LOG AUDIT KEAMANAN &amp; INTEGRITAS DATA</h3>
               <p class="text-[11px] text-slate-500">SHA-256 Checksum: <span class="font-mono text-emerald-700 font-bold">${typeof DB_INTEGRITY !== 'undefined' ? DB_INTEGRITY.checksum.substring(0, 24) : 'verified'}...</span></p>
             </div>
-            <button onclick="document.getElementById('auditModalOverlay').remove()" class="text-slate-400 hover:text-slate-700"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            <button onclick="document.getElementById('auditModalOverlay').remove()" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition" aria-label="Tutup">&times;</button>
           </div>
           <div class="overflow-y-auto flex-1 bg-slate-50 rounded-xl p-2 border border-slate-200">
             <table class="w-full text-left border-collapse">
