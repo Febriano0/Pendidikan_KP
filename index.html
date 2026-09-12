@@ -1,608 +1,436 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Pimpinan Dinas Pendidikan - 5 Bab Utama</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+  <title>Portal Web Executive &amp; Dashboard Pimpinan Disdikpora Kulon Progo</title>
+  
+  <!-- SEO METADATA -->
+  <meta name="description" content="Sistem Informasi Eksekutif &amp; Dashboard Pimpinan Disdikpora Kabupaten Kulon Progo. Data terpadu Akses, Mutu, Sarpras, Kepegawaian (MCDM), dan Kelembagaan berbasis 12 Kapanewon.">
+  <meta name="keywords" content="Disdikpora Kulon Progo, Executive Dashboard, Web Pendidikan Kulon Progo, Rapor Pendidikan, Dapodik, Kapanewon Kulon Progo, MCDM Guru, Pemkab Kulon Progo">
+  <meta name="author" content="Dinas Pendidikan Pemuda dan Olahraga Kabupaten Kulon Progo">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://disdikpora.kulonprogokab.go.id/executive/">
+
+  <!-- OPEN GRAPH & TWITTER CARD -->
+  <meta property="og:title" content="Portal Web Executive &amp; Dashboard Pimpinan Disdikpora Kulon Progo">
+  <meta property="og:description" content="Integrasi data urusan pendidikan 12 Kapanewon Kulon Progo berbasis 5 Sub-Menu kriteria data dan Peta Geospasial Interaktif.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://disdikpora.kulonprogokab.go.id/executive/">
+  <meta property="og:image" content="https://disdikpora.kulonprogokab.go.id/executive/assets/preview-og.jpg">
+  <meta property="og:locale" content="id_ID">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portal Web Executive Disdikpora Kulon Progo">
+  <meta name="twitter:description" content="Dashboard Eksekutif Pengambilan Kebijakan Pendidikan Kabupaten Kulon Progo.">
+
+  <!-- RESOURCE PRECONNECT & PERFORMANCE -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js" defer></script>
+
+  <!-- STRUCTURED DATA (SCHEMA.ORG JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GovernmentOrganization",
+    "name": "Dinas Pendidikan Pemuda dan Olahraga Kabupaten Kulon Progo",
+    "url": "https://disdikpora.kulonprogokab.go.id",
+    "description": "Dinas Pendidikan Pemuda dan Olahraga Pemerintah Kabupaten Kulon Progo Daerah Istimewa Yogyakarta",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kulon Progo",
+      "addressRegion": "D.I. Yogyakarta",
+      "addressCountry": "ID"
     }
+  }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .page-view { min-height: calc(100vh - 140px); }
+    .gpu-layer { transform: translateZ(0); will-change: transform; }
+    .smooth-fade { transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
   </style>
+  <!-- CONTENT SECURITY POLICY & ANTI-HIJACKING HEADERS -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-ancestors 'none'; object-src 'none';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between antialiased">
 
-  <!-- Top Navigation Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        
-        <!-- Brand / Title -->
+  <!-- OFFICIAL GOVT TOPBAR & HEADER -->
+  <header class="sticky top-0 z-50 bg-slate-900 border-b border-amber-600/40 shadow-2xl backdrop-blur">
+    <div class="h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-blue-700"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      
+      <!-- Govt Logo & Title -->
+      <a href="#landing" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center font-black text-slate-900 shadow-md group-hover:scale-105 transition">
+          KP
+        </div>
+        <div>
+          <h1 class="text-sm font-black text-white tracking-wide">PEMERINTAH KABUPATEN KULON PROGO</h1>
+          <p class="text-xs text-amber-400 font-semibold">Dinas Pendidikan Pemuda dan Olahraga • Executive Portal</p>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-1 text-xs font-semibold">
+        <a href="#landing" data-route="landing" class="nav-link px-3 py-2 rounded-lg transition">Beranda</a>
+        <a href="#home" data-route="home" class="nav-link px-3 py-2 rounded-lg transition">Home Dashboard</a>
+        <a href="#sub1" data-route="sub1" class="nav-link px-3 py-2 rounded-lg transition">Sub 1: Akses</a>
+        <a href="#sub2" data-route="sub2" class="nav-link px-3 py-2 rounded-lg transition">Sub 2: Mutu</a>
+        <a href="#sub3" data-route="sub3" class="nav-link px-3 py-2 rounded-lg transition">Sub 3: Sarpras</a>
+        <a href="#sub4" data-route="sub4" class="nav-link px-3 py-2 rounded-lg transition">Sub 4: GTK</a>
+        <a href="#sub5" data-route="sub5" class="nav-link px-3 py-2 rounded-lg transition">Sub 5: Kelembagaan</a>
+      </nav>
+
+      <!-- User Session & Quick Action -->
+            <!-- Mobile Hamburger Button -->
+      <button id="mobileNavToggle" aria-label="Buka Menu Navigasi" class="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+      <div class="flex items-center space-x-3">
+        <div id="userSessionBadge"></div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR (Dynamic selector per Kapanewon & Search) -->
+    <div class="bg-slate-900/90 border-t border-slate-800 px-4 sm:px-6 lg:px-8 py-2">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
         <div class="flex items-center space-x-3">
-          <div class="p-2 bg-blue-600 rounded-lg text-white">
-            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <h1 class="text-lg font-bold text-slate-900 leading-tight">Dinas Pendidikan & Kebudayaan</h1>
-            <p class="text-xs text-slate-500">Executive Dashboard Pimpinan</p>
-          </div>
+          <span class="text-slate-400 font-medium">Filter Kapanewon:</span>
+          <select id="kapanewonFilterSelect" class="bg-slate-950 border border-slate-700 text-white rounded-lg px-3 py-1.5 font-semibold focus:outline-none focus:border-amber-500">
+            <!-- Populated via app.js -->
+          </select>
         </div>
 
-        <!-- Right Header Tools -->
-        <div class="flex items-center space-x-3">
-          <button onclick="exportReport()" class="flex items-center space-x-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg transition-colors">
-            <i data-lucide="download" class="w-4 h-4"></i>
-            <span class="hidden sm:inline">Cetak Laporan Eksklusif</span>
-          </button>
-          
-          <div class="h-6 w-px bg-slate-200"></div>
-
-          <!-- User Profile -->
-          <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 rounded-full bg-blue-100 border border-blue-300 text-blue-700 flex items-center justify-center font-bold text-sm">
-              KD
-            </div>
-            <div class="hidden md:block text-left">
-              <div class="text-xs font-semibold text-slate-800">Kepala Dinas</div>
-              <div class="text-[10px] text-slate-400">NIP. 19780512...</div>
-            </div>
-          </div>
+        <div class="flex items-center space-x-3 flex-1 max-w-xs">
+          <input type="text" id="globalSearchInput" placeholder="Cari sekolah, indikator, atau data..." class="w-full bg-slate-950 border border-slate-700 text-white placeholder-slate-500 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-amber-500">
         </div>
-
+      </div>
+    </div>
+  
+    <!-- MOBILE NAVIGATION DRAWER (Responsive Mobile View) -->
+    <div id="mobileNavDrawer" class="hidden md:hidden bg-slate-900 border-b border-amber-600/30 px-4 py-3 space-y-2 text-xs font-semibold">
+      <a href="#landing" data-route="landing" class="nav-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Beranda Utama</a>
+      <a href="#home" data-route="home" class="nav-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Home Executive Dashboard</a>
+      <a href="#sub1" data-route="sub1" class="nav-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Sub 1: Akses Pendidikan</a>
+      <a href="#sub2" data-route="sub2" class="nav-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Sub 2: Mutu ANBK</a>
+      <a href="#sub3" data-route="sub3" class="nav-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Sub 3: Sarana Prasarana</a>
+      <a href="#sub4" data-route="sub4" class="nav-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Sub 4: Kepegawalan GTK (MCDM)</a>
+      <a href="#sub5" data-route="sub5" class="nav-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800">Sub 5: Kelembagaan &amp; GIS</a>
+      <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+        <a href="about.html" class="text-amber-400 font-bold">Tentang Aplikasi</a>
+        <a href="privacy_security.html" class="text-slate-400">Keamanan Data</a>
       </div>
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+  <!-- MAIN APP CONTAINER (SPA ROUTE VIEWS) -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-    <!-- Global Filter & Alert Banner -->
-    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-      <div class="flex flex-wrap items-center gap-3">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-          <i data-lucide="filter" class="w-3.5 h-3.5"></i> Filter Global:
-        </span>
-        
-        <select id="yearFilter" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="2026" selected>T.A. 2026</option>
-          <option value="2025">T.A. 2025</option>
-        </select>
-
-        <select id="levelFilter" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="all" selected>Semua Jenjang (PAUD, SD, SMP)</option>
-          <option value="sd">SD Negeri & Swasta</option>
-          <option value="smp">SMP Negeri & Swasta</option>
-        </select>
-
-        <select id="districtFilter" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="all" selected>Semua Kecamatan</option>
-          <option value="utara">Kecamatan Utara</option>
-          <option value="selatan">Kecamatan Selatan</option>
-          <option value="barat">Kecamatan Barat</option>
-          <option value="timur">Kecamatan Timur</option>
-        </select>
-      </div>
-
-      <div class="flex items-center gap-2 text-blue-700 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-200 text-xs">
-        <i data-lucide="info" class="w-4 h-4 text-blue-600 shrink-0"></i>
-        <span>Pilih bab di bawah untuk melihat rincian indikator & data analitis.</span>
-      </div>
-    </div>
-
-    <!-- 5 BAB NAVIGATION TABS -->
-    <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
-      <nav class="flex space-x-2 min-w-max">
-        
-        <button onclick="switchTab('bab1')" id="tab-bab1" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white shadow-sm">
-          <i data-lucide="users" class="w-4 h-4"></i>
-          <span>Bab I: Akses & Pemerataan</span>
-        </button>
-
-        <button onclick="switchTab('bab2')" id="tab-bab2" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all">
-          <i data-lucide="award" class="w-4 h-4"></i>
-          <span>Bab II: Mutu & Capaian</span>
-        </button>
-
-        <button onclick="switchTab('bab3')" id="tab-bab3" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all">
-          <i data-lucide="building-2" class="w-4 h-4"></i>
-          <span>Bab III: Sarana & Prasarana</span>
-        </button>
-
-        <button onclick="switchTab('bab4')" id="tab-bab4" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all">
-          <i data-lucide="user-check" class="w-4 h-4"></i>
-          <span>Bab IV: Ketenagaan (GTK)</span>
-        </button>
-
-        <button onclick="switchTab('bab5')" id="tab-bab5" class="tab-btn flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-all">
-          <i data-lucide="landmark" class="w-4 h-4"></i>
-          <span>Bab V: Tata Kelola & Prestasi</span>
-        </button>
-
-      </nav>
-    </div>
-
-    <!-- TAB CONTENTS -->
-
-    <!-- ================= BAB 1: AKSES DAN PEMERATAAN ================= -->
-    <div id="content-bab1" class="tab-content space-y-6">
-      
-      <!-- Summary Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Angka Partisipasi Murni (APM)</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">94.8%</div>
-          <p class="text-xs text-emerald-600 font-semibold mt-1">↑ +1.2% dari tahun lalu</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Angka Putus Sekolah (APS)</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">0.32%</div>
-          <p class="text-xs text-emerald-600 font-semibold mt-1">↓ Turun 0.08% (Membaik)</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Siswa Penerima Beasiswa</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">18,450</div>
-          <p class="text-xs text-slate-400 mt-1">Program Beasiswa Daerah</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Anak Tidak Sekolah (ATS)</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">412</div>
-          <p class="text-xs text-amber-600 font-semibold mt-1">Butuh Intervensi Khusus</p>
-        </div>
-      </div>
-
-      <!-- Detail Visualizations -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <h2 class="text-sm font-bold text-slate-800 mb-1">Tren Angka Putus Sekolah & Penyaluran Beasiswa</h2>
-          <p class="text-xs text-slate-400 mb-4">Evaluasi keterjangkauan dan efektivitas beasiswa pendidikan</p>
-          <div class="h-64">
-            <canvas id="chartAkses"></canvas>
+    <!-- PAGE 1: LANDING PAGE -->
+    <section id="page-landing" class="page-view space-y-8">
+      <div class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 rounded-3xl p-8 md:p-12 border border-slate-800 shadow-2xl relative overflow-hidden">
+        <div class="max-w-3xl space-y-4">
+          <span class="px-3.5 py-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-extrabold rounded-full">🏛️ PORTAL WEB RESMI PEMKAB KULON PROGO</span>
+          <h2 class="text-3xl md:text-5xl font-black text-white leading-tight">
+            Sistem Informasi Executive &amp; Web Dashboard Pimpinan
+          </h2>
+          <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+            Menyajikan tata kelola data urusan pendidikan terpadu (Dapodik, Dukcapil, BPS, BAN-S/M, &amp; BKPSDM) berbasis 5 Sub-Menu kriteria data dan Peta Geospasial Kapanewon.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-3">
+            <a href="#home" class="px-6 py-3 bg-amber-600 hover:bg-amber-500 text-slate-900 font-extrabold text-sm rounded-xl shadow-lg transition">Jelajahi Home Dashboard →</a>
+            <a href="#login" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm rounded-xl border border-slate-700 transition">🔒 Masuk Otentikasi Pimpinan</a>
           </div>
         </div>
+      </div>
 
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+      <!-- Quick Summary Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md">
+          <span class="text-xs text-slate-400 font-semibold block">TOTAL SATUAN PENDIDIKAN</span>
+          <span class="text-3xl font-black text-white mt-1 block">485 <span class="text-xs text-slate-400 font-normal">Sekolah</span></span>
+          <span class="text-[11px] text-emerald-400 font-bold mt-2 block">348 Negeri / 137 Swasta</span>
+        </div>
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md">
+          <span class="text-xs text-slate-400 font-semibold block">APM SD KABUPATEN</span>
+          <span class="text-3xl font-black text-amber-400 mt-1 block">98.7%</span>
+          <span class="text-[11px] text-emerald-400 font-bold mt-2 block">Memenuhi SPM Nasional</span>
+        </div>
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md">
+          <span class="text-xs text-slate-400 font-semibold block">GURU S1 / SERDIK</span>
+          <span class="text-3xl font-black text-white mt-1 block">96.8%</span>
+          <span class="text-[11px] text-emerald-400 font-bold mt-2 block">Verifikasi Info GTK</span>
+        </div>
+        <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 shadow-md">
+          <span class="text-xs text-slate-400 font-semibold block">AKREDITASI A / B</span>
+          <span class="text-3xl font-black text-blue-400 mt-1 block">91.3%</span>
+          <span class="text-[11px] text-emerald-400 font-bold mt-2 block">BAN-S/M Verified</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 2: LOGIN PAGE MODAL/VIEW -->
+    <section id="page-login" class="page-view flex items-center justify-center py-12">
+      <div class="bg-slate-900 border border-slate-800 max-w-md w-full p-8 rounded-3xl shadow-2xl space-y-6">
+        <div class="text-center space-y-2">
+          <div class="w-14 h-14 bg-amber-600 text-slate-900 font-black text-2xl rounded-2xl mx-auto flex items-center justify-center shadow-lg">KP</div>
+          <h2 class="text-2xl font-black text-white">MASUK PORTAL EXECUTIVE</h2>
+          <p class="text-xs text-slate-400">Pemerintah Kabupaten Kulon Progo • Otentikasi NIP</p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); app.loginUser(document.getElementById('loginNip').value, document.getElementById('loginPass').value);" class="space-y-4">
           <div>
-            <h2 class="text-sm font-bold text-slate-800 mb-1">Distribusi Siswa Miskin / KIP</h2>
-            <p class="text-xs text-slate-400 mb-4">Sebaran wilayah siswa penerima bantuan</p>
-            <div class="space-y-3">
-              <div>
-                <div class="flex justify-between text-xs font-semibold mb-1">
-                  <span>Kecamatan Utara</span>
-                  <span>4,210 Siswa</span>
-                </div>
-                <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-blue-600 h-full rounded-full" style="width: 80%"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between text-xs font-semibold mb-1">
-                  <span>Kecamatan Barat</span>
-                  <span>3,850 Siswa</span>
-                </div>
-                <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-blue-600 h-full rounded-full" style="width: 65%"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between text-xs font-semibold mb-1">
-                  <span>Kecamatan Selatan</span>
-                  <span>2,940 Siswa</span>
-                </div>
-                <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-blue-600 h-full rounded-full" style="width: 50%"></div></div>
-              </div>
-            </div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">NIP / ID PEGAWAI PIMPINAN</label>
+            <input type="text" id="loginNip" value="19750812 200212 1 001" class="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-3 text-sm focus:border-amber-500 font-mono">
           </div>
-          <button onclick="alert('Membuka Laporan Detail ATS')" class="w-full mt-4 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg text-xs font-semibold transition-colors">Lihat Peta Sebaran ATS</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ================= BAB 2: MUTU DAN CAPAIAN PEMBELAJARAN ================= -->
-    <div id="content-bab2" class="tab-content hidden space-y-6">
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Rapor Pendidikan Daerah</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">76.4 <span class="text-xs text-slate-400 font-normal">/ 100</span></div>
-          <span class="inline-block mt-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px]">Baik</span>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Indeks Literasi</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">78.2</div>
-          <p class="text-xs text-emerald-600 font-semibold mt-1">↑ Di atas Rata-rata Nasional</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Indeks Numerasi</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">71.8</div>
-          <p class="text-xs text-amber-600 font-semibold mt-1">Perlu Peningkatan Sifat Pembelajaran</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Akreditasi Sekolah A</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">64.2%</div>
-          <p class="text-xs text-slate-400 mt-1">277 dari 432 Sekolah</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <h2 class="text-sm font-bold text-slate-800 mb-1">Capaian Asesmen Nasional (ANBK) per Jenjang</h2>
-          <p class="text-xs text-slate-400 mb-4">Perbandingan kompetensi literasi, numerasi, dan karakter</p>
-          <div class="h-64">
-            <canvas id="chartMutu"></canvas>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <h2 class="text-sm font-bold text-slate-800 mb-1">Karakter & Iklim Sekolah</h2>
-          <p class="text-xs text-slate-400 mb-4">Indikator keamanan & kebhinekaan</p>
-          <div class="space-y-4 text-xs">
-            <div class="p-3 bg-slate-50 rounded-lg">
-              <div class="flex justify-between font-semibold text-slate-700">
-                <span>Iklim Keamanan Sekolah</span>
-                <span class="text-emerald-600">Aman (82.1)</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-0.5">Bebas perundungan dan kekerasan fisik</p>
-            </div>
-            <div class="p-3 bg-slate-50 rounded-lg">
-              <div class="flex justify-between font-semibold text-slate-700">
-                <span>Iklim Kebhinekaan</span>
-                <span class="text-emerald-600">Tinggi (85.4)</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-0.5">Toleransi agama & budaya terjamin</p>
-            </div>
-            <div class="p-3 bg-slate-50 rounded-lg">
-              <div class="flex justify-between font-semibold text-slate-700">
-                <span>Kualitas Pembelajaran</span>
-                <span class="text-amber-600">Sedang (68.0)</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-0.5">Perlu pelatihan metode mengajar interaktif</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ================= BAB 3: SARANA DAN PRASARANA ================= -->
-    <div id="content-bab3" class="tab-content hidden space-y-6">
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Kondisi Ruang Kelas Baik</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">62%</div>
-          <p class="text-xs text-slate-400 mt-1">2,410 Ruang Kelas</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Rusak Berat (Butuh Rehabilitasi)</span>
-          <div class="text-2xl font-extrabold text-red-600 mt-2">4%</div>
-          <p class="text-xs text-red-600 font-semibold mt-1">12 Sekolah Mengajukan Urgen</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Akses Internet Sekolah</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">88.5%</div>
-          <p class="text-xs text-emerald-600 font-semibold mt-1">Target 100% Akhir Tahun</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Kecukupan Laboratorium/TIK</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">74.1%</div>
-          <p class="text-xs text-slate-400 mt-1">Pengadaan Chromebox/PC</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <h2 class="text-sm font-bold text-slate-800 mb-1">Proporsi Kondisi Fisik Kelas</h2>
-          <p class="text-xs text-slate-400 mb-4">Klasifikasi kelayakan infrastruktur</p>
-          <div class="h-56 relative flex items-center justify-center">
-            <canvas id="chartSarpras"></canvas>
-          </div>
-        </div>
-
-        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h2 class="text-sm font-bold text-slate-800">Daftar Usulan Rehabilitasi Gedung Sekolah Urgent</h2>
-              <p class="text-xs text-slate-400">Sekolah dengan tingkat kerusakan fisik &gt; 30%</p>
-            </div>
-            <span class="text-xs bg-red-100 text-red-700 px-2.5 py-1 rounded-full font-bold">12 Sekolah Kritis</span>
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-              <thead>
-                <tr class="border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50">
-                  <th class="py-2.5 px-3">Nama Sekolah</th>
-                  <th class="py-2.5 px-3">Fasilitas Rusak</th>
-                  <th class="py-2.5 px-3">Tingkat Kerusakan</th>
-                  <th class="py-2.5 px-3 text-right">Aksi Pimpinan</th>
-                </tr>
-              </thead>
-              <tbody class="text-xs divide-y divide-slate-100">
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-3 font-semibold text-slate-800">SDN 02 Merdeka</td>
-                  <td class="py-3 px-3 text-slate-600">3 Ruang Kelas & Perpustakaan</td>
-                  <td class="py-3 px-3 text-red-600 font-bold">Rusak Berat (68%)</td>
-                  <td class="py-3 px-3 text-right"><button onclick="alert('Disposisi DAK Fisik Terkirim!')" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded text-[11px]">Disposisi DAK</button></td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-3 font-semibold text-slate-800">SMPN 04 Maju</td>
-                  <td class="py-3 px-3 text-slate-600">Laboratorium IPA & Toilet</td>
-                  <td class="py-3 px-3 text-amber-600 font-bold">Rusak Sedang (42%)</td>
-                  <td class="py-3 px-3 text-right"><button onclick="alert('Disposisi APBD Terkirim!')" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded text-[11px]">Disposisi APBD</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ================= BAB 4: KETENAGAAN PENDIDIK DAN KEPENDIDIKAN ================= -->
-    <div id="content-bab4" class="tab-content hidden space-y-6">
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Total Guru & GTK</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">6,420</div>
-          <p class="text-xs text-slate-400 mt-1">PNS, PPPK & Honorer</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Sertifikasi Pendidik (Serdik)</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">78.5%</div>
-          <p class="text-xs text-emerald-600 font-semibold mt-1">5,039 Guru Tersertifikasi</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Guru Penggerak</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">342</div>
-          <p class="text-xs text-indigo-600 font-semibold mt-1">Kandidat Kepala Sekolah</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Kekurangan Guru Mapel</span>
-          <div class="text-2xl font-extrabold text-amber-600 mt-2">128 Guru</div>
-          <p class="text-xs text-amber-600 font-semibold mt-1">Dominasi Matel & IPA</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <h2 class="text-sm font-bold text-slate-800 mb-1">Komposisi Status Kepegawaian Guru</h2>
-          <p class="text-xs text-slate-400 mb-4">Rasio Aparatur Sipil Negara (ASN) vs Non-ASN</p>
-          <div class="h-64">
-            <canvas id="chartGTK"></canvas>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <h2 class="text-sm font-bold text-slate-800 mb-1">Pemerataan Guru Per Kecamatan</h2>
-          <p class="text-xs text-slate-400 mb-4">Kebutuhan redistribusi tenaga pendidik</p>
-
-          <div class="space-y-3 text-xs">
-            <div class="p-3 bg-red-50 rounded-lg border border-red-100">
-              <div class="flex justify-between font-bold text-red-900 mb-1">
-                <span>Kecamatan Utara</span>
-                <span class="text-[10px] bg-red-200 text-red-800 px-1 rounded">Defisit 24 Guru</span>
-              </div>
-              <p class="text-red-700 text-[11px]">Krisis guru kelas SD dan guru IPA SMP.</p>
-            </div>
-            <div class="p-3 bg-emerald-50 rounded-lg border border-emerald-100">
-              <div class="flex justify-between font-bold text-emerald-900 mb-1">
-                <span>Kecamatan Selatan</span>
-                <span class="text-[10px] bg-emerald-200 text-emerald-800 px-1 rounded">Ideal</span>
-              </div>
-              <p class="text-emerald-700 text-[11px]">Rasio guru dan murid seimbang (1:18).</p>
-            </div>
-            <div class="p-3 bg-amber-50 rounded-lg border border-amber-100">
-              <div class="flex justify-between font-bold text-amber-900 mb-1">
-                <span>Kecamatan Barat</span>
-                <span class="text-[10px] bg-amber-200 text-amber-800 px-1 rounded">Kelebihan 6 Guru</span>
-              </div>
-              <p class="text-amber-700 text-[11px]">Potensi untuk direrouting/mutasi ke wilayah Utara.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ================= BAB 5: KELEMBAGAAN, TATA KELOLA, DAN PRESTASI ================= -->
-    <div id="content-bab5" class="tab-content hidden space-y-6">
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Serapan Anggaran Dinas</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">68.4%</div>
-          <div class="w-full bg-slate-100 h-2 rounded-full mt-2"><div class="bg-emerald-500 h-full rounded-full" style="width: 68.4%"></div></div>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Penyaluran Dana BOS</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">98.2%</div>
-          <p class="text-xs text-emerald-600 font-semibold mt-1">Tepat Waktu TAHAP I & II</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Prestasi Siswa (Nasional/Prov)</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">142 Medali</div>
-          <p class="text-xs text-indigo-600 font-semibold mt-1">OSN, O2SN, & FLS2N</p>
-        </div>
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Kepatuhan Laporan Sekolah</span>
-          <div class="text-2xl font-extrabold text-slate-900 mt-2">91.5%</div>
-          <p class="text-xs text-slate-400 mt-1">Pengisian DAPODIK Real-time</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-          <h2 class="text-sm font-bold text-slate-800 mb-1">Capaian Prestasi Siswa & Sekolah (Tahun 2026)</h2>
-          <p class="text-xs text-slate-400 mb-4">Sebaran prestasi di bidang Akademik, Olahraga, dan Seni</p>
-          <div class="h-64">
-            <canvas id="chartPrestasi"></canvas>
-          </div>
-        </div>
-
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
           <div>
-            <h2 class="text-sm font-bold text-slate-800 mb-1">Tata Kelola & Akuntabilitas</h2>
-            <p class="text-xs text-slate-400 mb-4">Status pelaporan & transparansi keuangan</p>
-            <div class="space-y-3 text-xs">
-              <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-lg">
-                <span class="font-medium">Opini BPK Terakhir</span>
-                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded">WTP</span>
-              </div>
-              <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-lg">
-                <span class="font-medium">Tingkat Pengaduan Masyarakat</span>
-                <span class="text-slate-600 font-bold">14 Kasus (12 Selesai)</span>
-              </div>
-              <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-lg">
-                <span class="font-medium">Digitalisasi Sekolah (ARKAS)</span>
-                <span class="text-emerald-600 font-bold">96% Sekolah Active</span>
-              </div>
-            </div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">KATA SANDI / TOKEN SSL</label>
+            <input type="password" id="loginPass" value="password123" class="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-3 text-sm focus:border-amber-500">
           </div>
-          <button onclick="alert('Membuka Modul Keuangan & LHKPN')" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-xs font-semibold transition-colors">Buka Detail Realisasi Keuangan</button>
+          <button type="submit" class="w-full py-3.5 bg-amber-600 hover:bg-amber-500 text-slate-900 font-extrabold rounded-xl text-sm transition shadow-lg">
+            MASUK DASHBOARD PIMPINAN →
+          </button>
+        </form>
+
+        <p class="text-[11px] text-slate-500 text-center">🔒 Terintegrasi SSO Diskominfo &amp; Standar UU PDP</p>
+      </div>
+    </section>
+
+    <!-- PAGE 3: HOME DASHBOARD (Main Executive Screen with 5 Submenus & Map) -->
+    <section id="page-home" class="page-view space-y-8">
+      <div class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
+        <div>
+          <span class="px-3 py-1 bg-amber-500/10 text-amber-400 font-bold text-xs rounded-full">EXECUTIVE DASHBOARD</span>
+          <h2 class="text-2xl font-black text-white mt-2">Selamat Datang, Bapak Bupati Kulon Progo</h2>
+          <p class="text-xs text-slate-400">Ringkasan Eksekutif &amp; Pusat Navigasi 5 Sub-Menu Urusan Pendidikan Daerah</p>
         </div>
       </div>
 
-    </div>
+      <!-- 5 SUBMENU NAVIGATION BUTTONS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <a href="#sub1" class="bg-slate-900 hover:bg-slate-800 p-5 rounded-2xl border border-slate-800 shadow-md group transition">
+          <span class="text-xs font-bold text-amber-400 uppercase block mb-1">SUB-MENU 1</span>
+          <h3 class="text-base font-extrabold text-white group-hover:text-amber-400 transition">Akses &amp; Pemerataan</h3>
+          <p class="text-xs text-slate-400 mt-2">APK/APM, ATS (2,090), Putus Sekolah &amp; Regrouping SD.</p>
+        </a>
+
+        <a href="#sub2" class="bg-slate-900 hover:bg-slate-800 p-5 rounded-2xl border border-slate-800 shadow-md group transition">
+          <span class="text-xs font-bold text-emerald-400 uppercase block mb-1">SUB-MENU 2</span>
+          <h3 class="text-base font-extrabold text-white group-hover:text-emerald-400 transition">Mutu &amp; Capaian</h3>
+          <p class="text-xs text-slate-400 mt-2">Rapor Pendidikan (Literasi, Numerasi), ANBK &amp; Akreditasi.</p>
+        </a>
+
+        <a href="#sub3" class="bg-slate-900 hover:bg-slate-800 p-5 rounded-2xl border border-slate-800 shadow-md group transition">
+          <span class="text-xs font-bold text-blue-400 uppercase block mb-1">SUB-MENU 3</span>
+          <h3 class="text-base font-extrabold text-white group-hover:text-blue-400 transition">Sarana &amp; Prasarana</h3>
+          <p class="text-xs text-slate-400 mt-2">Kondisi Ruang Kelas, Air SPM, &amp; Prioritas DAK Fisik.</p>
+        </a>
+
+        <a href="#sub4" class="bg-slate-900 hover:bg-slate-800 p-5 rounded-2xl border border-slate-800 shadow-md group transition">
+          <span class="text-xs font-bold text-purple-400 uppercase block mb-1">SUB-MENU 4</span>
+          <h3 class="text-base font-extrabold text-white group-hover:text-purple-400 transition">Ketenagaan GTK</h3>
+          <p class="text-xs text-slate-400 mt-2">Formasi PPPK &amp; Algoritma MCDM Penempatan Guru.</p>
+        </a>
+
+        <a href="#sub5" class="bg-slate-900 hover:bg-slate-800 p-5 rounded-2xl border border-slate-800 shadow-md group transition">
+          <span class="text-xs font-bold text-cyan-400 uppercase block mb-1">SUB-MENU 5</span>
+          <h3 class="text-base font-extrabold text-white group-hover:text-cyan-400 transition">Kelembagaan &amp; GIS</h3>
+          <p class="text-xs text-slate-400 mt-2">Peta Geospasial Sekolah, Perizinan PNF &amp; Inovasi AI.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- PAGE 4: SUBMENU 1 VIEW -->
+    <section id="page-sub1" class="page-view space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold text-amber-400 uppercase">SUB-MENU 1</span>
+          <h2 class="text-2xl font-black text-white">Akses &amp; Pemerataan Pendidikan</h2>
+          <p class="text-xs text-slate-400">Kriteria Data: Dapodik, Dukcapil, BPS, Verval PD, &amp; Tim Regrouping SD</p>
+        </div>
+      </div>
+      <div class="overflow-x-auto bg-slate-900 rounded-2xl border border-slate-800">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-950 text-slate-400 text-xs uppercase border-b border-slate-800">
+              <th class="p-3">NO</th>
+              <th class="p-3">KAPANEWON</th>
+              <th class="p-3">SUMBER DATA RESMI</th>
+              <th class="p-3">APK PAUD</th>
+              <th class="p-3">APM SD/SMP</th>
+              <th class="p-3">JML ATS</th>
+              <th class="p-3">PUTUS SEKOLAH</th>
+              <th class="p-3">STATUS REGROUPING</th>
+              <th class="p-3">KEGUNAAN DATA</th>
+              <th class="p-3">AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="table-sub1-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAGE 5: SUBMENU 2 VIEW -->
+    <section id="page-sub2" class="page-view space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold text-emerald-400 uppercase">SUB-MENU 2</span>
+          <h2 class="text-2xl font-black text-white">Mutu &amp; Capaian Pembelajaran</h2>
+          <p class="text-xs text-slate-400">Sumber Data: Platform Rapor Pendidikan Kemendikdasmen &amp; BAN-S/M</p>
+        </div>
+      </div>
+      <div class="overflow-x-auto bg-slate-900 rounded-2xl border border-slate-800">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-950 text-slate-400 text-xs uppercase border-b border-slate-800">
+              <th class="p-3">NPSN</th>
+              <th class="p-3">NAMA SEKOLAH</th>
+              <th class="p-3">KAPANEWON</th>
+              <th class="p-3">SUMBER DATA RESMI</th>
+              <th class="p-3">LITERASI</th>
+              <th class="p-3">NUMERASI</th>
+              <th class="p-3">KARAKTER</th>
+              <th class="p-3">AKREDITASI</th>
+              <th class="p-3">PRIORITAS PEMBINAAN</th>
+              <th class="p-3">AKSI</th>
+            </tr>
+          </thead>
+          <tbody id="table-sub2-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAGE 6: SUBMENU 3 VIEW -->
+    <section id="page-sub3" class="page-view space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold text-blue-400 uppercase">SUB-MENU 3</span>
+          <h2 class="text-2xl font-black text-white">Sarana &amp; Prasarana Pendidikan</h2>
+          <p class="text-xs text-slate-400">Sumber Data: Dapodik Sarpras &amp; e-Monev DAK Fisik</p>
+        </div>
+      </div>
+      <div class="overflow-x-auto bg-slate-900 rounded-2xl border border-slate-800">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-950 text-slate-400 text-xs uppercase border-b border-slate-800">
+              <th class="p-3">NPSN</th>
+              <th class="p-3">NAMA SEKOLAH</th>
+              <th class="p-3">KAPANEWON</th>
+              <th class="p-3">SUMBER DATA</th>
+              <th class="p-3">BAIK</th>
+              <th class="p-3">RUSAK RINGAN</th>
+              <th class="p-3">RUSAK BERAT</th>
+              <th class="p-3">SPM AIR</th>
+              <th class="p-3">PERPUS</th>
+              <th class="p-3">LAB</th>
+              <th class="p-3">USULAN DAK</th>
+            </tr>
+          </thead>
+          <tbody id="table-sub3-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAGE 7: SUBMENU 4 VIEW -->
+    <section id="page-sub4" class="page-view space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold text-purple-400 uppercase">SUB-MENU 4</span>
+          <h2 class="text-2xl font-black text-white">Ketenagaan GTK &amp; Algoritma MCDM Guru</h2>
+          <p class="text-xs text-slate-400">Sumber Data: Dapodik, BKPSDM, &amp; Formulasi MCDM Penempatan Guru</p>
+        </div>
+      </div>
+      <div class="overflow-x-auto bg-slate-900 rounded-2xl border border-slate-800">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-950 text-slate-400 text-xs uppercase border-b border-slate-800">
+              <th class="p-3">NIP</th>
+              <th class="p-3">NAMA GURU</th>
+              <th class="p-3">SUMBER DATA</th>
+              <th class="p-3">SEKOLAH ASAL</th>
+              <th class="p-3">JARAK ASAL</th>
+              <th class="p-3">REKOMENDASI TUJUAN</th>
+              <th class="p-3">JARAK BARU</th>
+              <th class="p-3">SKOR MCDM</th>
+              <th class="p-3">ARGUMENTASI SISTEM</th>
+              <th class="p-3">EKSEKUSI</th>
+            </tr>
+          </thead>
+          <tbody id="table-sub4-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAGE 8: SUBMENU 5 VIEW -->
+    <section id="page-sub5" class="page-view space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-bold text-cyan-400 uppercase">SUB-MENU 5</span>
+          <h2 class="text-2xl font-black text-white">Kelembagaan, Tata Kelola &amp; Peta GIS Sekolah</h2>
+          <p class="text-xs text-slate-400">Sumber Data: Dapodik, Peta Dikpora, Bidang PAUD-Dikmas, &amp; Laporan Bimtek AI</p>
+        </div>
+      </div>
+      <div class="overflow-x-auto bg-slate-900 rounded-2xl border border-slate-800">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-950 text-slate-400 text-xs uppercase border-b border-slate-800">
+              <th class="p-3">NPSN</th>
+              <th class="p-3">NAMA LEMBAGA</th>
+              <th class="p-3">KAPANEWON</th>
+              <th class="p-3">SUMBER DATA RESMI</th>
+              <th class="p-3">JENJANG</th>
+              <th class="p-3">PERIZINAN</th>
+              <th class="p-3">AKREDITASI</th>
+              <th class="p-3">PRESTASI</th>
+              <th class="p-3">INOVASI AI</th>
+            </tr>
+          </thead>
+          <tbody id="table-sub5-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAGE 9: 404 PAGE VIEW -->
+    <section id="page-404" class="page-view flex items-center justify-center py-12">
+      <div class="text-center space-y-4 max-w-md bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-2xl">
+        <div class="w-16 h-16 bg-red-950 border border-red-800 text-red-400 font-black text-2xl rounded-full mx-auto flex items-center justify-center">404</div>
+        <h2 class="text-2xl font-black text-white">Rute Tidak Ditemukan</h2>
+        <p class="text-xs text-slate-400">Halaman yang Anda tuju tidak tersedia pada sistem informasi Disdikpora Kulon Progo.</p>
+        <a href="#landing" class="inline-block px-4 py-2 bg-amber-600 hover:bg-amber-500 text-slate-900 font-extrabold text-xs rounded-xl shadow-lg">← Kembali ke Beranda Utama</a>
+      </div>
+    </section>
 
   </main>
 
-  <!-- JavaScript Code for Tabs & Charts -->
-  <script>
-    // Initialize Icons
-    lucide.createIcons();
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
 
-    // Tab Switching Functionality
-    function switchTab(tabId) {
-      // Hide all contents
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      // Show targeted content
-      document.getElementById('content-' + tabId).classList.remove('hidden');
+  <!-- FOOTER INTEMATIONAL COMPLIANCE -->
+  <footer class="bg-slate-900 border-t border-slate-800 py-6 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <span class="font-bold text-white block">© 2026 Pemerintah Kabupaten Kulon Progo</span>
+        <span>Dinas Pendidikan Pemuda dan Olahraga • Hak Cipta Dilindungi Undang-Undang</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="about.html" class="hover:text-amber-400">Tentang Aplikasi</a>
+        <a href="privacy_security.html" class="hover:text-amber-400">Keamanan &amp; Integritas Data</a>
+        <a href="terms_copyright.html" class="hover:text-amber-400">Hak Cipta &amp; Ketentuan</a>
+        <a href="404.html" class="hover:text-amber-400">Halaman Error 404</a>
+      </div>
+    </div>
+  </footer>
 
-      // Reset style all tabs
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
-        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
-      });
-
-      // Active styling for clicked tab
-      const activeTab = document.getElementById('tab-' + tabId);
-      activeTab.classList.remove('text-slate-600', 'hover:bg-slate-100');
-      activeTab.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
-    }
-
-    // Initialize Charts when Page Loads
-    document.addEventListener('DOMContentLoaded', () => {
-      initChartAkses();
-      initChartMutu();
-      initChartSarpras();
-      initChartGTK();
-      initChartPrestasi();
-    });
-
-    // BAB 1 Chart
-    function initChartAkses() {
-      const ctx = document.getElementById('chartAkses').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu'],
-          datasets: [
-            {
-              label: 'Penerima Beasiswa (Siswa)',
-              data: [8000, 9500, 11000, 13500, 15000, 16800, 17500, 18450],
-              borderColor: '#3b82f6',
-              backgroundColor: 'rgba(59, 130, 246, 0.1)',
-              fill: true,
-              tension: 0.3
-            },
-            {
-              label: 'Angka Putus Sekolah (Kasus)',
-              data: [120, 98, 85, 60, 42, 35, 28, 18],
-              borderColor: '#ef4444',
-              backgroundColor: 'transparent',
-              borderDash: [5, 5],
-              tension: 0.3
-            }
-          ]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-      });
-    }
-
-    // BAB 2 Chart
-    function initChartMutu() {
-      const ctx = document.getElementById('chartMutu').getContext('2d');
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['PAUD', 'SD Negeri', 'SD Swasta', 'SMP Negeri', 'SMP Swasta'],
-          datasets: [
-            { label: 'Literasi', data: [65, 76, 82, 78, 84], backgroundColor: '#3b82f6' },
-            { label: 'Numerasi', data: [58, 70, 75, 72, 79], backgroundColor: '#10b981' },
-            { label: 'Karakter', data: [72, 80, 85, 81, 86], backgroundColor: '#8b5cf6' }
-          ]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-      });
-    }
-
-    // BAB 3 Chart
-    function initChartSarpras() {
-      const ctx = document.getElementById('chartSarpras').getContext('2d');
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Baik', 'Rusak Ringan', 'Rusak Sedang', 'Rusak Berat'],
-          datasets: [{
-            data: [62, 24, 10, 4],
-            backgroundColor: ['#10b981', '#fbbf24', '#f97316', '#ef4444']
-          }]
-        },
-        options: { responsive: true, maintainAspectRatio: false, cutout: '65%' }
-      });
-    }
-
-    // BAB 4 Chart
-    function initChartGTK() {
-      const ctx = document.getElementById('chartGTK').getContext('2d');
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Guru SD', 'Guru SMP', 'Tenaga Kependidikan (TU/Librarian)'],
-          datasets: [
-            { label: 'PNS', data: [2200, 1400, 300], backgroundColor: '#1e40af' },
-            { label: 'PPPK', data: [800, 600, 150], backgroundColor: '#3b82f6' },
-            { label: 'Honorer', data: [500, 320, 150], backgroundColor: '#cbd5e1' }
-          ]
-        },
-        options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
-      });
-    }
-
-    // BAB 5 Chart
-    function initChartPrestasi() {
-      const ctx = document.getElementById('chartPrestasi').getContext('2d');
-      new Chart(ctx, {
-        type: 'polarArea',
-        data: {
-          labels: ['OSN (Sains)', 'O2SN (Olahraga)', 'FLS2N (Seni)', 'Pramuka/Karakter', 'Lainnya'],
-          datasets: [{
-            data: [42, 38, 28, 22, 12],
-            backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#64748b']
-          }]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-      });
-    }
-
-    function exportReport() {
-      alert("Membuat Laporan Lengkap 5 Bab Eksekutif untuk Kepala Dinas...");
-    }
-  </script>
+  <!-- JS Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
