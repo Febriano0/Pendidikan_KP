@@ -434,7 +434,7 @@ class DashboardApp {
             <td class="p-3 text-xs text-slate-600">${mut ? SecurityUtils.escapeHTML(mut.literasi) : 'Standar'} / ${sarp ? SecurityUtils.escapeHTML(sarp.baik) : 'Layak'}</td>
             <td class="p-3">
               <button onclick="app.filterByKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm">
-                Pilih Wilayah 📍
+                Pilih Wilayah <svg class="w-3.5 h-3.5 text-amber-400 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               </button>
             </td>
           </tr>
@@ -513,10 +513,10 @@ class DashboardApp {
         const iconSpan = th.querySelector(".sort-icon");
         if (iconSpan) {
           if (key === activeKey) {
-            iconSpan.textContent = this.sortDirection === 'asc' ? '▲' : '▼';
+            iconSpan.innerHTML = this.sortDirection === 'asc' ? '<svg class="w-3 h-3 inline-block ml-1 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-6 8h12l-6-8z"/></svg>' : '<svg class="w-3 h-3 inline-block ml-1 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 20l6-8H6l6 8z"/></svg>';
             iconSpan.className = "sort-icon text-xs text-amber-300 font-black ml-1";
           } else {
-            iconSpan.textContent = '↕️';
+            iconSpan.innerHTML = '<svg class="w-3 h-3 sort-icon inline-block ml-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>';
             iconSpan.className = "sort-icon text-xs text-slate-300 font-bold ml-1";
           }
         }
@@ -824,26 +824,26 @@ class DashboardApp {
 
     if (this.user) {
       desktopContent = `
-        <span class="text-xs text-amber-300 font-bold whitespace-nowrap mr-1">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
-        <a href="${relPrefix}security/index.html" class="px-2.5 py-1.5 bg-blue-900 hover:bg-blue-800 text-white border border-blue-700 rounded-lg font-bold text-xs transition inline-flex items-center gap-1 shadow-sm">🛡️ Audit Log</a>
+        <span class="text-xs text-amber-300 font-bold whitespace-nowrap mr-1"><svg class="w-3.5 h-3.5 text-amber-300 inline-block mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> ${SecurityUtils.escapeHTML(this.user.name)}</span>
+        <a href="${relPrefix}security/index.html" class="px-2.5 py-1.5 bg-blue-900 hover:bg-blue-800 text-white border border-blue-700 rounded-lg font-bold text-xs transition inline-flex items-center gap-1 shadow-sm"><svg class="w-3.5 h-3.5 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> Audit Log</a>
         <button onclick="app.logoutUser()" class="px-2.5 py-1.5 bg-red-700 hover:bg-red-800 text-white rounded-lg font-bold text-xs transition shadow-sm">Keluar</button>
       `;
       mobileContent = `
         <div class="w-full flex items-center justify-between bg-slate-800 p-2.5 rounded-lg border border-slate-700 mb-2">
-          <span class="text-xs text-amber-300 font-bold">👑 ${SecurityUtils.escapeHTML(this.user.name)}</span>
+          <span class="text-xs text-amber-300 font-bold"><svg class="w-3.5 h-3.5 text-amber-300 inline-block mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> ${SecurityUtils.escapeHTML(this.user.name)}</span>
           <button onclick="app.logoutUser()" class="px-2.5 py-1 bg-red-700 hover:bg-red-800 text-white rounded font-bold text-xs">Keluar</button>
         </div>
-        <a href="${relPrefix}security/index.html" class="w-full text-center px-3 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-bold text-xs transition block border border-blue-700">🛡️ Audit Log Keamanan</a>
+        <a href="${relPrefix}security/index.html" class="w-full text-center px-3 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-lg font-bold text-xs transition block border border-blue-700"><svg class="w-3.5 h-3.5 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> Audit Log Keamanan</a>
       `;
     } else {
       desktopContent = `
-        <a href="${relPrefix}security/index.html" class="px-3 py-1.5 bg-blue-900/90 hover:bg-blue-800 text-white border border-blue-600/80 rounded-lg font-bold text-xs transition inline-flex items-center gap-1 shadow-sm">🛡️ Status Keamanan</a>
-        <a href="${relPrefix}login/index.html" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-lg text-xs transition shadow-sm inline-flex items-center gap-1">🔒 Masuk Pimpinan</a>
+        <a href="${relPrefix}security/index.html" class="px-3 py-1.5 bg-blue-900/90 hover:bg-blue-800 text-white border border-blue-600/80 rounded-lg font-bold text-xs transition inline-flex items-center gap-1 shadow-sm"><svg class="w-3.5 h-3.5 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> Status Keamanan</a>
+        <a href="${relPrefix}login/index.html" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-lg text-xs transition shadow-sm inline-flex items-center gap-1"><svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg> Masuk Pimpinan</a>
       `;
       mobileContent = `
         <div class="grid grid-cols-2 gap-2 w-full">
-          <a href="${relPrefix}security/index.html" class="text-center px-2 py-2 bg-blue-900 hover:bg-blue-800 text-white border border-blue-700 rounded-lg font-bold text-xs transition block">🛡️ Status Keamanan</a>
-          <a href="${relPrefix}login/index.html" class="text-center px-2 py-2 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-lg text-xs transition block shadow-sm">🔒 Masuk Pimpinan</a>
+          <a href="${relPrefix}security/index.html" class="text-center px-2 py-2 bg-blue-900 hover:bg-blue-800 text-white border border-blue-700 rounded-lg font-bold text-xs transition block"><svg class="w-3.5 h-3.5 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> Status Keamanan</a>
+          <a href="${relPrefix}login/index.html" class="text-center px-2 py-2 bg-amber-600 hover:bg-amber-700 text-white font-extrabold rounded-lg text-xs transition block shadow-sm"><svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg> Masuk Pimpinan</a>
         </div>
       `;
     }
@@ -869,7 +869,7 @@ class DashboardApp {
         <div class="bg-white border border-slate-300 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
           <div class="flex items-center justify-between border-b border-slate-200 pb-3">
             <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wide">${cleanTitle}</h3>
-            <button onclick="document.getElementById('customModalOverlay').remove()" class="text-slate-400 hover:text-slate-700 text-lg font-bold">✕</button>
+            <button onclick="document.getElementById('customModalOverlay').remove()" class="text-slate-400 hover:text-slate-700"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
           </div>
           <p class="text-xs text-slate-700 leading-relaxed">${cleanBody}</p>
           <div class="pt-2 flex justify-end">
@@ -902,10 +902,10 @@ class DashboardApp {
         <div class="bg-white border border-slate-300 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 max-h-[85vh] flex flex-col">
           <div class="flex items-center justify-between border-b border-slate-200 pb-3">
             <div>
-              <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide">🛡️ LOG AUDIT KEAMANAN &amp; INTEGRITAS DATA</h3>
+              <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide"><svg class="w-3.5 h-3.5 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> LOG AUDIT KEAMANAN &amp; INTEGRITAS DATA</h3>
               <p class="text-[11px] text-slate-500">SHA-256 Checksum: <span class="font-mono text-emerald-700 font-bold">${typeof DB_INTEGRITY !== 'undefined' ? DB_INTEGRITY.checksum.substring(0, 24) : 'verified'}...</span></p>
             </div>
-            <button onclick="document.getElementById('auditModalOverlay').remove()" class="text-slate-400 hover:text-slate-700 text-lg font-bold">✕</button>
+            <button onclick="document.getElementById('auditModalOverlay').remove()" class="text-slate-400 hover:text-slate-700"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
           </div>
           <div class="overflow-y-auto flex-1 bg-slate-50 rounded-xl p-2 border border-slate-200">
             <table class="w-full text-left border-collapse">

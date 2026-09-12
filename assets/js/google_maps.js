@@ -58,7 +58,7 @@ window.initGoogleMapComponent = function() {
             <h4 style="font-size: 14px; font-weight: 900; color: #0f2b48; margin: 2px 0;">${k.name}</h4>
             <p style="font-size: 11px; color: #475569; margin-bottom: 6px;">Zona: <b>${k.zone}</b></p>
             <button onclick="if(window.app) window.app.filterByKapanewon('${k.id}')" style="background: #0f2b48; color: #ffffff; border: none; padding: 5px 12px; font-size: 10px; font-weight: 700; border-radius: 4px; cursor: pointer;">
-              🔍 Filter Data ${k.name}
+              Filter Data ${k.name}
             </button>
           </div>
         `);
