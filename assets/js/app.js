@@ -619,23 +619,28 @@ class DashboardApp {
         let iconSpan = th.querySelector(".sort-icon");
         if (!iconSpan) return;
 
+        // Ensure th has whitespace-nowrap
+        if (!th.classList.contains("whitespace-nowrap")) {
+          th.classList.add("whitespace-nowrap");
+        }
+
         // Auto-wrap if sort-icon is on an SVG element to avoid nested SVG bugs
         if (iconSpan.tagName.toLowerCase() === 'svg') {
           const wrapper = document.createElement('span');
-          wrapper.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle";
+          wrapper.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle whitespace-nowrap flex-shrink-0";
           iconSpan.parentNode.replaceChild(wrapper, iconSpan);
           iconSpan = wrapper;
         }
 
         if (key === activeKey) {
           th.setAttribute("aria-sort", this.sortDirection === 'asc' ? "ascending" : "descending");
-          iconSpan.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-amber-400 ml-1.5 align-middle font-bold";
+          iconSpan.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-amber-400 ml-1.5 align-middle font-bold whitespace-nowrap flex-shrink-0";
           iconSpan.innerHTML = this.sortDirection === 'asc'
             ? '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>'
             : '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M19 12l-7 7-7-7"/></svg>';
         } else {
           th.setAttribute("aria-sort", "none");
-          iconSpan.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle";
+          iconSpan.className = "sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle whitespace-nowrap flex-shrink-0";
           iconSpan.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg>';
         }
       }
