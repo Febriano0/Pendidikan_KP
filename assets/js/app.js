@@ -329,9 +329,9 @@ class DashboardApp {
         p.setAttribute("stroke", "#d97706");
         p.setAttribute("stroke-width", "6");
         if (textLabel) {
-          textLabel.setAttribute("fill", "#0f2b48"); // Deep navy
+          textLabel.setAttribute("fill", "#000000"); // Ultra crisp black
           textLabel.setAttribute("stroke", "#ffffff"); // High-contrast crisp white halo
-          textLabel.setAttribute("stroke-width", "3.5");
+          textLabel.setAttribute("stroke-width", "4.5");
           textLabel.setAttribute("paint-order", "stroke fill");
           textLabel.setAttribute("font-weight", "900");
           textLabel.classList.remove("drop-shadow");
@@ -344,9 +344,9 @@ class DashboardApp {
         p.setAttribute("stroke", "#0f2b48");
         p.setAttribute("stroke-width", "3.5");
         if (textLabel) {
-          textLabel.setAttribute("fill", "#ffffff"); // Crisp white
-          textLabel.setAttribute("stroke", "#091e3a"); // High-contrast deep navy halo
-          textLabel.setAttribute("stroke-width", "3.5");
+          textLabel.setAttribute("fill", "#0f172a"); // Deep crisp slate/navy
+          textLabel.setAttribute("stroke", "#ffffff"); // High-contrast crisp white halo
+          textLabel.setAttribute("stroke-width", "4");
           textLabel.setAttribute("paint-order", "stroke fill");
           textLabel.setAttribute("font-weight", "800");
           textLabel.classList.remove("drop-shadow");

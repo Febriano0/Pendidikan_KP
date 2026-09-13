@@ -1,4 +1,6 @@
 /* DISDIKPORA KULON PROGO - HIGH CONTRAST ACCESSIBLE GOVERNMENT CSS */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
+
 *, ::before, ::after {
   box-sizing: border-box;
   margin: 0;
@@ -463,30 +465,44 @@ tr:hover {
   cursor: pointer;
 }
 
-/* Map Region Text Labels - High Contrast Cartographic Halo */
+/* Map Region Text Labels - High Contrast Cartographic Typography (Plus Jakarta Sans) */
 .map-region-label,
 .map-region-group text {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  font-size: 13.5px !important;
-  font-weight: 700 !important;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
   paint-order: stroke fill !important;
-  stroke: #091e3a !important;
-  stroke-width: 3.5px !important;
+  stroke: #ffffff !important;
+  stroke-width: 4px !important;
   stroke-linecap: round !important;
   stroke-linejoin: round !important;
-  fill: #ffffff !important;
-  filter: none !important; /* Eliminate dark drop-shadow smudges */
+  fill: #0f172a !important;
+  filter: none !important;
   pointer-events: none !important;
   user-select: none !important;
   transition: fill 0.2s ease, stroke 0.2s ease, font-weight 0.2s ease !important;
 }
 
 .map-region-group[data-kapanewon-id="wates"] text {
-  font-size: 15px !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.04em !important;
+  fill: #020617 !important;
+  stroke-width: 4.5px !important;
+}
+
+.map-region-group[data-kapanewon-id="panjatan"] text {
+  font-size: 15.5px !important;
   font-weight: 800 !important;
 }
 
-/* Hover state on region group: Gold polygon, Navy text with White Halo */
+.map-region-group[data-kapanewon-id="temon"] text tspan:last-child {
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+}
+
+/* Hover state on region group: Gold polygon, Crisp Black text with White Halo */
 .map-region-group:hover .map-polygon-path {
   fill: #fde047 !important;
   stroke: #d97706 !important;
@@ -495,14 +511,14 @@ tr:hover {
 
 .map-region-group:hover text,
 .map-region-group:hover .map-region-label {
-  fill: #0f2b48 !important;
+  fill: #000000 !important;
   stroke: #ffffff !important;
-  stroke-width: 3.5px !important;
-  font-weight: 800 !important;
+  stroke-width: 4.5px !important;
+  font-weight: 900 !important;
   filter: none !important;
 }
 
-/* Active / Selected state: Gold polygon, Crisp Navy text with White Halo */
+/* Active / Selected state: Gold polygon, Crisp Black text with White Halo */
 .map-region-group.is-active .map-polygon-path {
   fill: #fde047 !important;
   stroke: #d97706 !important;
@@ -511,9 +527,9 @@ tr:hover {
 
 .map-region-group.is-active text,
 .map-region-group.is-active .map-region-label {
-  fill: #0f2b48 !important;
+  fill: #000000 !important;
   stroke: #ffffff !important;
-  stroke-width: 3.5px !important;
+  stroke-width: 4.5px !important;
   font-weight: 900 !important;
   filter: none !important;
 }
