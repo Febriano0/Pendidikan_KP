@@ -631,7 +631,6 @@ class DashboardApp {
           <td class="p-3 font-black text-red-600">${aksesItem ? SecurityUtils.escapeHTML(String(aksesItem.ats)) : '-'} Anak ATS<div class="text-[11px] text-slate-500 font-normal mt-0.5">Rasio: ${aksesItem ? SecurityUtils.escapeHTML(aksesItem.rasioSiswa) : '-'}</div></td>
           <td class="p-3"><span class="badge badge-${aksesItem ? SecurityUtils.escapeHTML(aksesItem.statusColor) : 'blue'}">${aksesItem ? SecurityUtils.escapeHTML(aksesItem.regrouping) : '-'}</span></td>
           <td class="p-3 text-xs text-slate-600">${aksesItem ? SecurityUtils.escapeHTML(aksesItem.sumber) : 'Dapodik & BPS'}</td>
-          <td class="p-3"><a href="../sub1-akses/index.html${queryParam}" class="px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 1 →</a></td>
         </tr>
         <tr class="hover:bg-slate-50 transition border-b border-slate-200">
           <td class="p-3 font-extrabold text-amber-600">Sub 2: Mutu ANBK</td>
@@ -639,7 +638,6 @@ class DashboardApp {
           <td class="p-3 font-extrabold text-slate-800">Lit: ${topMutu ? SecurityUtils.escapeHTML(topMutu.literasi) : '-'} • Num: ${topMutu ? SecurityUtils.escapeHTML(topMutu.numerasi) : '-'}</td>
           <td class="p-3"><span class="badge badge-${topMutu ? SecurityUtils.escapeHTML(topMutu.statusColor) : 'emerald'}">${topMutu ? SecurityUtils.escapeHTML(topMutu.pembinaan) : '-'}</span></td>
           <td class="p-3 text-xs text-slate-600">${topMutu ? SecurityUtils.escapeHTML(topMutu.sumber) : 'Rapor Pendidikan'}</td>
-          <td class="p-3"><a href="../sub2-mutu/index.html${queryParam}" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 2 →</a></td>
         </tr>
         <tr class="hover:bg-slate-50 transition border-b border-slate-200">
           <td class="p-3 font-extrabold text-blue-800">Sub 3: Sarpras Sekolah</td>
@@ -647,7 +645,6 @@ class DashboardApp {
           <td class="p-3 font-extrabold text-slate-800">${topSarpras ? SecurityUtils.escapeHTML(topSarpras.baik) : '-'} Baik • ${topSarpras ? SecurityUtils.escapeHTML(topSarpras.rusakBerat) : '-'} Rusak Berat</td>
           <td class="p-3"><span class="badge badge-${topSarpras ? SecurityUtils.escapeHTML(topSarpras.statusColor) : 'emerald'}">${topSarpras ? SecurityUtils.escapeHTML(topSarpras.dak) : '-'}</span></td>
           <td class="p-3 text-xs text-slate-600">${topSarpras ? SecurityUtils.escapeHTML(topSarpras.sumber) : 'Dapodik Sarpras'}</td>
-          <td class="p-3"><a href="../sub3-sarpras/index.html${queryParam}" class="px-3 py-1.5 bg-blue-800 hover:bg-blue-900 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 3 →</a></td>
         </tr>
         <tr class="hover:bg-slate-50 transition border-b border-slate-200">
           <td class="p-3 font-extrabold text-purple-700">Sub 4: GTK (MCDM)</td>
@@ -655,7 +652,6 @@ class DashboardApp {
           <td class="p-3 font-extrabold text-emerald-700">Skor MCDM: ${topGtk ? SecurityUtils.escapeHTML(topGtk.mcdmScore) : 'Optimal'}</td>
           <td class="p-3"><span class="badge badge-emerald">${topGtk ? SecurityUtils.escapeHTML(topGtk.argumentasi) : 'Penataan Domisili'}</span></td>
           <td class="p-3 text-xs text-slate-600">${topGtk ? SecurityUtils.escapeHTML(topGtk.sumber) : 'BKPSDM'}</td>
-          <td class="p-3"><a href="../sub4-gtk/index.html${queryParam}" class="px-3 py-1.5 bg-purple-700 hover:bg-purple-800 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 4 →</a></td>
         </tr>
         <tr class="hover:bg-slate-50 transition">
           <td class="p-3 font-extrabold text-cyan-700">Sub 5: Kelembagaan &amp; GIS</td>
@@ -663,7 +659,6 @@ class DashboardApp {
           <td class="p-3 font-extrabold text-slate-800">${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.prestasi) : 'Terakreditasi'}</td>
           <td class="p-3"><span class="badge badge-${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.statusColor) : 'purple'}">${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.inovasi) : 'Aktif'}</span></td>
           <td class="p-3 text-xs text-slate-600">${topKelembagaan ? SecurityUtils.escapeHTML(topKelembagaan.sumber) : 'Dapodik & Dikpora'}</td>
-          <td class="p-3"><a href="../sub5-kelembagaan/index.html${queryParam}" class="px-3 py-1.5 bg-cyan-700 hover:bg-cyan-800 text-white rounded-lg text-xs font-bold whitespace-nowrap shadow-sm inline-block">Buka Sub 5 →</a></td>
         </tr>
       `;
     } else {
@@ -681,7 +676,7 @@ class DashboardApp {
       }
 
       if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500 italic">Tidak ada Kapanewon yang cocok dengan kata kunci "${SecurityUtils.escapeHTML(this.searchQuery)}".</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-500 italic">Tidak ada Kapanewon yang cocok dengan kata kunci "${SecurityUtils.escapeHTML(this.searchQuery)}".</td></tr>`;
         return;
       }
 
@@ -689,7 +684,6 @@ class DashboardApp {
         const kId = a.kapanewon.toLowerCase();
         const mut = DB.mutu.find(m => m.kapanewon.toLowerCase() === kId);
         const sarp = DB.sarpras.find(s => s.kapanewon.toLowerCase() === kId);
-        const q = `?kap=${kId}`;
         const isSelected = (this.selectedKapanewon === kId);
         return `
           <tr class="${isSelected ? 'bg-amber-50/80 border-l-4 border-l-amber-600' : 'hover:bg-slate-50'} transition border-b border-slate-200">
@@ -698,11 +692,6 @@ class DashboardApp {
             <td class="p-3 font-black text-red-600">${SecurityUtils.escapeHTML(String(a.ats))} Anak</td>
             <td class="p-3"><span class="badge badge-${SecurityUtils.escapeHTML(a.statusColor)}">${SecurityUtils.escapeHTML(a.regrouping)}</span></td>
             <td class="p-3 text-xs text-slate-600">${mut ? SecurityUtils.escapeHTML(mut.literasi) : 'Standar'} / ${sarp ? SecurityUtils.escapeHTML(sarp.baik) : 'Layak'}</td>
-            <td class="p-3">
-              <button onclick="app.toggleKapanewon('${kId}', '${SecurityUtils.escapeHTML(a.kapanewon)}')" class="px-3.5 py-1.5 ${isSelected ? 'bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-700' : 'bg-amber-600 hover:bg-amber-700 text-white'} rounded-lg text-xs font-bold whitespace-nowrap shadow-sm transition inline-flex items-center gap-1" aria-label="${isSelected ? 'Batalkan pilihan wilayah ' + SecurityUtils.escapeHTML(a.kapanewon) : 'Pilih wilayah ' + SecurityUtils.escapeHTML(a.kapanewon)}" title="${isSelected ? 'Klik untuk membatalkan filter' : 'Klik untuk memfilter data wilayah ini'}">
-                ${isSelected ? 'Batal Pilih <svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5 inline-block ml-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>' : 'Pilih Wilayah <svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5 inline-block ml-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>'}
-              </button>
-            </td>
           </tr>
         `;
       }).join("");
@@ -852,7 +841,7 @@ class DashboardApp {
     data = this.sortData(data);
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="13" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="12" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
     }
 
@@ -874,9 +863,6 @@ class DashboardApp {
           <span class="badge badge-${SecurityUtils.escapeHTML(item.statusColor)}">${SecurityUtils.escapeHTML(item.regrouping)}</span>
         </td>
         <td class="p-3 text-slate-600 text-xs">${SecurityUtils.escapeHTML(item.usage)}</td>
-        <td class="p-3">
-          <button onclick="app.showModalDetail('Akses & Pemerataan - ${SecurityUtils.escapeHTML(item.kapanewon)} (${SecurityUtils.escapeHTML(item.kalurahan)})', 'Detail ATS: ${SecurityUtils.escapeHTML(item.ats)} anak. Angka Melanjutkan: ${SecurityUtils.escapeHTML(item.melanjutkan)}. Rasio Siswa: ${SecurityUtils.escapeHTML(item.rasioSiswa)}. Kalurahan: ${SecurityUtils.escapeHTML(item.kalurahan)}. Sumber: ${SecurityUtils.escapeHTML(item.sumber)}. ${SecurityUtils.escapeHTML(item.usage)}')" class="px-3.5 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-bold text-[11px] shadow-sm whitespace-nowrap inline-flex items-center justify-center">Detail</button>
-        </td>
       </tr>
     `).join("");
   }
@@ -903,7 +889,7 @@ class DashboardApp {
     data = this.sortData(data);
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="13" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="12" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
     }
 
@@ -924,9 +910,6 @@ class DashboardApp {
         <td class="p-3 font-bold text-blue-700">${SecurityUtils.escapeHTML(item.akreditasi)}</td>
         <td class="p-3">
           <span class="badge badge-${SecurityUtils.escapeHTML(item.statusColor)}">${SecurityUtils.escapeHTML(item.pembinaan)}</span>
-        </td>
-        <td class="p-3">
-          <button onclick="app.showModalDetail('Mutu ANBK - ${SecurityUtils.escapeHTML(item.nama)} (${SecurityUtils.escapeHTML(item.kalurahan)})', 'Kalurahan: ${SecurityUtils.escapeHTML(item.kalurahan)}. Literasi: ${SecurityUtils.escapeHTML(item.literasi)}, Numerasi: ${SecurityUtils.escapeHTML(item.numerasi)}. Pendekarku: ${SecurityUtils.escapeHTML(item.pendekarku)}. MT School: ${SecurityUtils.escapeHTML(item.mtSchool)}. Akreditasi: ${SecurityUtils.escapeHTML(item.akreditasi)}')" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-[11px] shadow-sm whitespace-nowrap inline-flex items-center justify-center">Rapor</button>
         </td>
       </tr>
     `).join("");
@@ -1006,7 +989,7 @@ class DashboardApp {
     data = this.sortData(data);
 
     if (data.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="13" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="12" class="p-6 text-center text-slate-500 italic">Tidak ada data yang cocok dengan kriteria filter.</td></tr>`;
       return;
     }
 
@@ -1026,9 +1009,6 @@ class DashboardApp {
         <td class="p-3 text-emerald-600 font-bold">${SecurityUtils.escapeHTML(item.jarakBaru)}</td>
         <td class="p-3 font-black text-amber-600 text-sm">${SecurityUtils.escapeHTML(item.mcdmScore)}</td>
         <td class="p-3 text-slate-700 text-xs">${SecurityUtils.escapeHTML(item.argumentasi)}</td>
-        <td class="p-3">
-          <button onclick="app.approveSK('${SecurityUtils.escapeHTML(item.nip)}', '${SecurityUtils.escapeHTML(item.nama)}')" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[11px] shadow-sm whitespace-nowrap inline-flex items-center justify-center">Setujui SK</button>
-        </td>
       </tr>
     `).join("");
   }
