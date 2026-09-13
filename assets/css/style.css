@@ -467,9 +467,9 @@ tr:hover {
 .map-region-label,
 .map-region-group text {
   font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  font-size: 17px !important;
+  font-size: 20.5px !important;
   font-weight: 800 !important;
-  letter-spacing: 0.02em !important;
+  letter-spacing: 0.015em !important;
   paint-order: stroke fill !important;
   stroke: #ffffff !important;
   stroke-width: 4px !important;
@@ -482,22 +482,34 @@ tr:hover {
   transition: fill 0.2s ease, stroke 0.2s ease, font-weight 0.2s ease !important;
 }
 
+.map-region-group[data-kapanewon-id="kalibawang"] text {
+  font-size: 18.5px !important;
+}
+
+.map-region-group[data-kapanewon-id="kokap"] text {
+  font-size: 21.5px !important;
+}
+
 .map-region-group[data-kapanewon-id="wates"] text {
-  font-size: 20px !important;
+  font-size: 22px !important;
   font-weight: 900 !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.03em !important;
   fill: #020617 !important;
   stroke-width: 4.5px !important;
 }
 
 .map-region-group[data-kapanewon-id="panjatan"] text {
-  font-size: 15.5px !important;
+  font-size: 17.5px !important;
   font-weight: 800 !important;
 }
 
 .map-region-group[data-kapanewon-id="temon"] text tspan:last-child {
-  font-size: 12.5px !important;
+  font-size: 13.5px !important;
   font-weight: 700 !important;
+}
+
+.map-region-group[data-kapanewon-id="galur"] text {
+  font-size: 21px !important;
 }
 
 /* Hover state on region group: Gold polygon, Crisp Black text with White Halo */
