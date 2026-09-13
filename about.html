@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f2b48">
+  <title>Tentang Aplikasi & Profil Disdikpora - Portal Executive Kulon Progo</title>
+  <meta name="description" content="Profil resmi Dinas Pendidikan Pemuda dan Olahraga Kabupaten Kulon Progo, Visi Misi, Arsitektur Dashboard Eksekutif, dan metadata tim magang.">
+  <meta name="keywords" content="Disdikpora Kulon Progo, Executive Dashboard, Web Pendidikan, Keamanan Data, Pemkab Kulon Progo">
+  <meta name="author" content="Dinas Pendidikan Pemuda dan Olahraga Kabupaten Kulon Progo">
+  <meta name="robots" content="index, follow">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .gpu-layer { transform: translateZ(0); will-change: transform; }
+  </style>
+    <!-- CONTENT SECURITY POLICY & ANTI-HIJACKING HEADERS -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: http: data: blob:; img-src 'self' data: https: http:; frame-ancestors 'none'; object-src 'none';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen flex flex-col justify-between antialiased">
+
+  <!-- TOP GOVT HEADER -->
+  <header class="bg-slate-900 border-b border-amber-600/40 px-6 py-4 flex items-center justify-between shadow-xl">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-lg bg-amber-600 flex items-center justify-center font-extrabold text-slate-900 shadow-md">
+        KP
+      </div>
+      <div>
+        <h1 class="text-sm font-extrabold text-white tracking-wide">PORTAL RESMI DISDIKPORA KULON PROGO</h1>
+        <p class="text-xs text-amber-400">Pemerintah Kabupaten Kulon Progo • Profil &amp; Informasi Sistem</p>
+      </div>
+    </div>
+    <div class="flex items-center space-x-2">
+      <a href="index.html#landing" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-lg transition border border-slate-700">Landing Page</a>
+      <a href="index.html#home" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-slate-900 font-extrabold text-xs rounded-lg transition">Dashboard Pimpinan</a>
+    </div>
+  </header>
+
+  <!-- CONTENT CONTAINER -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-6 md:p-12 space-y-8 my-6">
+    <!-- Header Banner -->
+    <div class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl">
+      <span class="px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold rounded-full uppercase">Sistem Informasi Executive Terpadu</span>
+      <h1 class="text-3xl md:text-4xl font-extrabold text-white mt-3 mb-2">Tentang Web Dashboard Pimpinan Disdikpora</h1>
+      <p class="text-slate-300 text-sm leading-relaxed max-w-3xl">
+        Aplikasi Web Dashboard Pimpinan (Bupati Kulon Progo / Kepala Dinas) dikembangkan untuk menyajikan data urusan pendidikan berbasis 5 Sub-Menu kriteria data yang saling terintegrasi (Dapodik, Dukcapil, BPS, BAN-S/M, &amp; BKPSDM).
+      </p>
+    </div>
+
+    <!-- 3 Core Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+        <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center mb-4"><svg width="20" height="20" class="flex-shrink-0 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke-width="2"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
+        <h3 class="text-base font-bold text-white mb-2">Tujuan Pengambilan Keputusan</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Membantu Pimpinan Daerah dalam membuat kebijakan afirmasi anak tidak sekolah (ATS), penggabungan (regrouping) SD efisien, alokasi DAK Fisik sarpras, dan penempatan guru objektif berbasis algoritma MCDM.
+        </p>
+      </div>
+
+      <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+        <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center mb-4"><svg width="20" height="20" class="flex-shrink-0 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></div>
+        <h3 class="text-base font-bold text-white mb-2">Peta Geospasial GIS Kapanewon</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Dilengkapi integrasi peta vektor 12 Kapanewon Kabupaten Kulon Progo (*Samigaluh, Kalibawang, Girimulyo, Kokap, Pengasih, Nanggulan, Sentolo, Wates, Temon, Panjatan, Lendah, Galur*) dengan Datum WGS84.
+        </p>
+      </div>
+
+      <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+        <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center mb-4"><svg width="20" height="20" class="flex-shrink-0 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg></div>
+        <h3 class="text-base font-bold text-white mb-2">Tim Pembangunan Magang</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Penyusunan ide, analisis, dan prototype dilaksanakan oleh Tim Magang Disdikpora Kulon Progo (Kevin, Rayyan, Ray, Lindra, Dimas Stev, Dhimas Early) berkoordinasi dengan Diskominfo Kulon Progo.
+        </p>
+      </div>
+    </div>
+
+    <!-- Navigation Footer Links -->
+    <div class="flex items-center justify-between border-t border-slate-800 pt-6 text-xs text-slate-400">
+      <div>© 2026 Dinas Pendidikan Pemuda dan Olahraga Kabupaten Kulon Progo</div>
+      <div class="space-x-4">
+        <a href="privacy_security.html" class="hover:text-amber-400 underline">Keamanan &amp; Integritas Data</a>
+        <a href="terms_copyright.html" class="hover:text-amber-400 underline">Hak Cipta &amp; Ketentuan</a>
+        <a href="404.html" class="hover:text-amber-400 underline">Uji Halaman 404</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 border-t border-slate-900 px-6 py-4 text-center text-xs text-slate-300">
+    Pemerintah Kabupaten Kulon Progo • Komplek Perkantoran Pemkab Kulon Progo, DIY
+  </footer>
+
+</body>
+</html>

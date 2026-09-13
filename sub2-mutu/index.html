@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f2b48">
+  <title>Sub-Menu 2: Mutu ANBK & Rapor - Executive Portal</title>
+  <meta name="description" content="Sub-Menu 2 Mutu ANBK & Rapor Pendidikan Kulon Progo">
+  <meta name="keywords" content="Disdikpora Kulon Progo, Executive Dashboard, Web Pendidikan, Pemkab Kulon Progo">
+  <meta name="author" content="Dinas Pendidikan Pemuda dan Olahraga Kabupaten Kulon Progo">
+  <meta name="robots" content="index, follow">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: http: data: blob:; img-src 'self' data: https: http:; frame-ancestors 'none'; object-src 'none';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen flex flex-col justify-between antialiased">
+  <!-- OFFICIAL INDONESIAN GOVT TOPBAR -->
+  <div class="bg-slate-950 text-white text-[11px] py-1.5 px-4 sm:px-6 lg:px-8 flex justify-between items-center border-b border-slate-800 font-medium">
+    <div class="flex items-center space-x-4">
+      <span class="inline-flex items-center gap-1.5"><svg width="14" height="14" class="w-3.5 h-3.5 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Kantor Disdikpora: Jl. Landasan Udara Adisutjipto, Kompleks Pemkab Kulon Progo</span>
+      <span class="hidden sm:inline-flex items-center gap-1.5"><svg width="14" height="14" class="w-3.5 h-3.5 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>Telp: (0274) 773032</span>
+      <span class="hidden md:inline-flex items-center gap-1.5"><svg width="14" height="14" class="w-3.5 h-3.5 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>disdikpora@kulonprogokab.go.id</span>
+    </div>
+    <div class="flex items-center space-x-3">
+      <span class="px-2 py-0.5 bg-amber-500 text-slate-900 rounded font-bold text-[10px]">PORTAL SPBE RESMI</span>
+      <span>13 September 2026</span>
+    </div>
+  </div>
+
+      <header class="sticky top-0 z-50 bg-slate-900 border-b border-amber-600/40 shadow-2xl backdrop-blur">
+    <!-- TOP ACCENT COLOR STRIPE -->
+    <div class="h-1.5 bg-gradient-to-r from-red-600 via-amber-500 to-blue-700"></div>
+
+    <!-- TIER 1: BRAND IDENTITY & EXECUTIVE ACTIONS -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
+      <!-- BRAND LOGO & TITLE -->
+      <a href="../index.html" class="header-brand flex items-center space-x-3 group min-w-0 flex-shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center font-black text-slate-900 shadow-md group-hover:scale-105 transition flex-shrink-0">
+          KP
+        </div>
+        <div class="min-w-0">
+          <h1 class="text-xs sm:text-sm font-black text-white tracking-wide truncate">PEMERINTAH KABUPATEN KULON PROGO</h1>
+          <p class="text-[10px] sm:text-xs text-amber-400 font-bold truncate">Dinas Pendidikan Pemuda dan Olahraga • Executive Portal</p>
+        </div>
+      </a>
+
+      <!-- DESKTOP ACTIONS (USER SESSION BADGE) -->
+      <div class="hidden md:flex items-center space-x-2 flex-shrink-0">
+        <div id="userSessionBadge" class="flex items-center space-x-2"></div>
+      </div>
+
+      <!-- MOBILE NAV TOGGLE -->
+      <button id="mobileNavToggle" aria-label="Buka navigasi menu" aria-expanded="false" aria-label="Buka Menu Navigasi" class="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 flex-shrink-0">
+        <svg width="24" height="24" class="flex-shrink-0 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+
+    <!-- TIER 2: SUB-MENU NAVIGATION STRIP & SEARCH / FILTER (DESKTOP) -->
+    <div class="header-tier2 bg-slate-950/90 border-t border-slate-800/80 px-4 sm:px-6 lg:px-8 py-1.5 hidden md:block">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <!-- 7 SUB-MENU NAVIGATION TABS -->
+        <nav class="header-nav flex items-center space-x-1 text-xs font-semibold overflow-x-auto no-scrollbar flex-shrink-0 py-0.5">
+          <a href="../index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Beranda</a>
+          <a href="../dashboard/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Home Dashboard</a>
+          <a href="../sub1-akses/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Sub 1: Akses</a>
+          <a href="../sub2-mutu/index.html" class="nav-link px-3 py-1.5 rounded-lg transition bg-amber-500 font-extrabold text-white whitespace-nowrap shadow-sm">Sub 2: Mutu</a>
+          <a href="../sub3-sarpras/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Sub 3: Sarpras</a>
+          <a href="../sub4-gtk/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Sub 4: GTK</a>
+          <a href="../sub5-kelembagaan/index.html" class="nav-link px-3 py-1.5 rounded-lg transition text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">Sub 5: Kelembagaan</a>
+        </nav>
+
+        <!-- FILTER KAPANEWON & SEARCH (EXCLUSIVE TO SUB 1-5) -->
+        <div class="flex items-center space-x-3 flex-shrink-0">
+          <div class="flex items-center space-x-1.5">
+            <span class="text-xs text-amber-400 font-bold whitespace-nowrap hidden xl:inline">Filter Kapanewon:</span>
+            <select id="kapanewonFilterSelect" class="bg-slate-900 border border-slate-700 text-white rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:border-amber-500 transition cursor-pointer">
+            </select>
+          </div>
+          <div class="search-container relative w-44 lg:w-56">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none text-slate-400"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></span>
+            <input type="text" id="globalSearchInput" aria-label="Cari data indikator atau kapanewon" placeholder="Cari data..." class="w-full bg-slate-900 border border-slate-700 text-white placeholder-slate-400 rounded-lg pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:border-amber-500 transition">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE DRAWER -->
+    <div id="mobileNavDrawer" class="hidden md:hidden bg-slate-900 border-b border-amber-600/30 px-4 py-4 space-y-3 text-xs font-semibold shadow-2xl">
+      <!-- Mobile Search Input -->
+      <div class="relative w-full">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none text-slate-400"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></span>
+        <input type="text" id="mobileSearchInput" aria-label="Cari data indikator atau kapanewon" placeholder="Cari data, sekolah, indikator..." class="w-full bg-slate-950 border border-slate-700 text-white placeholder-slate-400 rounded-lg pl-8 pr-3 py-2 text-xs focus:outline-none focus:border-amber-500">
+      </div>
+
+      <!-- Mobile Kapanewon Filter -->
+      <div class="space-y-1">
+        <label class="text-xs text-amber-400 font-bold block">Filter Kapanewon:</label>
+        <select id="mobileKapanewonFilterSelect" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-amber-500">
+        </select>
+      </div>
+
+      <!-- Mobile Session Badge -->
+      <div id="mobileUserSessionBadge" class="pt-1 pb-2 border-b border-slate-800"></div>
+
+      <!-- Navigation Links -->
+      <div class="space-y-1">
+        <a href="../index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Beranda Utama</a>
+        <a href="../dashboard/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Home Executive Dashboard</a>
+        <a href="../sub1-akses/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 1: Akses Pendidikan</a>
+        <a href="../sub2-mutu/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 2: Mutu ANBK</a>
+        <a href="../sub3-sarpras/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 3: Sarana Prasarana</a>
+        <a href="../sub4-gtk/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 4: Kepegawaian GTK (MCDM)</a>
+        <a href="../sub5-kelembagaan/index.html" class="nav-link block px-3 py-2 rounded-lg text-slate-200">Sub 5: Kelembagaan &amp; GIS</a>
+      </div>
+
+      <!-- Quick Footer Links in Drawer -->
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-[11px]">
+        <a href="../about/index.html" class="text-amber-400 font-bold">Tentang Aplikasi</a>
+        <a href="../security/index.html" class="text-slate-400 hover:text-white">Keamanan Data</a>
+        <a href="../terms/index.html" class="text-slate-400 hover:text-white">Ketentuan Layanan</a>
+      </div>
+    </div>
+  </header>
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+    <section class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-300 pb-4">
+        <div>
+          <span class="text-xs font-bold text-amber-600 uppercase">SUB-MENU 2</span>
+          <h2 class="text-2xl font-black text-slate-900">Mutu ANBK, Literasi-Numerasi &amp; Rapor Pendidikan</h2>
+          <p class="text-xs text-slate-600 font-medium">Sumber Data Resmi: Platform Rapor Pendidikan Kemendikdasmen &amp; BAN-S/M</p>
+        </div>
+      </div>
+      
+      <!-- PETA GEOSPASIAL INTERAKTIF -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-300 shadow-sm">
+        <div class="map-card-layout">
+          <!-- KOLOM KIRI: TEKS, KONTROL & LEGENDA -->
+          <div class="map-card-text space-y-3">
+            <div>
+              <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider block">PETA FILTER GEOSPASIAL • SUB-MENU 2</span>
+              <h3 class="text-lg font-black text-slate-900 leading-tight">Peta Geospasial 12 Kapanewon Kabupaten Kulon Progo</h3>
+              <p class="text-xs text-slate-600 font-medium mt-1">Klik salah satu wilayah Kapanewon pada peta di samping untuk memfilter data tabel secara langsung:</p>
+            </div>
+
+            <!-- KONTROL WILAYAH (DI BAWAH TEKS BESAR) -->
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <div id="activeMapBadge" class="px-3 py-1.5 bg-slate-900 text-amber-400 border border-slate-800 text-xs font-bold rounded-lg flex items-center gap-2 shadow-sm">
+                <span><svg width="14" height="14" class="w-3.5 h-3.5 text-amber-400 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Wilayah:</span>
+                <span id="activeMapName" class="text-white font-extrabold">Semua Kapanewon (12)</span>
+              </div>
+              <button onclick="app.filterByKapanewon('all', 'Semua Kapanewon (12)')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 text-xs font-bold rounded-lg transition shadow-sm cursor-pointer" title="Tampilkan semua data">
+                <svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Tampilkan Semua
+              </button>
+            </div>
+
+            <!-- LEGENDA WILAYAH -->
+            <div class="flex flex-wrap items-center gap-3 text-xs pt-2 text-slate-700 border-t border-slate-200">
+              <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded bg-[#1e3a8a] border border-blue-900 inline-block flex-shrink-0"></span> <b>Zona Utara</b> (Menoreh)</span>
+              <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded bg-[#d97706] border border-amber-800 inline-block flex-shrink-0"></span> <b>Zona Tengah</b> (Pusat/Wates)</span>
+              <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded bg-[#4d7c0f] border border-green-800 inline-block flex-shrink-0"></span> <b>Zona Selatan</b> (Pesisir/YIA)</span>
+            </div>
+
+            <!-- PETUNJUK -->
+            <div class="text-[11px] font-bold text-slate-500 pt-0.5 flex items-center gap-1">
+              <svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5 text-amber-600 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>Petunjuk: Klik salah satu wilayah pada peta untuk memfilter data tabel langsung.
+            </div>
+          </div>
+
+          <!-- KOLOM TENGAH: PETA GEOSPASIAL -->
+          <div class="map-card-visual flex justify-center items-center">
+            <div class="bg-slate-100 p-2 sm:p-2.5 rounded-xl border border-slate-300 relative overflow-hidden shadow-inner w-fit mx-auto flex justify-center items-center map-container-box">
+              <svg viewBox="0 0 740 680" class="w-full max-w-[412px] h-auto drop-shadow-md select-none map-svg-compact block">
+                <path d="M 60 520 Q 230 565 370 560 T 630 655" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4" opacity="0.6" />
+                <g id="map-polygons">
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="samigaluh" data-kapanewon-name="Samigaluh">
+                    <path data-kapanewon-id="samigaluh" data-kapanewon-name="Samigaluh" d="M 330 45 L 430 30 L 510 40 L 535 95 L 490 145 L 415 155 L 340 135 L 315 85 Z" fill="#1e3a8a" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="425" y="95" text-anchor="middle" font-size="20.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Samigaluh</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="kalibawang" data-kapanewon-name="Kalibawang">
+                    <path data-kapanewon-id="kalibawang" data-kapanewon-name="Kalibawang" d="M 510 40 L 615 50 L 665 95 L 650 165 L 575 160 L 490 145 L 535 95 Z" fill="#0284c7" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="585" y="108" text-anchor="middle" font-size="18.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Kalibawang</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="girimulyo" data-kapanewon-name="Girimulyo">
+                    <path data-kapanewon-id="girimulyo" data-kapanewon-name="Girimulyo" d="M 235 130 L 340 135 L 415 155 L 400 245 L 310 255 L 225 220 L 210 165 Z" fill="#0369a1" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="315" y="195" text-anchor="middle" font-size="20.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Girimulyo</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="nanggulan" data-kapanewon-name="Nanggulan">
+                    <path data-kapanewon-id="nanggulan" data-kapanewon-name="Nanggulan" d="M 415 155 L 490 145 L 575 160 L 650 165 L 625 265 L 515 260 L 400 245 Z" fill="#0284c7" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="525" y="210" text-anchor="middle" font-size="20.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Nanggulan</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="kokap" data-kapanewon-name="Kokap">
+                    <path data-kapanewon-id="kokap" data-kapanewon-name="Kokap" d="M 125 235 L 225 220 L 310 255 L 275 365 L 175 375 L 110 320 Z" fill="#0f766e" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="200" y="305" text-anchor="middle" font-size="21.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Kokap</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="pengasih" data-kapanewon-name="Pengasih">
+                    <path data-kapanewon-id="pengasih" data-kapanewon-name="Pengasih" d="M 310 255 L 400 245 L 515 260 L 465 370 L 365 365 L 275 365 Z" fill="#d97706" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="380" y="320" text-anchor="middle" font-size="20.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Pengasih</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="sentolo" data-kapanewon-name="Sentolo">
+                    <path data-kapanewon-id="sentolo" data-kapanewon-name="Sentolo" d="M 515 260 L 625 265 L 655 350 L 635 415 L 530 405 L 465 370 Z" fill="#2563eb" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="558" y="340" text-anchor="middle" font-size="20.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Sentolo</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="temon" data-kapanewon-name="Temon">
+                    <path data-kapanewon-id="temon" data-kapanewon-name="Temon" d="M 85 355 L 175 375 L 275 365 L 255 465 L 225 530 L 75 495 Z" fill="#4d7c0f" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="165" y="438" text-anchor="middle" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">
+                      <tspan x="165" dy="0" font-size="20.5" font-weight="800">Temon</tspan>
+                      <tspan x="165" dy="18" font-size="13.5" font-weight="700">(YIA)</tspan>
+                    </text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="wates" data-kapanewon-name="Wates">
+                    <path data-kapanewon-id="wates" data-kapanewon-name="Wates" d="M 275 365 L 365 365 L 380 460 L 350 535 L 225 530 L 255 465 Z" fill="#b45309" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="312" y="455" text-anchor="middle" font-size="22" font-weight="900" fill="#020617" stroke="#ffffff" stroke-width="4.5" paint-order="stroke fill" class="map-region-label">WATES</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="panjatan" data-kapanewon-name="Panjatan">
+                    <path data-kapanewon-id="panjatan" data-kapanewon-name="Panjatan" d="M 365 365 L 465 370 L 485 460 L 460 550 L 350 535 L 380 460 Z" fill="#15803d" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="426" y="460" text-anchor="middle" font-size="17.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Panjatan</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="lendah" data-kapanewon-name="Lendah">
+                    <path data-kapanewon-id="lendah" data-kapanewon-name="Lendah" d="M 465 370 L 530 405 L 635 415 L 610 515 L 525 540 L 485 460 Z" fill="#6d28d9" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="548" y="465" text-anchor="middle" font-size="20.5" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Lendah</text>
+                  </g>
+                  <g class="map-region-group cursor-pointer" data-kapanewon-id="galur" data-kapanewon-name="Galur">
+                    <path data-kapanewon-id="galur" data-kapanewon-name="Galur" d="M 460 550 L 485 460 L 525 540 L 610 515 L 585 625 L 490 645 L 435 620 Z" fill="#0369a1" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="520" y="580" text-anchor="middle" font-size="21" font-weight="800" fill="#0f172a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill" class="map-region-label">Galur</text>
+                  </g>
+                </g>
+                <g transform="translate(680, 50)">
+                  <circle cx="0" cy="0" r="20" fill="#0f2b48" stroke="#d97706" stroke-width="2"/>
+                  <text x="0" y="-6" text-anchor="middle" fill="#fde047" font-size="9" font-weight="900">U</text>
+                  <polygon points="0,-4 -4,6 0,2 4,6" fill="#d97706"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- KOLOM KANAN: RINGKASAN INDIKATOR WILAYAH (QUICK KPI STATS) -->
+          <div class="map-card-stats bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-300 shadow-sm flex flex-col justify-between">
+            <div class="map-card-stats-header flex items-center justify-between border-b border-slate-200 pb-2.5">
+              <span class="map-card-stats-title text-xs sm:text-[13px] font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
+              </span>
+              <span id="quickStatsZoneBadge" class="text-xs font-bold px-3 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 shadow-xs">Total Kabupaten</span>
+            </div>
+
+            <div class="map-card-stats-body flex-1 flex flex-col justify-between gap-3 pt-2">
+              <!-- Stat 1 -->
+              <div class="mini-kpi-item">
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat1Label" class="mini-kpi-label">Skor Literasi ANBK:</span>
+                    <span id="quickStat1Val" class="mini-kpi-val text-slate-900">76.5 (Tinggi)</span>
+                  </div>
+                </div>
+                <span id="quickStat1Badge" class="mini-kpi-badge bg-emerald-100 text-emerald-800 border border-emerald-300">Rerata ANBK Literasi</span>
+              </div>
+
+              <!-- Stat 2 -->
+              <div class="mini-kpi-item">
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat2Label" class="mini-kpi-label">Skor Numerasi ANBK:</span>
+                    <span id="quickStat2Val" class="mini-kpi-val text-blue-700">71.9 (Sedang)</span>
+                  </div>
+                </div>
+                <span id="quickStat2Badge" class="mini-kpi-badge bg-blue-100 text-blue-800 border border-blue-300">Rerata ANBK Numerasi</span>
+              </div>
+
+              <!-- Stat 3 -->
+              <div class="mini-kpi-item">
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat3Label" class="mini-kpi-label">Standarisasi Mutu:</span>
+                    <span id="quickStat3Val" class="mini-kpi-val text-purple-700">88.5% Unggul</span>
+                  </div>
+                </div>
+                <span id="quickStat3Badge" class="mini-kpi-badge bg-purple-100 text-purple-800 border border-purple-300">Akreditasi A/B</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto bg-white rounded-xl border border-slate-300 shadow-sm">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-[#0f2b48] text-white text-xs uppercase border-b-2 border-amber-600">
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('npsn')"><div class="inline-flex items-center whitespace-nowrap"><span>NPSN</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('nama')"><div class="inline-flex items-center whitespace-nowrap"><span>NAMA SEKOLAH</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('kapanewon')"><div class="inline-flex items-center whitespace-nowrap"><span>KAPANEWON</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('kalurahan')"><div class="inline-flex items-center whitespace-nowrap"><span>KALURAHAN / DESA</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('sumber')"><div class="inline-flex items-center whitespace-nowrap"><span>SUMBER DATA</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('literasi')"><div class="inline-flex items-center whitespace-nowrap"><span>SKOR LITERASI</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('numerasi')"><div class="inline-flex items-center whitespace-nowrap"><span>SKOR NUMERASI</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('karakter')"><div class="inline-flex items-center whitespace-nowrap"><span>KARAKTER</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('pendekarku')"><div class="inline-flex items-center whitespace-nowrap"><span>PROGRAM PENDEKARKU</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('mtSchool')"><div class="inline-flex items-center whitespace-nowrap"><span>MT SCHOOL (MORAL-TECH)</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('akreditasi')"><div class="inline-flex items-center whitespace-nowrap"><span>AKREDITASI</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+              <th class="p-3 cursor-pointer select-none hover:bg-blue-900 transition whitespace-nowrap" onclick="app.sortBy('pembinaan')"><div class="inline-flex items-center whitespace-nowrap"><span>STATUS PEMBINAAN</span><span class="sort-icon inline-flex items-center justify-center w-3.5 h-3.5 text-slate-300 ml-1.5 align-middle flex-shrink-0"><svg width="14" height="14" class="flex-shrink-0 w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg></span></div></th>
+
+            </tr>
+          </thead>
+          <tbody id="table-sub2-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+    <footer class="bg-slate-900 border-t border-amber-600/50 py-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center space-y-4">
+      <!-- CENTERED BOTTOM NAVIGATION (ABOUT, SECURITY, TERMS, 404) -->
+      <nav class="footer-nav flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 font-bold text-slate-200">
+        <a href="../about/index.html" class="hover:text-amber-400 transition inline-flex items-center gap-1.5">Tentang Aplikasi</a>
+        <span class="text-slate-600 hidden sm:inline">•</span>
+        <a href="../security/index.html" class="hover:text-amber-400 transition inline-flex items-center gap-1.5">Keamanan &amp; Integritas Data</a>
+        <span class="text-slate-600 hidden sm:inline">•</span>
+        <a href="../terms/index.html" class="hover:text-amber-400 transition inline-flex items-center gap-1.5">Hak Cipta &amp; Ketentuan</a>
+        <span class="text-slate-600 hidden sm:inline">•</span>
+        <a href="../404.html" class="hover:text-amber-400 transition inline-flex items-center gap-1.5">Halaman Error 404</a>
+      </nav>
+
+      <!-- CENTERED OFFICIAL EMBLEM & DETAILS -->
+      <div class="footer-copyright space-y-1.5 pt-3 border-t border-slate-800/80 w-full text-center">
+        <p class="font-black text-white text-xs tracking-wide">© 2026 PEMERINTAH KABUPATEN KULON PROGO</p>
+        <p class="text-[11px] text-amber-400 font-semibold">Dinas Pendidikan Pemuda dan Olahraga • Hak Cipta Dilindungi Undang-Undang</p>
+        <p class="text-[10px] text-slate-300">Kompleks Perkantoran Pemkab Kulon Progo, Jl. Landasan Udara Adisutjipto, Wates, DIY • Standar Kepatuhan SPBE &amp; ISO/IEC 27001</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../assets/js/data.js" defer></script>
+  <script src="../assets/js/app.js" defer></script>
+</body>
+</html>

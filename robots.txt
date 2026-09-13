@@ -1,0 +1,6 @@
+# Web Executive Portal - Disdikpora Kabupaten Kulon Progo
+User-agent: *
+Allow: /
+Disallow: /assets/private/
+
+Sitemap: https://disdikpora.kulonprogokab.go.id/executive/sitemap.xml
