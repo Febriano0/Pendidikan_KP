@@ -173,50 +173,7 @@
             </div>
           </div>
 
-          <!-- KOLOM TENGAH: RINGKASAN METRIK CEPAT WILAYAH (QUICK KPI STATS) -->
-          <div class="map-card-stats bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5">
-            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-              <span class="text-[11px] font-black text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
-              </span>
-              <span id="quickStatsZoneBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">Total Kabupaten</span>
-            </div>
-
-            <div class="space-y-2">
-              <!-- Stat 1 -->
-              <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat1Label" class="text-[11px] text-slate-500 font-semibold block">Rekomendasi Mutasi:</span>
-                  <span id="quickStat1Val" class="text-base font-black text-slate-900">7 Usulan Optimal</span>
-                </div>
-                <span id="quickStat1Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">MCDM TOPSIS</span>
-              </div>
-
-              <!-- Stat 2 -->
-              <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat2Label" class="text-[11px] text-slate-500 font-semibold block">Kesesuaian Penempatan:</span>
-                  <span id="quickStat2Val" class="text-base font-black text-blue-700">93.2%</span>
-                </div>
-                <span id="quickStat2Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300">Rerata Kecocokan</span>
-              </div>
-
-              <!-- Stat 3 -->
-              <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat3Label" class="text-[11px] text-slate-500 font-semibold block">Optimalisasi Mobilitas:</span>
-                  <span id="quickStat3Val" class="text-base font-black text-purple-700">Hemat 18.5 km</span>
-                </div>
-                <span id="quickStat3Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300">Efisiensi Jarak Guru</span>
-              </div>
-            </div>
-
-            <div class="text-[10px] text-slate-500 italic pt-1 border-t border-slate-200/80 text-center">
-              Otomatis terbarui saat Kapanewon pada peta dipilih
-            </div>
-          </div>
-
-          <!-- KOLOM KANAN: PETA GEOSPASIAL DISAMPING -->
+          <!-- KOLOM TENGAH: PETA GEOSPASIAL -->
           <div class="map-card-visual flex justify-center items-center">
             <div class="bg-slate-100 p-2 sm:p-2.5 rounded-xl border border-slate-300 relative overflow-hidden shadow-inner w-fit mx-auto flex justify-center items-center map-container-box">
               <svg viewBox="0 0 740 680" class="w-full max-w-[412px] h-auto drop-shadow-md select-none map-svg-compact block">
@@ -280,6 +237,49 @@
                   <polygon points="0,-4 -4,6 0,2 4,6" fill="#d97706"/>
                 </g>
               </svg>
+            </div>
+          </div>
+
+          <!-- KOLOM KANAN: RINGKASAN INDIKATOR WILAYAH (QUICK KPI STATS) -->
+          <div class="map-card-stats bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="text-[11px] font-black text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
+              </span>
+              <span id="quickStatsZoneBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">Total Kabupaten</span>
+            </div>
+
+            <div class="space-y-2">
+              <!-- Stat 1 -->
+              <div class="mini-kpi-item">
+                <div>
+                  <span id="quickStat1Label" class="text-[11px] text-slate-500 font-semibold block">Rekomendasi Mutasi:</span>
+                  <span id="quickStat1Val" class="text-base font-black text-slate-900">7 Usulan Optimal</span>
+                </div>
+                <span id="quickStat1Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">MCDM TOPSIS</span>
+              </div>
+
+              <!-- Stat 2 -->
+              <div class="mini-kpi-item">
+                <div>
+                  <span id="quickStat2Label" class="text-[11px] text-slate-500 font-semibold block">Kesesuaian Penempatan:</span>
+                  <span id="quickStat2Val" class="text-base font-black text-blue-700">93.2%</span>
+                </div>
+                <span id="quickStat2Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300">Rerata Kecocokan</span>
+              </div>
+
+              <!-- Stat 3 -->
+              <div class="mini-kpi-item">
+                <div>
+                  <span id="quickStat3Label" class="text-[11px] text-slate-500 font-semibold block">Optimalisasi Mobilitas:</span>
+                  <span id="quickStat3Val" class="text-base font-black text-purple-700">Hemat 18.5 km</span>
+                </div>
+                <span id="quickStat3Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300">Efisiensi Jarak Guru</span>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-500 italic pt-1 border-t border-slate-200/80 text-center">
+              Otomatis terbarui saat Kapanewon pada peta dipilih
             </div>
           </div>
         </div>
