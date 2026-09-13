@@ -361,7 +361,164 @@ class DashboardApp {
       this.renderCurrentSubmenuTable();
     }
 
+    this.updateQuickKPIStats(kapId);
+
     auditLogger.log("GEOSPATIAL_MAP_CLICKED", this.user ? this.user.name : "Guest", `Kapanewon: ${displayName}`);
+  }
+
+  updateQuickKPIStats(kapId) {
+    const route = this.currentRoute;
+    const foundKap = (typeof DB !== 'undefined' && DB.kapanewon) ? DB.kapanewon.find(k => k.id === kapId) : null;
+    const zoneBadge = document.getElementById("quickStatsZoneBadge");
+    
+    if (zoneBadge) {
+      if (kapId === "all") {
+        zoneBadge.textContent = "Total Kabupaten";
+        zoneBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200";
+      } else {
+        const zone = foundKap ? foundKap.zone : "Wilayah";
+        zoneBadge.textContent = `Zona ${zone} (${foundKap ? foundKap.id.toUpperCase() : ''})`;
+        zoneBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300";
+      }
+    }
+
+    const s1Val = document.getElementById("quickStat1Val");
+    const s1Badge = document.getElementById("quickStat1Badge");
+    const s2Val = document.getElementById("quickStat2Val");
+    const s2Badge = document.getElementById("quickStat2Badge");
+    const s3Val = document.getElementById("quickStat3Val");
+    const s3Badge = document.getElementById("quickStat3Badge");
+
+    if (!s1Val || !s2Val || !s3Val) return;
+
+    if (route === "dashboard") {
+      if (kapId === "all") {
+        s1Val.textContent = "486 Satuan";
+        if (s1Badge) { s1Badge.textContent = "PAUD, SD, SMP"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+        s2Val.textContent = "99.2%";
+        if (s2Badge) { s2Badge.textContent = "Melek Huruf"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s3Val.textContent = "84.6";
+        if (s3Badge) { s3Badge.textContent = "SPM Tuntas"; s3Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300"; }
+      } else {
+        const itemAkses = (typeof DB !== 'undefined' && DB.akses) ? DB.akses.find(a => a.kapanewon.toLowerCase().includes(kapId)) : null;
+        const countSekolah = (typeof DB !== 'undefined' && DB.mutu) ? (DB.mutu.filter(m => m.kapanewon.toLowerCase().includes(kapId)).length * 15 + 18) : 42;
+        s1Val.textContent = `${countSekolah} Satuan`;
+        if (s1Badge) { s1Badge.textContent = "Terakreditasi A/B"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+        s2Val.textContent = itemAkses ? itemAkses.apk : "78.5%";
+        if (s2Badge) { s2Badge.textContent = "APK Wilayah"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s3Val.textContent = itemAkses && itemAkses.ats > 200 ? `${itemAkses.ats} Siswa ATS` : "SPM Prima";
+        if (s3Badge) {
+          const isDanger = itemAkses && itemAkses.ats > 200;
+          s3Badge.textContent = isDanger ? "Prioritas Afirmasi" : "Capaian Baik";
+          s3Badge.className = isDanger ? "text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-300" : "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
+        }
+      }
+    } else if (route === "sub1") {
+      if (kapId === "all") {
+        s1Val.textContent = "76.4% / 97.2%";
+        if (s1Badge) { s1Badge.textContent = "Rerata APK / APM"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+        s2Val.textContent = "2,280 Siswa";
+        if (s2Badge) { s2Badge.textContent = "Total ATS 12 Kapanewon"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300"; }
+        s3Val.textContent = "12 Terpetakan";
+        if (s3Badge) { s3Badge.textContent = "3 Butuh Merger SD"; s3Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300"; }
+      } else {
+        const item = (typeof DB !== 'undefined' && DB.akses) ? DB.akses.find(a => a.kapanewon.toLowerCase().includes(kapId)) : null;
+        s1Val.textContent = item ? `${item.apk} (APK)` : "75.0%";
+        if (s1Badge) { s1Badge.textContent = item ? `APM: ${item.apm.split('/')[0].trim()}` : "Stabil"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s2Val.textContent = item ? `${item.ats} Siswa` : "150 Siswa";
+        if (s2Badge) {
+          const isHigh = item && item.ats > 200;
+          s2Badge.textContent = isHigh ? "Afirmasi Mendesak" : "Terkendali";
+          s2Badge.className = isHigh ? "text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-300" : "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
+        }
+        s3Val.textContent = item ? item.regrouping : "Optimal";
+        if (s3Badge) {
+          const isMerger = item && item.regrouping.includes("Merger");
+          s3Badge.textContent = isMerger ? "Kajian Efisiensi" : "Layanan Merata";
+          s3Badge.className = isMerger ? "text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300" : "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
+        }
+      }
+    } else if (route === "sub2") {
+      if (kapId === "all") {
+        s1Val.textContent = "76.5 (Tinggi)";
+        if (s1Badge) { s1Badge.textContent = "Rerata ANBK Literasi"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s2Val.textContent = "71.9 (Sedang)";
+        if (s2Badge) { s2Badge.textContent = "Rerata ANBK Numerasi"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+        s3Val.textContent = "88.5% Unggul";
+        if (s3Badge) { s3Badge.textContent = "Akreditasi A/B"; s3Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300"; }
+      } else {
+        const item = (typeof DB !== 'undefined' && DB.mutu) ? DB.mutu.find(m => m.kapanewon.toLowerCase().includes(kapId)) : null;
+        s1Val.textContent = item ? item.literasi : "75.0 (Sedang)";
+        if (s1Badge) { s1Badge.textContent = "Literasi Rapor"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+        s2Val.textContent = item ? item.numerasi : "70.0 (Sedang)";
+        if (s2Badge) { s2Badge.textContent = "Numerasi Rapor"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s3Val.textContent = item ? item.pembinaan : "Pendampingan Reguler";
+        if (s3Badge) {
+          const isPrioritas = item && item.pembinaan.includes("PRIORITAS");
+          s3Badge.textContent = isPrioritas ? "Intervensi Khusus" : "Mandiri";
+          s3Badge.className = isPrioritas ? "text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-300" : "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
+        }
+      }
+    } else if (route === "sub3") {
+      if (kapId === "all") {
+        s1Val.textContent = "88.2%";
+        if (s1Badge) { s1Badge.textContent = "Ruang Kelas SPM Layak"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s2Val.textContent = "18 Ruang";
+        if (s2Badge) { s2Badge.textContent = "Rusak Berat (DAK 2026)"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-300"; }
+        s3Val.textContent = "94.5%";
+        if (s3Badge) { s3Badge.textContent = "Lab & Perpus Aktif"; s3Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+      } else {
+        const item = (typeof DB !== 'undefined' && DB.sarpras) ? DB.sarpras.find(s => s.kapanewon.toLowerCase().includes(kapId)) : null;
+        s1Val.textContent = item ? `${item.baik} (Baik)` : "10 Ruang";
+        if (s1Badge) { s1Badge.textContent = item ? item.spm : "Layak"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s2Val.textContent = item ? item.rusakBerat : "0 Ruang";
+        if (s2Badge) {
+          const hasHeavy = item && item.rusakBerat !== "0 Ruang";
+          s2Badge.textContent = hasHeavy ? "Butuh DAK Rehab" : "Aman";
+          s2Badge.className = hasHeavy ? "text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-300" : "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
+        }
+        s3Val.textContent = item ? item.dak : "Normal (Perawatan)";
+        if (s3Badge) {
+          const isUrgent = item && item.dak.includes("PRIORITAS");
+          s3Badge.textContent = isUrgent ? "Alokasi DAK" : "Pemeliharaan";
+          s3Badge.className = isUrgent ? "text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300" : "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300";
+        }
+      }
+    } else if (route === "sub4") {
+      if (kapId === "all") {
+        s1Val.textContent = "7 Usulan Optimal";
+        if (s1Badge) { s1Badge.textContent = "MCDM TOPSIS"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s2Val.textContent = "93.2%";
+        if (s2Badge) { s2Badge.textContent = "Rerata Kecocokan"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+        s3Val.textContent = "Hemat 18.5 km";
+        if (s3Badge) { s3Badge.textContent = "Efisiensi Jarak Guru"; s3Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300"; }
+      } else {
+        const item = (typeof DB !== 'undefined' && DB.gtk) ? DB.gtk.find(g => g.asal.toLowerCase().includes(kapId) || g.tujuan.toLowerCase().includes(kapId)) : null;
+        s1Val.textContent = item ? item.mcdmScore : "90.0%";
+        if (s1Badge) { s1Badge.textContent = "Skor MCDM"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s2Val.textContent = item ? `${item.jarakAsal} -> ${item.jarakBaru}` : "3.5 km";
+        if (s2Badge) { s2Badge.textContent = "Pangkas Jarak"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+        s3Val.textContent = item ? item.mapel : "Pemerataan Mapel";
+        if (s3Badge) { s3Badge.textContent = "Kebutuhan Guru"; s3Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300"; }
+      }
+    } else if (route === "sub5") {
+      if (kapId === "all") {
+        s1Val.textContent = "486 Lembaga";
+        if (s1Badge) { s1Badge.textContent = "100% Izin Operasional"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300"; }
+        s2Val.textContent = "24 Prestasi";
+        if (s2Badge) { s2Badge.textContent = "Tingkat DIY & Nasional"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300"; }
+        s3Val.textContent = "12 Inovasi";
+        if (s3Badge) { s3Badge.textContent = "Coding & Vokasi"; s3Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300"; }
+      } else {
+        const item = (typeof DB !== 'undefined' && DB.kelembagaan) ? DB.kelembagaan.find(k => k.kapanewon.toLowerCase().includes(kapId)) : null;
+        s1Val.textContent = item ? item.akreditasi : "A";
+        if (s1Badge) { s1Badge.textContent = item ? item.jenjang : "Sekolah"; s1Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300"; }
+        s2Val.textContent = item ? item.prestasi : "Juara Berprestasi";
+        if (s2Badge) { s2Badge.textContent = "Penghargaan"; s2Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300"; }
+        s3Val.textContent = item ? item.inovasi : "Inovasi Pembelajaran";
+        if (s3Badge) { s3Badge.textContent = "Program Unggulan"; s3Badge.className = "text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300"; }
+      }
+    }
   }
 
   getElement(id) {

@@ -140,7 +140,7 @@
       
       <!-- PETA GEOSPASIAL INTERAKTIF -->
       <div class="bg-white p-5 rounded-2xl border border-slate-300 shadow-sm">
-        <div class="map-card-layout items-center">
+        <div class="map-card-layout">
           <!-- KOLOM KIRI: TEKS, KONTROL & LEGENDA -->
           <div class="map-card-text space-y-3">
             <div>
@@ -149,7 +149,7 @@
               <p class="text-xs text-slate-600 font-medium mt-1">Klik salah satu wilayah Kapanewon pada peta di samping untuk memfilter data tabel secara langsung:</p>
             </div>
 
-            <!-- KONTROL WILAYAH (DIPINDAH KE BAWAH TEKS BESAR) -->
+            <!-- KONTROL WILAYAH (DI BAWAH TEKS BESAR) -->
             <div class="flex flex-wrap items-center gap-2 pt-1">
               <div id="activeMapBadge" class="px-3 py-1.5 bg-slate-900 text-amber-400 border border-slate-800 text-xs font-bold rounded-lg flex items-center gap-2 shadow-sm">
                 <span><svg width="14" height="14" class="w-3.5 h-3.5 text-amber-400 inline-block mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Wilayah:</span>
@@ -173,92 +173,111 @@
             </div>
           </div>
 
+          <!-- KOLOM TENGAH: RINGKASAN METRIK CEPAT WILAYAH (QUICK KPI STATS) -->
+          <div class="map-card-stats bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="text-[11px] font-black text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
+              </span>
+              <span id="quickStatsZoneBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">Total Kabupaten</span>
+            </div>
+
+            <div class="space-y-2">
+              <!-- Stat 1 -->
+              <div class="mini-kpi-item">
+                <div>
+                  <span id="quickStat1Label" class="text-[11px] text-slate-500 font-semibold block">Rekomendasi Mutasi:</span>
+                  <span id="quickStat1Val" class="text-base font-black text-slate-900">7 Usulan Optimal</span>
+                </div>
+                <span id="quickStat1Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">MCDM TOPSIS</span>
+              </div>
+
+              <!-- Stat 2 -->
+              <div class="mini-kpi-item">
+                <div>
+                  <span id="quickStat2Label" class="text-[11px] text-slate-500 font-semibold block">Kesesuaian Penempatan:</span>
+                  <span id="quickStat2Val" class="text-base font-black text-blue-700">93.2%</span>
+                </div>
+                <span id="quickStat2Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300">Rerata Kecocokan</span>
+              </div>
+
+              <!-- Stat 3 -->
+              <div class="mini-kpi-item">
+                <div>
+                  <span id="quickStat3Label" class="text-[11px] text-slate-500 font-semibold block">Optimalisasi Mobilitas:</span>
+                  <span id="quickStat3Val" class="text-base font-black text-purple-700">Hemat 18.5 km</span>
+                </div>
+                <span id="quickStat3Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300">Efisiensi Jarak Guru</span>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-500 italic pt-1 border-t border-slate-200/80 text-center">
+              Otomatis terbarui saat Kapanewon pada peta dipilih
+            </div>
+          </div>
+
           <!-- KOLOM KANAN: PETA GEOSPASIAL DISAMPING -->
           <div class="map-card-visual flex justify-center items-center">
             <div class="bg-slate-100 p-2 sm:p-2.5 rounded-xl border border-slate-300 relative overflow-hidden shadow-inner w-fit mx-auto flex justify-center items-center map-container-box">
-              <!-- SVG REALISTIC GEOGRAPHIC MAP -->
-              <svg viewBox="0 0 900 690" class="w-full max-w-[310px] h-auto drop-shadow-md select-none map-svg-compact">
-
-                <!-- Map Polygons Group -->
+              <svg viewBox="0 0 740 680" class="w-full max-w-[330px] h-auto drop-shadow-md select-none map-svg-compact block">
+                <path d="M 60 520 Q 230 565 370 560 T 630 655" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4" opacity="0.6" />
                 <g id="map-polygons">
-                  <!-- Samigaluh -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="samigaluh" data-kapanewon-name="Samigaluh">
-                    <path data-kapanewon-id="samigaluh" data-kapanewon-name="Samigaluh" d="M 360 50 L 520 40 L 580 130 L 460 170 L 350 140 Z" fill="#1e3a8a" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="450" y="105" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Samigaluh</text>
+                    <path data-kapanewon-id="samigaluh" data-kapanewon-name="Samigaluh" d="M 330 45 L 430 30 L 510 40 L 535 95 L 490 145 L 415 155 L 340 135 L 315 85 Z" fill="#1e3a8a" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="425" y="95" text-anchor="middle" font-size="14" class="map-region-label">Samigaluh</text>
                   </g>
-
-                  <!-- Kalibawang -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="kalibawang" data-kapanewon-name="Kalibawang">
-                    <path data-kapanewon-id="kalibawang" data-kapanewon-name="Kalibawang" d="M 520 40 L 700 50 L 670 170 L 580 130 Z" fill="#0284c7" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="610" y="105" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Kalibawang</text>
+                    <path data-kapanewon-id="kalibawang" data-kapanewon-name="Kalibawang" d="M 510 40 L 615 50 L 665 95 L 650 165 L 575 160 L 490 145 L 535 95 Z" fill="#0284c7" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="585" y="110" text-anchor="middle" font-size="14" class="map-region-label">Kalibawang</text>
                   </g>
-
-                  <!-- Girimulyo -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="girimulyo" data-kapanewon-name="Girimulyo">
-                    <path data-kapanewon-id="girimulyo" data-kapanewon-name="Girimulyo" d="M 230 150 L 350 140 L 460 170 L 420 270 L 250 250 Z" fill="#0369a1" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="340" y="205" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Girimulyo</text>
+                    <path data-kapanewon-id="girimulyo" data-kapanewon-name="Girimulyo" d="M 235 130 L 340 135 L 415 155 L 400 245 L 310 255 L 225 220 L 210 165 Z" fill="#0369a1" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="315" y="195" text-anchor="middle" font-size="14" class="map-region-label">Girimulyo</text>
                   </g>
-
-                  <!-- Nanggulan -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="nanggulan" data-kapanewon-name="Nanggulan">
-                    <path data-kapanewon-id="nanggulan" data-kapanewon-name="Nanggulan" d="M 460 170 L 670 170 L 620 290 L 420 270 Z" fill="#0284c7" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="540" y="225" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Nanggulan</text>
+                    <path data-kapanewon-id="nanggulan" data-kapanewon-name="Nanggulan" d="M 415 155 L 490 145 L 575 160 L 650 165 L 625 265 L 515 260 L 400 245 Z" fill="#0284c7" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="525" y="210" text-anchor="middle" font-size="14" class="map-region-label">Nanggulan</text>
                   </g>
-
-                  <!-- Kokap -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="kokap" data-kapanewon-name="Kokap">
-                    <path data-kapanewon-id="kokap" data-kapanewon-name="Kokap" d="M 130 250 L 250 250 L 270 380 L 120 360 Z" fill="#0f766e" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="190" y="315" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Kokap</text>
+                    <path data-kapanewon-id="kokap" data-kapanewon-name="Kokap" d="M 125 235 L 225 220 L 310 255 L 275 365 L 175 375 L 110 320 Z" fill="#0f766e" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="200" y="305" text-anchor="middle" font-size="14" class="map-region-label">Kokap</text>
                   </g>
-
-                  <!-- Pengasih -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="pengasih" data-kapanewon-name="Pengasih">
-                    <path data-kapanewon-id="pengasih" data-kapanewon-name="Pengasih" d="M 250 250 L 420 270 L 460 390 L 270 380 Z" fill="#d97706" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="350" y="325" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Pengasih</text>
+                    <path data-kapanewon-id="pengasih" data-kapanewon-name="Pengasih" d="M 310 255 L 400 245 L 515 260 L 465 370 L 365 365 L 275 365 Z" fill="#d97706" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="375" y="320" text-anchor="middle" font-size="14" class="map-region-label">Pengasih</text>
                   </g>
-
-                  <!-- Sentolo -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="sentolo" data-kapanewon-name="Sentolo">
-                    <path data-kapanewon-id="sentolo" data-kapanewon-name="Sentolo" d="M 420 270 L 620 290 L 650 420 L 460 390 Z" fill="#2563eb" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="530" y="345" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Sentolo</text>
+                    <path data-kapanewon-id="sentolo" data-kapanewon-name="Sentolo" d="M 515 260 L 625 265 L 655 350 L 635 415 L 530 405 L 465 370 Z" fill="#2563eb" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="555" y="340" text-anchor="middle" font-size="14" class="map-region-label">Sentolo</text>
                   </g>
-
-                  <!-- Temon -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="temon" data-kapanewon-name="Temon">
-                    <path data-kapanewon-id="temon" data-kapanewon-name="Temon" d="M 90 360 L 230 370 L 210 540 L 60 510 Z" fill="#4d7c0f" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="150" y="445" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Temon (YIA)</text>
+                    <path data-kapanewon-id="temon" data-kapanewon-name="Temon" d="M 85 355 L 175 375 L 275 365 L 255 465 L 225 530 L 75 495 Z" fill="#4d7c0f" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="165" y="440" text-anchor="middle" class="map-region-label">
+                      <tspan x="165" dy="0" font-size="14">Temon</tspan>
+                      <tspan x="165" dy="14" font-size="11" font-weight="700">(YIA)</tspan>
+                    </text>
                   </g>
-
-                  <!-- Wates -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="wates" data-kapanewon-name="Wates">
-                    <path data-kapanewon-id="wates" data-kapanewon-name="Wates" d="M 230 370 L 370 380 L 350 550 L 210 540 Z" fill="#b45309" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="290" y="455" text-anchor="middle" fill="#ffffff" font-size="23" font-weight="900" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">WATES</text>
+                    <path data-kapanewon-id="wates" data-kapanewon-name="Wates" d="M 275 365 L 365 365 L 380 460 L 350 535 L 225 530 L 255 465 Z" fill="#b45309" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="305" y="455" text-anchor="middle" font-size="15" font-weight="900" class="map-region-label">WATES</text>
                   </g>
-
-                  <!-- Panjatan -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="panjatan" data-kapanewon-name="Panjatan">
-                    <path data-kapanewon-id="panjatan" data-kapanewon-name="Panjatan" d="M 370 380 L 510 390 L 480 560 L 350 550 Z" fill="#15803d" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="430" y="465" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Panjatan</text>
+                    <path data-kapanewon-id="panjatan" data-kapanewon-name="Panjatan" d="M 365 365 L 465 370 L 485 460 L 460 550 L 350 535 L 380 460 Z" fill="#15803d" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="420" y="460" text-anchor="middle" font-size="14" class="map-region-label">Panjatan</text>
                   </g>
-
-                  <!-- Lendah -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="lendah" data-kapanewon-name="Lendah">
-                    <path data-kapanewon-id="lendah" data-kapanewon-name="Lendah" d="M 510 390 L 650 420 L 620 580 L 480 560 Z" fill="#6d28d9" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="560" y="485" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Lendah</text>
+                    <path data-kapanewon-id="lendah" data-kapanewon-name="Lendah" d="M 465 370 L 530 405 L 635 415 L 610 515 L 525 540 L 485 460 Z" fill="#6d28d9" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="545" y="465" text-anchor="middle" font-size="14" class="map-region-label">Lendah</text>
                   </g>
-
-                  <!-- Galur -->
                   <g class="map-region-group cursor-pointer" data-kapanewon-id="galur" data-kapanewon-name="Galur">
-                    <path data-kapanewon-id="galur" data-kapanewon-name="Galur" d="M 480 560 L 620 580 L 590 670 L 450 650 Z" fill="#0369a1" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path transition-all duration-200 cursor-pointer hover:fill-[#fde047] hover:stroke-[#d97706] hover:stroke-[6px]" />
-                    <text x="530" y="615" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" stroke="#091e3a" stroke-width="3.5" paint-order="stroke fill" class="map-region-label pointer-events-none">Galur</text>
+                    <path data-kapanewon-id="galur" data-kapanewon-name="Galur" d="M 460 550 L 485 460 L 525 540 L 610 515 L 585 625 L 490 645 L 435 620 Z" fill="#0369a1" stroke="#0f2b48" stroke-width="3.5" class="map-polygon-path" />
+                    <text x="520" y="580" text-anchor="middle" font-size="14" class="map-region-label">Galur</text>
                   </g>
                 </g>
-
-                <!-- Compass Rose (Utara Arrow) -->
-                <g transform="translate(830, 70)">
-                  <circle cx="0" cy="0" r="28" fill="#0f2b48" stroke="#d97706" stroke-width="2"/>
-                  <text x="0" y="-10" text-anchor="middle" fill="#fde047" font-size="12" font-weight="900">U</text>
-                  <polygon points="0,-8 -5,8 0,3 5,8" fill="#d97706"/>
+                <g transform="translate(680, 50)">
+                  <circle cx="0" cy="0" r="20" fill="#0f2b48" stroke="#d97706" stroke-width="2"/>
+                  <text x="0" y="-6" text-anchor="middle" fill="#fde047" font-size="9" font-weight="900">U</text>
+                  <polygon points="0,-4 -4,6 0,2 4,6" fill="#d97706"/>
                 </g>
               </svg>
             </div>
