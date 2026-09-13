@@ -257,43 +257,57 @@
           </div>
 
           <!-- KOLOM KANAN: RINGKASAN INDIKATOR WILAYAH (QUICK KPI STATS) -->
-          <div class="map-card-stats bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5">
-            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-              <span class="text-[11px] font-black text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
+          <div class="map-card-stats bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-300 shadow-sm flex flex-col justify-between">
+            <div class="map-card-stats-header flex items-center justify-between border-b border-slate-200 pb-2.5">
+              <span class="map-card-stats-title text-xs sm:text-[13px] font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
               </span>
-              <span id="quickStatsZoneBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">Total Kabupaten</span>
+              <span id="quickStatsZoneBadge" class="text-xs font-bold px-3 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 shadow-xs">Total Kabupaten</span>
             </div>
 
-            <div class="space-y-2">
+            <div class="map-card-stats-body flex-1 flex flex-col justify-between gap-3 pt-2">
               <!-- Stat 1 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat1Label" class="text-[11px] text-slate-500 font-semibold block">Total Satuan Pendidikan:</span>
-                  <span id="quickStat1Val" class="text-base font-black text-slate-900">486 Satuan</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat1Label" class="mini-kpi-label">Total Satuan Pendidikan:</span>
+                    <span id="quickStat1Val" class="mini-kpi-val text-slate-900">486 Satuan</span>
+                  </div>
                 </div>
-                <span id="quickStat1Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300">PAUD, SD, SMP</span>
+                <span id="quickStat1Badge" class="mini-kpi-badge bg-blue-100 text-blue-800 border border-blue-300">PAUD, SD, SMP</span>
               </div>
 
               <!-- Stat 2 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat2Label" class="text-[11px] text-slate-500 font-semibold block">Angka Melek Huruf:</span>
-                  <span id="quickStat2Val" class="text-base font-black text-emerald-700">99.2%</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat2Label" class="mini-kpi-label">Angka Melek Huruf:</span>
+                    <span id="quickStat2Val" class="mini-kpi-val text-emerald-700">99.2%</span>
+                  </div>
                 </div>
-                <span id="quickStat2Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">Melek Huruf</span>
+                <span id="quickStat2Badge" class="mini-kpi-badge bg-emerald-100 text-emerald-800 border border-emerald-300">Melek Huruf</span>
               </div>
 
               <!-- Stat 3 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat3Label" class="text-[11px] text-slate-500 font-semibold block">Indeks SPM Pendidikan:</span>
-                  <span id="quickStat3Val" class="text-base font-black text-purple-700">84.6</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat3Label" class="mini-kpi-label">Indeks SPM Pendidikan:</span>
+                    <span id="quickStat3Val" class="mini-kpi-val text-purple-700">84.6</span>
+                  </div>
                 </div>
-                <span id="quickStat3Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300">SPM Tuntas</span>
+                <span id="quickStat3Badge" class="mini-kpi-badge bg-purple-100 text-purple-800 border border-purple-300">SPM Tuntas</span>
               </div>
             </div>
-
           </div>
         </div>
       </div>

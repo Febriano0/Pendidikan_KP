@@ -241,40 +241,55 @@
           </div>
 
           <!-- KOLOM KANAN: RINGKASAN INDIKATOR WILAYAH (QUICK KPI STATS) -->
-          <div class="map-card-stats bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5">
-            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-              <span class="text-[11px] font-black text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
+          <div class="map-card-stats bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-300 shadow-sm flex flex-col justify-between">
+            <div class="map-card-stats-header flex items-center justify-between border-b border-slate-200 pb-2.5">
+              <span class="map-card-stats-title text-xs sm:text-[13px] font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
               </span>
-              <span id="quickStatsZoneBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">Total Kabupaten</span>
+              <span id="quickStatsZoneBadge" class="text-xs font-bold px-3 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 shadow-xs">Total Kabupaten</span>
             </div>
 
-            <div class="space-y-2">
+            <div class="map-card-stats-body flex-1 flex flex-col justify-between gap-3 pt-2">
               <!-- Stat 1 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat1Label" class="text-[11px] text-slate-500 font-semibold block">Skor Literasi ANBK:</span>
-                  <span id="quickStat1Val" class="text-base font-black text-slate-900">76.5 (Tinggi)</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat1Label" class="mini-kpi-label">Skor Literasi ANBK:</span>
+                    <span id="quickStat1Val" class="mini-kpi-val text-slate-900">76.5 (Tinggi)</span>
+                  </div>
                 </div>
-                <span id="quickStat1Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">Rerata ANBK Literasi</span>
+                <span id="quickStat1Badge" class="mini-kpi-badge bg-emerald-100 text-emerald-800 border border-emerald-300">Rerata ANBK Literasi</span>
               </div>
 
               <!-- Stat 2 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat2Label" class="text-[11px] text-slate-500 font-semibold block">Skor Numerasi ANBK:</span>
-                  <span id="quickStat2Val" class="text-base font-black text-blue-700">71.9 (Sedang)</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat2Label" class="mini-kpi-label">Skor Numerasi ANBK:</span>
+                    <span id="quickStat2Val" class="mini-kpi-val text-blue-700">71.9 (Sedang)</span>
+                  </div>
                 </div>
-                <span id="quickStat2Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300">Rerata ANBK Numerasi</span>
+                <span id="quickStat2Badge" class="mini-kpi-badge bg-blue-100 text-blue-800 border border-blue-300">Rerata ANBK Numerasi</span>
               </div>
 
               <!-- Stat 3 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat3Label" class="text-[11px] text-slate-500 font-semibold block">Standarisasi Mutu:</span>
-                  <span id="quickStat3Val" class="text-base font-black text-purple-700">88.5% Unggul</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat3Label" class="mini-kpi-label">Standarisasi Mutu:</span>
+                    <span id="quickStat3Val" class="mini-kpi-val text-purple-700">88.5% Unggul</span>
+                  </div>
                 </div>
-                <span id="quickStat3Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800 border border-purple-300">Akreditasi A/B</span>
+                <span id="quickStat3Badge" class="mini-kpi-badge bg-purple-100 text-purple-800 border border-purple-300">Akreditasi A/B</span>
               </div>
             </div>
           </div>

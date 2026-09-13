@@ -241,40 +241,55 @@
           </div>
 
           <!-- KOLOM KANAN: RINGKASAN INDIKATOR WILAYAH (QUICK KPI STATS) -->
-          <div class="map-card-stats bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5">
-            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-              <span class="text-[11px] font-black text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
+          <div class="map-card-stats bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-300 shadow-sm flex flex-col justify-between">
+            <div class="map-card-stats-header flex items-center justify-between border-b border-slate-200 pb-2.5">
+              <span class="map-card-stats-title text-xs sm:text-[13px] font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Ringkasan Indikator Wilayah
               </span>
-              <span id="quickStatsZoneBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">Total Kabupaten</span>
+              <span id="quickStatsZoneBadge" class="text-xs font-bold px-3 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 shadow-xs">Total Kabupaten</span>
             </div>
 
-            <div class="space-y-2">
+            <div class="map-card-stats-body flex-1 flex flex-col justify-between gap-3 pt-2">
               <!-- Stat 1 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat1Label" class="text-[11px] text-slate-500 font-semibold block">Kondisi Ruang Baik:</span>
-                  <span id="quickStat1Val" class="text-base font-black text-slate-900">88.2%</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat1Label" class="mini-kpi-label">Kondisi Ruang Baik:</span>
+                    <span id="quickStat1Val" class="mini-kpi-val text-slate-900">88.2%</span>
+                  </div>
                 </div>
-                <span id="quickStat1Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">Ruang Kelas SPM Layak</span>
+                <span id="quickStat1Badge" class="mini-kpi-badge bg-emerald-100 text-emerald-800 border border-emerald-300">Ruang Kelas SPM Layak</span>
               </div>
 
               <!-- Stat 2 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat2Label" class="text-[11px] text-slate-500 font-semibold block">Ruang Rusak Berat:</span>
-                  <span id="quickStat2Val" class="text-base font-black text-red-600">18 Ruang</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat2Label" class="mini-kpi-label">Ruang Rusak Berat:</span>
+                    <span id="quickStat2Val" class="mini-kpi-val text-red-600">18 Ruang</span>
+                  </div>
                 </div>
-                <span id="quickStat2Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-300">Rusak Berat (DAK 2026)</span>
+                <span id="quickStat2Badge" class="mini-kpi-badge bg-red-100 text-red-800 border border-red-300">Rusak Berat (DAK 2026)</span>
               </div>
 
               <!-- Stat 3 -->
               <div class="mini-kpi-item">
-                <div>
-                  <span id="quickStat3Label" class="text-[11px] text-slate-500 font-semibold block">Ketersediaan Fasilitas:</span>
-                  <span id="quickStat3Val" class="text-base font-black text-blue-700">94.5%</span>
+                <div class="mini-kpi-content">
+                  <div class="mini-kpi-icon-box">
+                    <svg width="22" height="22" class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  </div>
+                  <div class="mini-kpi-texts">
+                    <span id="quickStat3Label" class="mini-kpi-label">Ketersediaan Fasilitas:</span>
+                    <span id="quickStat3Val" class="mini-kpi-val text-blue-700">94.5%</span>
+                  </div>
                 </div>
-                <span id="quickStat3Badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-300">Lab & Perpus Aktif</span>
+                <span id="quickStat3Badge" class="mini-kpi-badge bg-blue-100 text-blue-800 border border-blue-300">Lab & Perpus Aktif</span>
               </div>
             </div>
           </div>
