@@ -339,10 +339,25 @@ tr:hover {
    SVG GEOSPATIAL MAP & HIGH-CONTRAST CARTOGRAPHIC LABELS
    Compact 50% scale, zero-ocean layout with razor-sharp cartographic halos.
    ========================================================================== */
+.map-container-box,
+.map-container-compact {
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.w-fit {
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
+
 .map-svg-compact {
-  width: 100% !important;
-  max-width: 400px !important;
+  width: 310px !important;
+  max-width: 100% !important;
   height: auto !important;
+  display: block !important;
 }
 
 .map-polygon-path {
